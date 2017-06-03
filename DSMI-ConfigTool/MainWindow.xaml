@@ -1,0 +1,328 @@
+﻿<Window x:Class="DSMI_ConfigTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DSMI_ConfigTool"
+        mc:Ignorable="d"
+        Title="DSMI Config Tool" Loaded="Window_Loaded" 
+        Height="585" Width="710"
+        ResizeMode="CanMinimize">
+    <Grid>
+        <!-- TabControl ? -->
+        <Grid>
+            <!-- Resolution -->
+            <GroupBox 
+                x:Name="groupBox_resolutionOptions" Header="Resolution" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,22,0,0"
+                Height="92" Width="310"
+                />
+            <Label 
+                x:Name="label_renderRes" Content="Render" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,50,0,0" 
+                Height="28"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_renderRes" SelectionChanged="comboBox_renderRes_SelectionChanged"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,77,0,0"
+                Width="120"
+                >
+                <ComboBoxItem>3840x2160</ComboBoxItem>
+                <ComboBoxItem>2560x1440</ComboBoxItem>
+                <ComboBoxItem>1920x1080</ComboBoxItem>
+                <ComboBoxItem>1600x900</ComboBoxItem>
+                <ComboBoxItem>1280x720</ComboBoxItem>
+                <ComboBoxItem>1024x576</ComboBoxItem>
+                <ComboBoxItem>896x504</ComboBoxItem>
+                <ComboBoxItem>768x432</ComboBoxItem>
+                <ComboBoxItem>640x360</ComboBoxItem>
+                <ComboBoxItem>512x288</ComboBoxItem>
+                <ComboBoxItem>384x216</ComboBoxItem>
+            </ComboBox>
+            <Label 
+                x:Name="label_uiRes" Content="Interface" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,50,0,0" 
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_uiRes" SelectionChanged="comboBox_uiRes_SelectionChanged"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,77,0,0"
+                Width="132"
+                />
+            <!-- Depth of field -->
+            <GroupBox 
+                x:Name="groupBox_dofOptions" Header="Depth of field" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,22,17,0"
+                Height="92" Width="310"
+                />
+            <Label 
+                x:Name="label_dofOverrideRes" Content="Resolution" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="408,50,0,0"
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_dofOverrideRes" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="381,77,0,0"
+                Width="120"
+                >
+                <ComboBoxItem>360</ComboBoxItem>
+                <ComboBoxItem>540</ComboBoxItem>
+                <ComboBoxItem>810</ComboBoxItem>
+                <ComboBoxItem>1080</ComboBoxItem>
+                <ComboBoxItem>2160</ComboBoxItem>
+            </ComboBox>
+            <Label 
+                x:Name="label_dofAdditionalBlur" Content="Blur" 
+                HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="582,50,0,0" 
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_dofAdditionalBlur" 
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,77,32,0"
+                Width="120"
+                >
+            </ComboBox>
+            <!-- Ambient occlusion -->
+            <GroupBox 
+                x:Name="groupBox_aoOptions" Header="Ambient occlusion" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,131,0,0"
+                Height="92" Width="310"
+                />
+            <Label 
+                x:Name="label_aoStrength" Content="Strength" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,159,0,0"
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_aoStrength" SelectionChanged="comboBox_aoStrength_SelectionChanged"
+                HorizontalAlignment="Left" Margin="32,186,0,0" VerticalAlignment="Top" 
+                Width="120"
+                />
+            <Label 
+                x:Name="label_aoType" Content="Type" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="228,159,0,0" 
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_aoType" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="188,186,0,0"
+                Width="120"
+                >
+                <ComboBoxItem>VSSAO</ComboBoxItem>
+                <ComboBoxItem>HBAO</ComboBoxItem>
+                <ComboBoxItem>SCAO</ComboBoxItem>
+                <ComboBoxItem>VSSAO2</ComboBoxItem>
+            </ComboBox>
+            <!-- Framerate -->
+            <GroupBox 
+                x:Name="groupBox_framerateOptions" Header="Framerate" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,131,17,0"
+                Height="92" Width="310"
+                />
+            <CheckBox 
+                x:Name="checkBox_unlockFPS" Content="Unlock framerate" 
+                Checked="checkBox_unlockFPS_Checked" Unchecked="checkBox_unlockFPS_Unchecked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="476,158,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <Label 
+                x:Name="label_maxFPSTarget" Content="Max :" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="383,184,0,0"
+                Height="28" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <ComboBox 
+                x:Name="comboBox_maxFPSTarget" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="422,187,0,0"
+                Width="40" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                >
+                <ComboBoxItem>30</ComboBoxItem>
+                <ComboBoxItem>60</ComboBoxItem>
+            </ComboBox>
+            <Label 
+                x:Name="label_writeFPS" Content="fps" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,184,0,0"
+                Width="45" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <Label 
+                x:Name="label_toggleFramerateKey" Content="Key :" HorizontalContentAlignment="Right"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="503,184,0,0"
+                Width="60" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <ComboBox 
+                x:Name="comboBox_toggleFramerateKey" 
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,187,32,0"
+                Width="99" IsEnabled="False"
+                />
+            <!-- Mouse cursor -->
+            <GroupBox 
+                x:Name="groupBox_mouseCursor" Header="Mouse cursor" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,240,17,0"
+                Height="61" Width="310"
+                />
+            <CheckBox 
+                x:Name="checkBox_showCursor" Content="Display cursor" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="394,270,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <CheckBox 
+                x:Name="checkBox_captureCursor" Content="Capture cursor" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="549,270,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <!-- Controls -->
+            <GroupBox 
+                x:Name="groupBox_controlOptions" Header="Controls" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,316,17,0"
+                Height="138" Width="310"
+                />
+            <!-- Gamepad -->
+            <RadioButton 
+                x:Name="radioButton_gamepad" Content="Gamepad" GroupName="inputType" 
+                Checked="radioButton_gamepad_Checked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="410,345,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <Label 
+                x:Name="label_gamepadButtonsStyle" Content="Icons" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="427,379,0,0" 
+                ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <ComboBox 
+                x:Name="comboBox_gamepadButtonsStyle" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="397,404,0,0"
+                Width="98" IsEnabled="False"
+                />
+            <!-- Mouse -->
+            <RadioButton 
+                x:Name="radioButton_mouse" Content="Mouse" GroupName="inputType" 
+                Checked="radioButton_mouse_Checked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="578,345,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <RadioButton 
+                x:Name="radioButton_oldMouseFix" Content="Classic fix" GroupName="mouseFix" 
+                Checked="radioButton_mouse_Checked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="571,390,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <RadioButton 
+                x:Name="radioButton_newMouseFix" Content="New fix" GroupName="mouseFix" 
+                Checked="radioButton_mouse_Checked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="571,410,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                />
+            <Button 
+                x:Name="button_configureMouse" Content="Configure mouse" 
+                Click="button_configureMouse_Click" Background="#ddd"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,452,18,0"
+                Width="150" Height="25" IsEnabled="False"
+                />
+            <Border 
+            x:Name="border_mouse" BorderBrush="Transparent" BorderThickness="1" CornerRadius="2"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="539,378,0,0"
+            Height="60" Width="126"
+            />
+            <!-- Language -->
+            <GroupBox 
+                x:Name="groupBox_language" Header="Language" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,239,0,0"
+                Height="61" Width="310"
+                />
+            <Label 
+                x:Name="label_forceLanguage" Content="Force language :" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,260,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip="" 
+                Height="28" Width="98"
+                />
+            <ComboBox 
+                x:Name="comboBox_forceLanguage" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="171,263,0,0" 
+                Width="90"
+                >
+                <ComboBoxItem>Off</ComboBoxItem>
+                <ComboBoxItem>English</ComboBoxItem>
+                <ComboBoxItem>French</ComboBoxItem>
+                <ComboBoxItem>Italian</ComboBoxItem>
+                <ComboBoxItem>German</ComboBoxItem>
+                <ComboBoxItem>Spanish</ComboBoxItem>
+                <ComboBoxItem>Korean</ComboBoxItem>
+                <ComboBoxItem>Chinese</ComboBoxItem>
+                <ComboBoxItem>Polish</ComboBoxItem>
+                <ComboBoxItem>Russian</ComboBoxItem>
+            </ComboBox>
+            <!-- DSPW -->
+            <GroupBox 
+                x:Name="groupBox_pvpWatchdog" Header="PvP Watchdog" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,316,0,0"
+                Height="61" Width="310"
+                />
+            <CheckBox 
+                x:Name="checkBox_overlayDspw" Content="Display overlay at launch" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,346,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <!-- FPSFix -->
+            <GroupBox 
+                x:Name="groupBox_FPSFix" Header="FPSFix" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,393,0,0"
+                Height="61" Width="310"
+                />
+            <CheckBox 
+                x:Name="checkBox_FPSFix" Content="Use FPSFix"
+                Checked="checkBox_fpsFix_Checked" Unchecked="checkBox_fpsFix_Unchecked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,423,0,0"
+            	ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <Label 
+                x:Name="label_FPSFixKey" Content="Key :" HorizontalContentAlignment="Right"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,418,0,0" Width="60"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_FPSFixKey"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="221,421,0,0"
+                Width="89"
+                />
+            <!-- SweetFX -->
+            <GroupBox 
+                x:Name="groupBox_sweetFX" Header="SweetFX" FontWeight="DemiBold"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,470,0,0"
+                Height="61" Width="486"
+                />
+            <CheckBox 
+                x:Name="checkBox_sweetFX" Content="Use SweetFX"
+                Checked="checkBox_sweetFX_Checked" Unchecked="checkBox_sweetFX_Unchecked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,500,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <Label 
+                x:Name="label_sweetFxKey" Content="Key :" HorizontalContentAlignment="Right"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,495,0,0" 
+                Width="60" ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_sweetFxKey"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="221,498,0,0"
+                Width="89"
+                />
+            <Label 
+                x:Name="label_sweetFxPreset" Content="Preset :" HorizontalContentAlignment="Right"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="344,495,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_sweetFxPreset" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="394,498,0,0"
+                Width="92"
+                />
+            <!-- Save and exit -->
+            <Button 
+                x:Name="button_saveAndExit" Content="Save and exit" Click="button_SaveAndExit_Click" 
+                Background="#c6ecc6" FontSize="15" FontWeight="DemiBold" VerticalContentAlignment="Center"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,17,17"  
+                Height="33" Width="150"
+                />
+        </Grid>
+    </Grid>
+</Window>

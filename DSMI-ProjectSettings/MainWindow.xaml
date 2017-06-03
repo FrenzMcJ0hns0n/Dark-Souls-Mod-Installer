@@ -1,0 +1,88 @@
+﻿<Window x:Class="DSMI_ProjectSettings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DSMI_ProjectSettings"
+        mc:Ignorable="d"
+        Title="DSMI Project Settings" 
+        Height="436" Width="640"
+        ResizeMode="CanMinimize" Loaded="Window_Loaded"
+        >
+    <Grid>
+        <!-- DATA folder location -->
+        <Border 
+            BorderBrush="LightGray" CornerRadius="5" BorderThickness="1" 
+            HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"
+            Height="77" Width="606" Background="#f5f7ff"
+            />
+        <Label 
+            x:Name="label_dataPathLocation" Content="Location of the DATA directory :"
+            FontSize="14" FontWeight="DemiBold"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,36,0,0"
+            />
+        <Button 
+            x:Name="button_browseDataPath" Content="Browse ..." Click="button_browseDataPath_Click"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,71,0,0" 
+            Height="22" Width="82"
+            />
+        <TextBox 
+            x:Name="textBox_dataPathLocation" TextWrapping="NoWrap" Text="" VerticalContentAlignment="Center"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,71,20,0"
+            Height="23" Width="496" IsReadOnly="True"
+            />
+        <!-- Language to use in project -->
+        <Border 
+            BorderBrush="LightGray" CornerRadius="5" BorderThickness="1" 
+            HorizontalAlignment="Center" Margin="0,129,0,0" VerticalAlignment="Top"
+            Height="74" Width="400" Background="#f5f7ff"
+            />
+        <Label 
+            x:Name="label_languageChoice" Content="Language to use in project :"
+            FontSize="14" FontWeight="DemiBold"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,134,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_english" Content="English" GroupName="Language"
+            Checked="radioButton_english_Checked"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="167,174,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_french" Content="Français" GroupName="Language" 
+            Checked="radioButton_french_Checked"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,174,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_spanish" Content="Español" GroupName="Language"
+            Checked="radioButton_spanish_Checked"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,174,167,0"
+            />
+        <!-- Compatibilty mode -->
+        <Border 
+            BorderBrush="LightGray" CornerRadius="5" BorderThickness="1" 
+            HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top"
+            Height="90" Width="320" Background="#f5f7ff"
+            />
+        <Label
+            x:Name="label_compatibilityMode" Content="Project mode :"
+            FontSize="14" FontWeight="DemiBold"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,230,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_normalMode" Content="Normal" GroupName="Mode"
+            Checked="radioButton_normalMode_Checked"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="282,268,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_minMode" Content="Minimal" GroupName="Mode"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="282,288,0,0" Checked="radioButton_minMode_Checked"
+            />
+        <!-- Save & exit -->
+        <Button 
+            x:Name="button_Apply" Content="Save and exit" Click="button_Apply_Click" FontSize="16"
+            HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"
+            Height="32" Width="142" IsEnabled="False"
+            />
+
+    </Grid>
+</Window>
