@@ -29,3 +29,12 @@ Optional mods
 - Dark Souls III menu sound effects [http://www.nexusmods.com/darksouls/mods/1195/?]
 - Health Bars Usability Tweaks (colorblind version)
 - Improved texts [http://www.nexusmods.com/darksouls/mods/1198/?]
+
+
+Prerequisites
+---------------
+- .NET framework
+
+Version 4.6.2 (Win 7 SP1 / 8 / 10) [https://www.microsoft.com/en-us/download/details.aspx?id=53344]
+
+Version 4.5 (Vista) [https://www.microsoft.com/en-us/download/details.aspx?id=30653]
