@@ -4,12 +4,12 @@ Mods compilation + management programs for Dark Souls: Prepare to Die Edition
 
 Mods installed
 ---------------
-- DSfix [http://blog.metaclassofnil.com/?tag=dsfix]
+- DSfix [http://blog.metaclassofnil.com/?tag=dsfix] GitHub : https://github.com/PeterTh/dsfix
 - Dark Souls Mouse Fix (DSMfix) [https://www.reddit.com/r/darksouls/comments/3ay9aj/dsmfix_update_for_new_steamworks_patch/]
 - Dark Souls Mouse Fix (new fix) [http://www.nexusmods.com/darksouls/mods/1241/?]
 - Dark Souls PvP Watchdog (DSPW) [http://www.nexusmods.com/darksouls/mods/849/?]
 - Dark Souls Connectivity Mod (DSCM) [http://www.nexusmods.com/darksouls/mods/1047/?]
-- FPSFix [http://www.nexusmods.com/darksouls/mods/862/?]
+- FPSFix [http://www.nexusmods.com/darksouls/mods/862/?] GitHub : https://github.com/NullBy7e/FPSFix/blob/master/FPSFix.h
 - Dark Souls SweetFX HDR (SweetFX 1.4 + presets) [http://www.nexusmods.com/darksouls/mods/289/?]
 - HD Painted Soapstone Signs [http://www.nexusmods.com/darksouls/mods/1161/?]
 - Health Bar Usability Tweaks [http://www.nexusmods.com/darksouls/mods/447/?]
