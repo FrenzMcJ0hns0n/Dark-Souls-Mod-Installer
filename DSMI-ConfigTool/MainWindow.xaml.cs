@@ -238,10 +238,8 @@ namespace DSMI_ConfigTool {
                     comboBox_gamepadButtonsStyle.Items.Add("Default");
 
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
-                    comboBox_sweetFxKey.Items.Add("F3");
 
                     comboBox_FPSFixKey.Items.Add("NUMPAD 4");
-                    comboBox_FPSFixKey.Items.Add("F4");
 
                     comboBox_sweetFxPreset.Items.Add("Cold");
                     comboBox_sweetFxPreset.Items.Add("Warm");
