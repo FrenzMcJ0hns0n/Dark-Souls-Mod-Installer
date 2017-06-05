@@ -323,6 +323,7 @@ namespace DSMI_ConfigTool {
             }
 
             if (modSupport == "normal") {
+
                 if (!(File.Exists(DSPW_INI_FILE)) || !(File.Exists(DATApath + "msvcp120.dll")) || !(File.Exists(DATApath + "msvcr120.dll"))) {
                     MessageBox.Show(Strings.ErrorMsg_missingFiles("Dark Souls PvP Watchdog", lang));
                     Environment.Exit(0);
@@ -332,6 +333,9 @@ namespace DSMI_ConfigTool {
                     MessageBox.Show(Strings.ErrorMsg_missingDll("WPFCustomMessageBox.dll", lang));
                     Environment.Exit(0);
                 }
+            }
+            else {
+                this.Title = "DSMI Configuration Tool (minimal mode)";
             }
         }
 

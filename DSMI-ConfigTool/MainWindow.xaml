@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DSMI_ConfigTool"
         mc:Ignorable="d"
-        Title="DSMI Config Tool" Loaded="Window_Loaded" 
+        Title="DSMI Configuration Tool" Loaded="Window_Loaded" 
         Height="585" Width="710"
         ResizeMode="CanMinimize">
     <Grid>
