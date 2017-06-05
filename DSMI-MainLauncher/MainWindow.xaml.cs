@@ -76,12 +76,20 @@ namespace DSMI_MainLauncher {
 
         }
 
+
+        #region Button events
+
         private void button_DATAfolder_Click(object sender, RoutedEventArgs e) {
             Process.Start(DATApath);
         }
 
         private void button_DSMIsRootfolder_Click(object sender, RoutedEventArgs e) {
-            Process.Start(startDir);
+            try {
+                Process.Start(Path.GetFullPath(Path.Combine(startDir, @"..\")));
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void button_play_Click(object sender, RoutedEventArgs e) {
@@ -220,6 +228,8 @@ namespace DSMI_MainLauncher {
                 MessageBox.Show(Strings.ErrorMsg_programNotFound(lang, "DSMI Un.exe"));
             }
         }
+
+        #endregion
 
 
         public void CreateLauncher() {
