@@ -1,5 +1,7 @@
 # Dark-Souls-Mod-Installer
-Mods compilation + management programs for Dark Souls: Prepare to Die Edition
+DSMI is a compilation of mods for Dark Souls: Prepare to Die Edition, and some programs to install and manage them. The aim is to provide a nice and lore-friendly starter pack for people who don't want to spend time installing and configuring files to play with mods.
+
+It is advised to use an up-to-date Steam release of the game, in order to get all mods to work. 
 
 
 Mods installed
@@ -33,8 +35,28 @@ Optional mods
 
 Prerequisites
 ---------------
-- .NET framework
-
-Version 4.6.2 (Win 7 SP1 / 8 / 10) [https://www.microsoft.com/en-us/download/details.aspx?id=53344]
-
+- Dark Souls: Prepare to Die Edition (Steam)
+- .NET framework 
+Version 4.6.2 (Win 7 SP1 / 8 / 10) [https://www.microsoft.com/en-us/download/details.aspx?id=53344] 
 Version 4.5 (Vista) [https://www.microsoft.com/en-us/download/details.aspx?id=30653]
+
+
+How to use it
+---------------
+0) Install Dark Souls: Prepare to Die Edition with Steam
+   
+[First install of the game ?
+Launch it once, to make Steam install some software prerequisites. Once on the main screen, you can exit.]
+
+Create a shortcut for "DSMI\Programs\DSMI-MainLauncher", and put it wherether you want.
+
+1) Run DSMI Main Launcher
+2) Click "Project settings" to define the global settings of the project
+3) Click "Install mods" to install all DSMI files/folders
+4) Click "Settings" to configure the game
+5) Click "Play" to run game + DSCM
+
+
+Contact
+---------------
+https://www.reddit.com/user/McJ0hns0n/
