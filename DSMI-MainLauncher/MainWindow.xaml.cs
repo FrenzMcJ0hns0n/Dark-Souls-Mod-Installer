@@ -141,44 +141,7 @@ namespace DSMI_MainLauncher {
                 file_name = new FileInfo(file).Name;
                 file_name = file_name.ToLower();
 
-                if ((file_name == "d3d9.dll") ||
-                    (file_name == "d3d9_wd.dll") ||
-                    (file_name == "d3d9_sf.dll") ||
-                    (file_name == "log.log") ||
-
-                    (file_name == "dinput8.dll") ||
-                    (file_name == "dsfix.ini") ||
-                    (file_name == "dsfix_readme.txt") ||
-                    (file_name == "dsfix_versions.txt") ||
-                    (file_name == "dsfixkeys.ini") ||
-                    (file_name == "dsfix.log") ||
-
-                    (file_name == "dscm.exe") ||
-
-                    (file_name == "dsmfix.dll") ||
-                    (file_name == "dsmfix.ini") ||
-                    (file_name == "dsmfix_readme.txt") ||
-                    (file_name == "dsmfixgui.exe") ||
-
-                    (file_name == "darksoulsmousefix.dll") ||
-                    (file_name == "darksoulsmousefix.ini") ||
-                    (file_name == "darksoulsmousefixgui.exe") ||
-                    (file_name == "darksoulsmousefixreadme.md") ||
-                    (file_name == "darksoulsmousefixreadme.pdf") ||
-
-                    (file_name == "dspw_changelog.txt") ||
-                    (file_name == "dspw_readme.txt") ||
-                    (file_name == "dspw_version") ||
-                    (file_name == "dspwsteam.ini") ||
-                    (file_name == "msvcp120.dll") ||
-                    (file_name == "msvcr120.dll") ||
-
-                    (file_name == "fpsfix.dll") ||
-                    (file_name == "fpsfix.ini") ||
-
-                    (file_name == "sweetfx_preset.txt") ||
-                    (file_name == "sweetfx_readme.txt") ||
-                    (file_name == "sweetfx_settings.txt")) {
+                if (Lists.DSMIitems_files.Contains(file_name)) {
                     counter++;
                 }
             }
@@ -192,14 +155,20 @@ namespace DSMI_MainLauncher {
                 folder_name = new DirectoryInfo(folder).Name;
                 folder_name = folder_name.ToLower();
 
-                if ((folder_name == "dsfix") ||
-                    (folder_name == "sweetfx")) {
+                if (Lists.DSMIitems_directories.Contains(folder_name)) {
                     counter++;
                 }
             }
 
+
+            // Ckeck files/folders count -----
+
             if (counter > 0) {
-                MessageBoxResult msgBoxResult = MessageBox.Show(Strings.Warning_installContent(lang), Strings.Warning_installHeader(lang), MessageBoxButton.YesNo);
+                MessageBoxResult msgBoxResult = MessageBox.Show(
+                    Strings.Warning_installContent(lang), 
+                    Strings.Warning_installHeader(lang), 
+                    MessageBoxButton.YesNo);
+
                 if (msgBoxResult == MessageBoxResult.Yes) {
                     CallLongRunningMethod_Install();
                 }

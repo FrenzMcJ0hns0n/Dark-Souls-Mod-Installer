@@ -129,65 +129,36 @@ namespace DSMI_Un_in_st_al_le_r {
 
         public void uninstallDsmiFiles() {
 
+
+            // Deleting files -----
+
             string[] filePaths = Directory.GetFiles(DATApath);
             foreach (string filePath in filePaths) {
                 name = new FileInfo(filePath).Name;
                 name = name.ToLower();
 
-                if ((name == "d3d9.dll") ||
-                    (name == "d3d9_wd.dll") ||
-                    (name == "d3d9_sf.dll") ||
-                    (name == "log.log") ||
-
-                    (name == "dinput8.dll") ||
-                    (name == "dsfix.ini") ||
-                    (name == "dsfix_readme.txt") ||
-                    (name == "dsfix_versions.txt") ||
-                    (name == "dsfixkeys.ini") ||
-                    (name == "dsfix.log") ||
-
-                    (name == "dscm.exe") ||
-
-                    (name == "dsmfix.dll") ||
-                    (name == "dsmfix.ini") ||
-                    (name == "dsmfix_readme.txt") ||
-                    (name == "dsmfixgui.exe") ||
-
-                    (name == "darksoulsmousefix.dll") ||
-                    (name == "darksoulsmousefix.ini") ||
-                    (name == "darksoulsmousefixgui.exe") ||
-                    (name == "darksoulsmousefixreadme.md") ||
-                    (name == "darksoulsmousefixreadme.pdf") ||
-
-                    (name == "dspw_changelog.txt") ||
-                    (name == "dspw_readme.txt") ||
-                    (name == "dspw_version") ||
-                    (name == "dspwsteam.ini") ||
-                    (name == "msvcp120.dll") ||
-                    (name == "msvcr120.dll") ||
-
-                    (name == "fpsfix.dll") ||
-                    (name == "fpsfix.ini") ||
-
-                    (name == "sweetfx_preset.txt") ||
-                    (name == "sweetfx_readme.txt") ||
-                    (name == "sweetfx_settings.txt")) {
+                if (Lists.DSMIitems_files.Contains(name)) {
                     file_counter++;
                     File.Delete(filePath);
                 }
             }
+
+
+            // Deleting directories -----
 
             string[] dirPaths = Directory.GetDirectories(DATApath);
             foreach (string dirPath in dirPaths) {
                 name = new DirectoryInfo(dirPath).Name;
                 name = name.ToLower();
 
-                if ((name == "dsfix") ||
-                    (name == "sweetfx")) {
+                if (Lists.DSMIitems_directories.Contains(name)) {
                     dir_counter++;
                     Directory.Delete(dirPath, true);
                 }
             }
+
+
+            // Count -----
 
             if ((file_counter > 0) || (dir_counter > 0)) {
                 MessageBox.Show(Strings.Message_uninstalledElements(file_counter, dir_counter, lang));
@@ -201,76 +172,36 @@ namespace DSMI_Un_in_st_al_le_r {
 
         public void uninstallMostElements() {
 
+
+            // Deleting files -----
+
             string[] filePaths = Directory.GetFiles(DATApath);
             foreach (string filePath in filePaths) {
                 name = new FileInfo(filePath).Name;
                 name = name.ToLower();
 
-                if ((name != "darksouls.exe") &&
-                    (name != "darksouls.exe.bak") &&
-
-                    (name != "dvdbnd0.bdt") &&
-                    (name != "dvdbnd0.bdt.bak") &&
-                    (name != "dvdbnd0.bhd5") &&
-                    (name != "dvdbnd0.bhd5.bak") &&
-                    (name != "dvdbnd1.bdt") &&
-                    (name != "dvdbnd1.bdt.bak") &&
-                    (name != "dvdbnd1.bhd5") &&
-                    (name != "dvdbnd1.bhd5.bak") &&
-                    (name != "dvdbnd2.bdt") &&
-                    (name != "dvdbnd2.bdt.bak") &&
-                    (name != "dvdbnd2.bhd5") &&
-                    (name != "dvdbnd2.bhd5.bak") &&
-                    (name != "dvdbnd3.bdt") &&
-                    (name != "dvdbnd3.bdt.bak") &&
-                    (name != "dvdbnd3.bhd5") &&
-                    (name != "dvdbnd3.bhd5.bak") &&
-
-                    (name != "fmodex.dll") &&
-                    (name != "fmod_event.dll") &&
-                    (name != "steam_api.dll") &&
-                    (name != "steam_appid.txt")) {
+                if ((!(Lists.vanillaItems_files.Contains(name))) && (!(Lists.otherNonVanilla_files.Contains(name)))) { 
                     file_counter++;
                     File.Delete(filePath);
                 }
             }
+
+
+            // Deleting directories -----
 
             string[] dirPaths = Directory.GetDirectories(DATApath);
             foreach (string dirPath in dirPaths) {
                 name = new DirectoryInfo(dirPath).Name;
                 name = name.ToLower();
 
-                if ((name != "movww") &&
-                    (name != "readme") &&
-
-                    (name != "dvdbnd0.bhd5.extract") &&
-                    (name != "dvdbnd1.bhd5.extract") &&
-                    (name != "dvdbnd2.bhd5.extract") &&
-                    (name != "dvdbnd3.bhd5.extract") &&
-
-                    (name != "chr") &&
-                    (name != "event") &&
-                    (name != "map") &&
-                    (name != "remo") &&
-                    (name != "script") &&
-                    (name != "sfx") &&
-
-                    (name != "facegen") &&
-                    (name != "font") &&
-                    (name != "menu") &&
-                    (name != "msg") &&
-                    (name != "mtd") &&
-                    (name != "obj") &&
-                    (name != "other") &&
-                    (name != "param") &&
-                    (name != "paramdef") &&
-                    (name != "parts") &&
-                    (name != "shader") &&
-                    (name != "sound")) {
+                if ((!(Lists.vanillaItems_directories.Contains(name))) && (!(Lists.otherNonVanilla_directories.Contains(name)))) {
                     dir_counter++;
                     Directory.Delete(dirPath, true);
                 }
             }
+
+
+            // Count -----
 
             if ((file_counter > 0) || (dir_counter > 0)) {
                 MessageBox.Show(Strings.Message_uninstalledElements(file_counter, dir_counter, lang));
@@ -284,43 +215,36 @@ namespace DSMI_Un_in_st_al_le_r {
 
         public void uninstallAllElements() {
 
+
+            // Deleting files -----
+
             string[] filePaths = Directory.GetFiles(DATApath);
             foreach (string filePath in filePaths) {
                 name = new FileInfo(filePath).Name;
                 name = name.ToLower();
 
-                if ((name != "darksouls.exe") &&
-                    (name != "darksouls.exe.bak") &&
-
-                    (name != "dvdbnd0.bdt") &&
-                    (name != "dvdbnd0.bhd5") &&
-                    (name != "dvdbnd1.bdt") &&
-                    (name != "dvdbnd1.bhd5") &&
-                    (name != "dvdbnd2.bdt") &&
-                    (name != "dvdbnd2.bhd5") &&
-                    (name != "dvdbnd3.bdt") &&
-                    (name != "dvdbnd3.bhd5") &&
-
-                    (name != "fmodex.dll") &&
-                    (name != "fmod_event.dll") &&
-                    (name != "steam_api.dll") &&
-                    (name != "steam_appid.txt")) {
+                if (!(Lists.vanillaItems_files.Contains(name))) {
                     file_counter++;
                     File.Delete(filePath);
                 }
             }
+
+
+            // Deleting directories -----
 
             string[] dirPaths = Directory.GetDirectories(DATApath);
             foreach (string dirPath in dirPaths) {
                 name = new DirectoryInfo(dirPath).Name;
                 name = name.ToLower();
 
-                if ((name != "movww") &&
-                    (name != "readme")) {
+                if (!(Lists.vanillaItems_directories.Contains(name))) {
                     dir_counter++;
                     Directory.Delete(dirPath, true);
                 }
             }
+
+
+            // Count -----
 
             if ((file_counter > 0) || (dir_counter > 0)) {
                 MessageBox.Show(Strings.Message_uninstalledElements(file_counter, dir_counter, lang));
