@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Resources; // Resources.dll
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
-using Resources;
 using WPFCustomMessageBox; // https://github.com/evanwon/WPFCustomMessageBox
 
 namespace DSMI_ConfigTool {
@@ -17,6 +17,7 @@ namespace DSMI_ConfigTool {
         public string lang;
         public string modSupport;
 
+        // TODO ? Dynamic preset management : add each txt file in ...\DATA\SweetFX\Presets\ as selectable preset ?
         public const string sf_preset_cold = "\"..\\Presets\\DS_SweetFX_HDR-Cold_and_sharp.txt\"";
         public const string sf_preset_warm = "\"..\\Presets\\DS_SweetFX_HDR-Warm_and_sharp.txt\"";
         public const string sf_preset_cine = "\"..\\Presets\\DS_SweetFX_HDR-Cinematic.txt\"";
@@ -247,18 +248,16 @@ namespace DSMI_ConfigTool {
                     break;
             }
 
-            comboBox_uiRes.Items.Add("3840x2160");
-            comboBox_uiRes.Items.Add("2560x1440");
-            comboBox_uiRes.Items.Add("1920x1080");
-            comboBox_uiRes.Items.Add("1600x900");
-            comboBox_uiRes.Items.Add("1280x720");
+
+            foreach (string item in Lists.uiRes_Values) {
+                comboBox_uiRes.Items.Add(item);
+            } 
 
             comboBox_toggleFramerateKey.Items.Add("F2");
 
-            comboBox_gamepadButtonsStyle.Items.Add("Xbox 360 HD");
-            comboBox_gamepadButtonsStyle.Items.Add("Xbox One");
-            comboBox_gamepadButtonsStyle.Items.Add("PlayStation 3");
-            comboBox_gamepadButtonsStyle.Items.Add("PlayStation 4");
+            foreach (string item in Lists.gamepadButtonsStyle_Values) {
+                comboBox_gamepadButtonsStyle.Items.Add(item);
+            }
 
             comboBox_FPSFixKey.Items.Add("F4");
 

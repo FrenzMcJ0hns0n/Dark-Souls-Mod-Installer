@@ -1,4 +1,4 @@
-﻿using Resources;
+﻿using Resources; // Resources.dll
 using System;
 using System.Diagnostics;
 using System.IO;

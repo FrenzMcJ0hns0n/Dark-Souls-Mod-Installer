@@ -4,6 +4,7 @@ namespace Resources {
 
     public class Lists {
 
+        #region Files and folders
 
         public static List<string> vanillaItems_files = new List<string>(new string[]
             {
@@ -29,7 +30,6 @@ namespace Resources {
                 "movww",
                 "readme"
             });
-
 
 
 
@@ -74,7 +74,6 @@ namespace Resources {
                 "shader",
                 "sound"
             });
-
 
 
 
@@ -128,6 +127,30 @@ namespace Resources {
                 "dsfix",
                 "sweetfx"
             });
+
+        #endregion
+
+
+        #region GUI items
+
+        public static List<string> uiRes_Values = new List<string>(new string[]
+            {
+                "3840x2160",
+                "2560x1440",
+                "1920x1080",
+                "1600x900",
+                "1280x720"
+            });
+
+        public static List<string> gamepadButtonsStyle_Values = new List<string>(new string[]
+            {
+                "Xbox 360 HD",
+                "Xbox One",
+                "PlayStation 3",
+                "PlayStation 4"
+            });
+
+        #endregion
 
     }
 }
