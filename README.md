@@ -1,11 +1,10 @@
 # Dark-Souls-Mod-Installer
-DSMI is a compilation of mods for Dark Souls: Prepare to Die Edition, and some programs to install and manage them. The aim is to provide a nice and lore-friendly starter pack for people who don't want to spend time installing and configuring files to play with mods.
+Dark-Souls-Mod-Installer (DSMI) is a compilation of mods for Dark Souls: Prepare to Die Edition, and some multilingual programs to install and manage them. The aim is to provide a lore-friendly starter pack for people who don't want to spend time installing and configuring files to play decently.
 
-It is advised to use an up-to-date Steam release of the game, in order to get all mods to work. 
+It is advised to use the last, fully-patched Steam version of the game so that all the mods work as intended.
 
 
-Mods installed
----------------
+### Installed mods
 - DSfix [http://blog.metaclassofnil.com/?tag=dsfix] GitHub : https://github.com/PeterTh/dsfix
 - Dark Souls Mouse Fix (DSMfix) [https://www.reddit.com/r/darksouls/comments/3ay9aj/dsmfix_update_for_new_steamworks_patch/]
 - Dark Souls Mouse Fix (new fix) [http://www.nexusmods.com/darksouls/mods/1241/?]
@@ -24,25 +23,21 @@ Mods installed
 - Dark Souls Dualshock 4 Interface [http://www.nexusmods.com/darksouls/mods/690/?]
 
 
-Optional mods
----------------
+### Optional mods/programs
 - All enemies are Gravelord Phantoms [http://www.nexusmods.com/darksouls/mods/1176/?]
 - Alternative starting classes [http://www.nexusmods.com/darksouls/mods/1215/?]
 - Dark Souls III menu sound effects [http://www.nexusmods.com/darksouls/mods/1195/?]
 - Health Bars Usability Tweaks (colorblind version)
 - Improved texts [http://www.nexusmods.com/darksouls/mods/1198/?]
+- DS-ExeModifier > GitHub : https://github.com/FrenzMcJ0hns0n/DS-ExeModifier
 
 
-Prerequisites
----------------
+### Prerequisites
 - Dark Souls: Prepare to Die Edition (Steam)
-- .NET framework 
-Version 4.6.2 (Win 7 SP1 / 8 / 10) [https://www.microsoft.com/en-us/download/details.aspx?id=53344] 
-Version 4.5 (Vista) [https://www.microsoft.com/en-us/download/details.aspx?id=30653]
+- .NET framework 4.5
 
 
-How to use it
----------------
+### How to use it
 0) Install Dark Souls: Prepare to Die Edition with Steam
    
 [First install of the game ?
@@ -57,6 +52,10 @@ Create a shortcut for "DSMI\Programs\DSMI-MainLauncher", and put it wherether yo
 5) Click "Play" to run game + DSCM
 
 
-Contact
----------------
+### Contact
 https://www.reddit.com/user/McJ0hns0n/
+
+
+### Notes
+- This still is a work in progress : feedbacks or suggestions are welcome.
+- Sean Pesce released a very similar project, see [this link](https://www.reddit.com/r/DarkSoulsMods/comments/64gevf/release_das1_dark_souls_configuration_utility/)
