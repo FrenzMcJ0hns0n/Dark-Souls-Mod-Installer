@@ -59,3 +59,18 @@ https://www.reddit.com/user/McJ0hns0n/
 ### Notes
 - This still is a work in progress : feedbacks or suggestions are welcome.
 - Sean Pesce released a very similar project, see [this link](https://www.reddit.com/r/DarkSoulsMods/comments/64gevf/release_das1_dark_souls_configuration_utility/)
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+## Programmer guide
+
+This project actually contains 5 distinct projects : 
+- DSMI ConfigTool
+- DSMI MainLauncher
+- DSMI ProjectSettings
+- DSMI DSMI-Un-in-st-al-le-r (cheap trick to avoid the Windows message "this program might not have installed correctly")
+- Resources
+
+The 4 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. This maybe isn't the best way to organize files, but this is the way I started worked on it, since it is my first substancial project. 
+
+Everything is written in C#, with the WPF technology. For those who aren't used to it, simply look the files MainPage.xaml (design) and MainPaige.xaml.cs (code-behind) of each DSMI projects to get all the interesting parts
