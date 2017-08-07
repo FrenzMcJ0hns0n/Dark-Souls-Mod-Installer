@@ -75,4 +75,4 @@ This project actually contains 5 distinct projects :
 
 The 4 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. This maybe isn't the best way to organize files, but this is the way I started worked on it, since it is my first substancial project. 
 
-Everything is written in C# WPF. Simply look the files *ainPage.xaml* (design) and *MainPaige.xaml.cs* (code-behind) in each DSMI projects to get the interesting parts.
+Everything is written in C# (WPF). Check the files *MainPage.xaml* (design) and *MainPage.xaml.cs* (code-behind) in each DSMI projects to get the interesting parts.
