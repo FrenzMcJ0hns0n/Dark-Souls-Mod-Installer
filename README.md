@@ -9,7 +9,7 @@ It is advised to use the last, fully-patched Steam version of the game so that a
 - Dark Souls Mouse Fix (new fix) [http://www.nexusmods.com/darksouls/mods/1241/?]
 - Dark Souls PvP Watchdog (DSPW) [http://www.nexusmods.com/darksouls/mods/849/?]
 - Dark Souls Connectivity Mod (DSCM) [http://www.nexusmods.com/darksouls/mods/1047/?]
-- FPSFix [http://www.nexusmods.com/darksouls/mods/862/?] GitHub : https://github.com/NullBy7e/FPSFix
+- FPSFix+ [https://github.com/SeanPesce/FPSFix-Plus]
 
 ### Sweet mods
 - Dark Souls SweetFX HDR (SweetFX 1.4 + presets) [http://www.nexusmods.com/darksouls/mods/289/?]
@@ -66,13 +66,13 @@ https://www.reddit.com/user/McJ0hns0n/
 
 ## Programmer guide
 
-This project actually contains 5 distinct projects : 
+This project actually contains 5 distinct sub-projects : 
 - DSMI ConfigTool
 - DSMI MainLauncher
 - DSMI ProjectSettings
 - DSMI DSMI-Un-in-st-al-le-r (cheap trick to avoid the Windows message "this program might not have installed correctly")
 - Resources
 
-The 4 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. This maybe isn't the best way to organize files, but this is the way I started worked on it, since it is my first substancial project. 
+The 4 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. This is a bad way to organize files, but that is how I started working, since it is my first substancial project. 
 
-Everything is written in C# (WPF). Check the files *MainPage.xaml* (design) and *MainPage.xaml.cs* (code-behind) in each DSMI projects to get the interesting parts.
+Everything is written in C#/WPF. Check the files *MainPage.xaml* (design) and *MainPage.xaml.cs* (code-behind) in each DSMI sub-project to get the interesting parts.
