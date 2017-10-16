@@ -137,57 +137,33 @@ namespace Resources {
 
         public static string GetDataFolderPathWithRegistry() {
 
+            // Other possible registry keys / values :
+            // @"SOFTWARE\Wow6432Node\namco bandai games\dark souls" / "exe_path"
+            // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420" / "InstallLocation"
 
-        // This isn't very pretty, but it should work fine in most cases
+            string keyValue = "";
+            var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            var regKey = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420");
 
-            string dat_path;
-            object dat_object;
+            if (regKey != null)
+                keyValue = regKey.GetValue("InstallLocation").ToString();
+            if (Directory.Exists(keyValue))
+                return keyValue + @"\DATA\";
+            return "";
 
-            RegistryKey dsExePath = Registry.LocalMachine;
-
-                try {
-                    dsExePath = dsExePath.OpenSubKey(@"SOFTWARE\Wow6432Node\namco bandai games\dark souls");
-                    dat_object = dsExePath.GetValue("exe_path");
-                    dat_path = dat_object.ToString();
-                    return dat_path.Remove(dat_path.Length - 13);
-                }
-                catch {
-                    try {
-                        dsExePath = dsExePath.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420");
-                        dat_object = dsExePath.GetValue("InstallLocation");
-                        dat_path = dat_object.ToString();
-
-                        if (Directory.Exists(dat_path + @"\DATA\")) {
-                            return dat_path + @"\DATA\";
-                        }
-                        return "";
-                    }
-                    catch {
-                        return "";
-                    }
-                }
-
-            }
+        }
 
         public static string GetSteamFolderPathWithRegistry() {
-            string le_path;
-            object le_objet;
 
-            RegistryKey steamPath = Registry.LocalMachine;
+            string keyValue = "";
+            var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            var regKey = baseKey.OpenSubKey(@"SOFTWARE\Wow6432Node\Valve\Steam");
 
-            try {
-                steamPath = steamPath.OpenSubKey(@"SOFTWARE\Wow6432Node\Valve\Steam");
-                le_objet = steamPath.GetValue("InstallPath");
-                le_path = le_objet.ToString();
-
-                if (File.Exists(le_path + @"\Steam.exe")) {
-                    return le_path + @"\";
-                }
-                return "";
-            }
-            catch {
-                return "";
-            }
+            if (regKey != null)
+                keyValue = regKey.GetValue("InstallPath").ToString();
+            if (Directory.Exists(keyValue))
+                return keyValue + @"\";
+            return "";
         }
 
         public static string ParseDataPathValue(string file, string expression) {

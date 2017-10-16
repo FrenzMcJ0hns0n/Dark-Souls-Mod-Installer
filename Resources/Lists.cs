@@ -106,7 +106,7 @@ namespace Resources {
 
                 "dscm.exe",
 
-                "fpsfix.dll",
+                "winmm.dll", // FPSfix+
                 "fpsfix.ini",
 
                 "d3d9.dll",

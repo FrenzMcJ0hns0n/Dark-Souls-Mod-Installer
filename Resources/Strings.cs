@@ -103,7 +103,7 @@ namespace Resources {
                     return "Resolution";
             }
         }
-        
+
         public static string label_dofOverrideRes_toolTipLanguage(string language) {
 
             switch (language) {
@@ -136,7 +136,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string label_dofAdditionalBlur_contentLanguage(string language) {
 
             switch (language) {
@@ -148,7 +148,7 @@ namespace Resources {
                     return "Blur";
             }
         }
-        
+
         public static string label_dofAdditionalBlur_toolTipLanguage(string language) {
 
             switch (language) {
@@ -175,7 +175,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string groupBox_aoOptions_headerLanguage(string language) {
 
             switch (language) {
@@ -187,7 +187,7 @@ namespace Resources {
                     return "Ambient occlusion";
             }
         }
-        
+
         public static string label_aoStrength_contentLanguage(string language) {
 
             switch (language) {
@@ -199,7 +199,7 @@ namespace Resources {
                     return "Strength";
             }
         }
-        
+
         public static string label_aoStrength_toolTipLanguage(string language) {
 
             switch (language) {
@@ -220,7 +220,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string label_aoType_contentLanguage(string language) {
 
             switch (language) {
@@ -230,7 +230,7 @@ namespace Resources {
                     return "Type";
             }
         }
-        
+
         public static string label_aoType_toolTipLanguage(string language) {
 
             switch (language) {
@@ -257,7 +257,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string checkBox_unlockFPS_contentLanguage(string language) {
 
             switch (language) {
@@ -269,7 +269,7 @@ namespace Resources {
                     return "Unlock framerate";
             }
         }
-        
+
         public static string checkBox_unlockFPS_toolTipLanguage(string language) {
 
             switch (language) {
@@ -287,7 +287,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string shared_maxFPSTarget_toolTipLanguage(string language) {
 
             switch (language) {
@@ -308,7 +308,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string label_toggleFramerateKey_contentLanguage(string language) {
 
             switch (language) {
@@ -320,7 +320,7 @@ namespace Resources {
                     return "Key :";
             }
         }
-        
+
         public static string label_toggleFramerateKey_toolTipLanguage(string language) {
 
             switch (language) {
@@ -332,7 +332,7 @@ namespace Resources {
                     return "Define the key to switch between 30 and 60 fps while in-game";
             }
         }
-        
+
         public static string groupBox_mouseCursor_headerLanguage(string language) {
 
             switch (language) {
@@ -344,7 +344,7 @@ namespace Resources {
                     return "Mouse cursor";
             }
         }
-        
+
         public static string checkBox_showCursor_contentLanguage(string language) {
 
             switch (language) {
@@ -356,7 +356,7 @@ namespace Resources {
                     return "Display cursor";
             }
         }
-        
+
         public static string checkBox_showCursor_toolTipLanguage(string language) {
 
             switch (language) {
@@ -368,7 +368,7 @@ namespace Resources {
                     return "Display the mouse cursor on screen while in-game.";
             }
         }
-        
+
         public static string checkBox_captureCursor_contentLanguage(string language) {
 
             switch (language) {
@@ -380,7 +380,7 @@ namespace Resources {
                     return "Capture cursor";
             }
         }
-        
+
         public static string checkBox_captureCursor_toolTipLanguage(string language) {
 
             switch (language) {
@@ -404,7 +404,7 @@ namespace Resources {
                     return "Controls";
             }
         }
-        
+
         public static string radioButton_gamepad_contentLanguage(string language) {
 
             switch (language) {
@@ -416,7 +416,7 @@ namespace Resources {
                     return "Gamepad";
             }
         }
-        
+
         public static string radioButton_gamepad_toolTipLanguage(string language) {
 
             switch (language) {
@@ -428,7 +428,7 @@ namespace Resources {
                     return "Play with gamepad (most common choice)";
             }
         }
-        
+
         public static string label_gamepadButtonsStyle_contentLanguage(string language) {
 
             switch (language) {
@@ -440,7 +440,7 @@ namespace Resources {
                     return "Icons";
             }
         }
-        
+
         public static string label_gamepadButtonsStyle_toolTipLanguage(string language) {
 
             switch (language) {
@@ -452,7 +452,7 @@ namespace Resources {
                     return "Look of the gamepad buttons";
             }
         }
-        
+
         public static string radioButton_mouse_contentLanguage(string language) {
 
             switch (language) {
@@ -464,7 +464,7 @@ namespace Resources {
                     return "Mouse";
             }
         }
-        
+
         public static string radioButton_mouse_toolTipLanguage(string language) {
 
             switch (language) {
@@ -476,7 +476,7 @@ namespace Resources {
                     return "Play with mouse (better support thanks to mods)";
             }
         }
-        
+
         public static string radioButton_oldMouseFix_contentLanguage(string language) {
 
             switch (language) {
@@ -488,7 +488,7 @@ namespace Resources {
                     return "Classic fix";
             }
         }
-        
+
         public static string radioButton_oldMouseFix_toolTipLanguage(string language) {
 
             switch (language) {
@@ -500,7 +500,7 @@ namespace Resources {
                     return "The old fix, initially released by Petska, then improved by Jellybaby34.";
             }
         }
-        
+
         public static string radioButton_newMouseFix_contentLanguage(string language) {
 
             switch (language) {
@@ -512,7 +512,7 @@ namespace Resources {
                     return "New fix";
             }
         }
-        
+
         public static string radioButton_newMouseFix_toolTipLanguage(string language) {
 
             switch (language) {
@@ -524,7 +524,7 @@ namespace Resources {
                     return "The new fix, by Methanhydrat";
             }
         }
-        
+
         public static string button_configureMouse_contentLanguage(string language) {
 
             switch (language) {
@@ -536,7 +536,7 @@ namespace Resources {
                     return "Configure mouse";
             }
         }
-        
+
         public static string groupBox_language_headerLanguage(string language) {
 
             switch (language) {
@@ -548,7 +548,7 @@ namespace Resources {
                     return "Language";
             }
         }
-        
+
         public static string label_forceLanguage_contentLanguage(string language) {
 
             switch (language) {
@@ -560,7 +560,7 @@ namespace Resources {
                     return "Force language :";
             }
         }
-        
+
         public static string label_forceLanguage_toolTipLanguage(string language) {
 
             switch (language) {
@@ -572,7 +572,7 @@ namespace Resources {
                     return "Force the use of a specific language in-game.\n\n- Off : use the language defined by Steam.";
             }
         }
-        
+
         public static string checkBox_overlayDspw_contentLanguage(string language) {
 
             switch (language) {
@@ -584,7 +584,7 @@ namespace Resources {
                     return "Display overlay at launch";
             }
         }
-        
+
         public static string checkBox_overlayDspw_toolTipLanguage(string language) {
 
             switch (language) {
@@ -605,7 +605,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string checkBox_sweetFX_contentLanguage(string language) {
 
             switch (language) {
@@ -617,7 +617,7 @@ namespace Resources {
                     return "Use SweetFX";
             }
         }
-        
+
         public static string checkBox_sweetFX_toolTipLanguage(string language) {
 
             switch (language) {
@@ -637,7 +637,7 @@ namespace Resources {
                          ;
             }
         }
-        
+
         public static string label_sweetFxKey_contentLanguage(string language) {
 
             switch (language) {
@@ -649,7 +649,7 @@ namespace Resources {
                     return "Key :";
             }
         }
-        
+
         public static string label_sweetFxKey_toolTipLanguage(string language) {
 
             switch (language) {
@@ -661,7 +661,7 @@ namespace Resources {
                     return "Define the key to enable/disable SweetFX in-game.";
             }
         }
-        
+
         public static string label_sweetFxPreset_toolTipLanguage(string language) {
 
             switch (language) {
@@ -673,61 +673,55 @@ namespace Resources {
                     return "Define the preset to use with SweetFX.";
             }
         }
-        
+
         public static string checkBox_FPSFix_contentLanguage(string language) {
 
             switch (language) {
                 case "fr":
-                    return "Utiliser FPSFix";
+                    return "Utiliser FPSFix+";
                 case "sp":
-                    return "Utilizar FPSFix";
+                    return "Utilizar FPSFix+";
                 default:
-                    return "Use FPSFix";
+                    return "Use FPSFix+";
             }
         }
-        
+
         public static string checkBox_FPSFix_toolTipLanguage(string language) {
 
             switch (language) {
                 case "fr":
-                    return "Définit si FPSFix est utilisé durant la partie.\n\n"
-                         + "La désactivation du mod peut aider à résoudre les problèmes liés au chaînage DLL."
-                         ;
+                    return "Définit si FPSFix+ est utilisé durant la partie";
                 case "sp":
-                    return "Define si FPSFix está utilizado durante la partida.\n\n"
-                         + "La desactivación del mod puede ayudar a resolver los problemas con al encadenamiento de DLL."
-                         ;
+                    return "Define si FPSFix+ está utilizado durante la partida";
                 default:
-                    return "Define if SweetFX is used in-game.\n\n"
-                         + "Disable the mod can help to solve issues relative to DLL chaining."
-                         ;
+                    return "Define if FPSFix+ is used in-game";
             }
         }
-        
-        public static string label_FPSFixKey_contentLanguage(string language) {
+
+        public static string checkbox_FPSFixBeep_contentLanguage(string language) {
 
             switch (language) {
                 case "fr":
-                    return "Touche :";
+                    return "Activer bip";
                 case "sp":
-                    return "Tecla :";
+                    return "Activar pitido";
                 default:
-                    return "Key :";
+                    return "Enable beep";
             }
         }
-        
-        public static string label_FPSFixKey_toolTipLanguage(string language) {
+
+        public static string checkbox_FPSFixBeep_toolTipLanguage(string language) {
 
             switch (language) {
                 case "fr":
-                    return "Définit la touche pour forcer le personnage à se lever si il est bloqué à un feu.";
+                    return "Émettre un bip à chaque fois que le fix est automatiquement appliqué ?";
                 case "sp":
-                    return "Define la tecla para forzar el personage à levantarse si está bloqueado a un fuego.";
+                    return "¿ Emitir un pitido cuando el fix se aplica automáticamente ?";
                 default:
-                    return "Define the key to kick the character when stuck at bonfire.";
+                    return "Play a sound each time the fix is automatically triggered ?";
             }
         }
-        
+
         public static string button_saveAndExit_contentLanguage(string language) {
 
             switch (language) {
@@ -843,7 +837,7 @@ namespace Resources {
                     return "Location of the DATA directory :";
             }
         }
-        
+
         public static string button_browseDataPath_contentLanguage(string language) {
 
             switch (language) {
@@ -855,7 +849,7 @@ namespace Resources {
                     return "Browse ...";
             }
         }
-        
+
         public static string dialog_browseDatapath_descriptionLanguage(string language) {
 
             switch (language) {
@@ -867,7 +861,7 @@ namespace Resources {
                     return "Select the DATA folder of Dark Souls: Prepare to Die Edition";
             }
         }
-        
+
         public static string label_languageChoice_contentLanguage(string language) {
 
             switch (language) {
@@ -879,7 +873,7 @@ namespace Resources {
                     return "Language to use in project :";
             }
         }
-        
+
         public static string label_compatibilityMode_contentLanguage(string language) {
 
             switch (language) {
@@ -891,7 +885,7 @@ namespace Resources {
                     return "Mods support :";
             }
         }
-        
+
         public static string radioButton_minMode_contentLanguage(string language) {
 
             switch (language) {
@@ -901,7 +895,7 @@ namespace Resources {
                     return "Minimal";
             }
         }
-        
+
         public static string button_Apply_contentLanguage(string language) {
 
             switch (language) {
@@ -1137,17 +1131,17 @@ namespace Resources {
 
             switch (language) {
                 case "fr":
-                    return "Erreur : Emplacement du dossier DATA invalide !"
+                    return "Erreur : Emplacement du dossier DATA invalide !\n"
                          + "Veuillez utiliser le bouton \"Parcourir...\" pour le définir manuellement.";
                 case "sp":
-                    return "¡ Error : La ubicación de la carpeta DATA está inválida !"
+                    return "¡ Error : La ubicación de la carpeta DATA está inválida !\n"
                          + "Por favor utiliza el botón \"Buscar...\" para definirlo manualmente.";
                 default:
-                    return "Error : Invalid DATA folder path : "
+                    return "Error : Invalid DATA folder path :\n"
                          + "Please use the \"Browse...\" button to define it manually.";
             }
         }
-        
+
         public static string ErrorMsg_missingDll(string file, string language) {
 
             switch (language) {
@@ -1162,7 +1156,7 @@ namespace Resources {
                          + "Please check your setup then try again.";
             }
         }
-        
+
         public static string ErrorMsg_missingFiles(string mod_name, string language) {
 
             switch (language) {
@@ -1192,7 +1186,7 @@ namespace Resources {
                          + "Run and exit Dark Souls once to generate it, then try again.";
             }
         }
-        
+
         public static string ErrorMsg_noMouseFixChosen(string language) {
 
             switch (language) {
@@ -1273,7 +1267,7 @@ namespace Resources {
                          + "Use \"Project settings\" to define the right location.";
             }
         }
-        
+
         public static string ErrorMsg_wrongResolutionChoice(string language) {
 
             switch (language) {
@@ -1288,7 +1282,18 @@ namespace Resources {
                 default:
                     return "Error : Wrong choice of resolution !\n\n"
                          + "If the Rendering resolution is lower than 1280x720, "
-                         + "you must choose a different resolution for the Interface;";
+                         + "you must choose a different resolution for the Interface.";
+            }
+        }
+
+        public static string ErrorMsg_unableToReachFilesAtInstall(string language) {
+            switch (language) {
+                case "fr":
+                    return "Erreur : Dossier \\Source\\ de DSMI inaccessible ou inexistant !";
+                case "sp":
+                    return "Error : La carpeta \\Source\\ de DSMI esta inaccesible o inencontrable.";
+                default:
+                    return "Error : DSMI's \\Source\\ folder is unreachable or don't exist !";
             }
         }
 
@@ -1306,7 +1311,7 @@ namespace Resources {
                     return "Applied.";
             }
         }
-        
+
         public static string Message_installationCompleted(string language) {
 
             switch (language) {
@@ -1316,7 +1321,7 @@ namespace Resources {
                     return "Installation OK";
             }
         }
-        
+
         public static string Message_launcherCreated(string language) {
 
             switch (language) {
@@ -1328,19 +1333,37 @@ namespace Resources {
                     return "Launcher created successfully !";
             }
         }
-        
-        public static string Message_launcherCreationFailed(string language) {
+
+        public static string Message_launcherCreationFailed_noDSCM(string language) {
 
             switch (language) {
                 case "fr":
-                    return "Erreur lors de la création du launcher à l'aide du registre.\nContinuez pour exécuter le générateur de launcher ...";
+                    return "Erreur lors de la création du launcher à l'aide du registre Windows.\n"
+                         + "DSCM est introuvable dans le dossier DATA : avez-vous installé les mods ?";
                 case "sp":
-                    return "Error al crear el launcher con operaciones de registro.\nContinúe para ejecutar el generador de launcher ...";
+                    return "Error al crear el launcher con operaciones de registro de Windows.\n"
+                         + "DSCM inencontrable en la carpeta DATA : ¿ Instaló los mods ?";
                 default:
-                    return "Error creating the launcher with registry.\nContinue to run the launcher generator ...";
+                    return "Error creating the launcher with Windows registry.\n"
+                         + "DSCM not found in the DATA folder : have you really installed mods ?";
             }
         }
-        
+
+        public static string Message_launcherCreationFailed_noSteam(string language) {
+
+            switch (language) {
+                case "fr":
+                    return "Erreur lors de la création du launcher à l'aide du registre Windows.\n"
+                         + "Steam est introuvable : l'avez-vous installé ?";
+                case "sp":
+                    return "Error al crear el launcher con operaciones de registro de Windows.\n"
+                         + "Steam inencontrable : por favor verifique su installacion.";
+                default:
+                    return "Error creating the launcher with Windows registry.\n"
+                         + "Steam not found : do you really have it installed ?";
+            }
+        }
+
         public static string Message_noLauncher(string language) {
 
             switch (language) {
@@ -1376,7 +1399,6 @@ namespace Resources {
                     return "Done : " + fileCount + " file(s) and " + folderCount + " folder(s) deleted.";
             }
         }
-
 
         //////////  WARNINGS  ////////////////////////////////////////////////
 
@@ -1414,7 +1436,7 @@ namespace Resources {
                 case "fr":
                     return "Êtes-vous sûr ?\nCela supprimera aussi les fichiers .bak que vous pourriez avoir !";
                 case "sp":
-                    return "Estás seguro ?\n¡ Este eliminará los archivos .bak que pueda tener !";
+                    return "¿ Estás seguro ?\n¡ Este eliminará los archivos .bak que pueda tener !";
                 default:
                     return "Are you sure ?\nIt will even delete the .bak files you may have !";
             }
@@ -1429,7 +1451,7 @@ namespace Resources {
                     return "Confirmation";
             }
         }
-        
+
         public static string Warning_unsupportedButtonTextures(string folder, string language) {
 
             switch (language) {
@@ -1447,7 +1469,7 @@ namespace Resources {
                          + "These textures are located in the folder :\n" + folder;
             }
         }
-        
+
         public static string Warning_wrongLoadedData(string language) {
 
             switch (language) {

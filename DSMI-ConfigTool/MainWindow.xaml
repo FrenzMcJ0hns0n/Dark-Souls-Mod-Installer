@@ -134,25 +134,25 @@
             <ComboBox 
                 x:Name="comboBox_maxFPSTarget" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="422,187,0,0"
-                Width="40" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                Width="42" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
                 >
                 <ComboBoxItem>30</ComboBoxItem>
                 <ComboBoxItem>60</ComboBoxItem>
             </ComboBox>
             <Label 
                 x:Name="label_writeFPS" Content="fps" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,184,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="464,184,0,0"
                 Width="45" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
                 />
             <Label 
                 x:Name="label_toggleFramerateKey" Content="Key :" HorizontalContentAlignment="Right"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="503,184,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,184,0,0"
                 Width="60" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
                 />
             <ComboBox 
                 x:Name="comboBox_toggleFramerateKey" 
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,187,32,0"
-                Width="99" IsEnabled="False"
+                Width="102" IsEnabled="False"
                 />
             <!-- Mouse cursor -->
             <GroupBox 
@@ -264,25 +264,20 @@
                 />
             <!-- FPSFix -->
             <GroupBox 
-                x:Name="groupBox_FPSFix" Header="FPSFix" FontWeight="DemiBold"
+                x:Name="groupBox_FPSFix" Header="FPSFix+" FontWeight="DemiBold"
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,393,0,0"
                 Height="61" Width="310"
                 />
             <CheckBox 
                 x:Name="checkBox_FPSFix" Content="Use FPSFix"
-                Checked="checkBox_fpsFix_Checked" Unchecked="checkBox_fpsFix_Unchecked"
+                
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,423,0,0"
+            	ToolTipService.ShowDuration="20000" ToolTip="" Checked="checkBox_FPSFix_Checked" Unchecked="checkBox_FPSFix_Unchecked"
+                />
+            <CheckBox 
+                x:Name="checkBox_FPSFix_beep" Content="Enable beep"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="190,423,0,0"
             	ToolTipService.ShowDuration="20000" ToolTip=""
-                />
-            <Label 
-                x:Name="label_FPSFixKey" Content="Key :" HorizontalContentAlignment="Right"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,418,0,0" Width="60"
-                ToolTipService.ShowDuration="20000" ToolTip=""
-                />
-            <ComboBox 
-                x:Name="comboBox_FPSFixKey"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="221,421,0,0"
-                Width="89"
                 />
             <!-- SweetFX -->
             <GroupBox 
@@ -308,13 +303,13 @@
                 />
             <Label 
                 x:Name="label_sweetFxPreset" Content="Preset :" HorizontalContentAlignment="Right"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="344,495,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="341,495,0,0"
                 ToolTipService.ShowDuration="20000" ToolTip=""
                 />
             <ComboBox 
                 x:Name="comboBox_sweetFxPreset" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="394,498,0,0"
-                Width="92"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,498,0,0"
+                Width="95"
                 />
             <!-- Save and exit -->
             <Button 

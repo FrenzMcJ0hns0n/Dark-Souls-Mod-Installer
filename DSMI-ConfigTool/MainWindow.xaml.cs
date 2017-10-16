@@ -84,7 +84,7 @@ namespace DSMI_ConfigTool {
 
         // FPSFix
         public string fpsFix_gotValue;
-        public string fpsFixKey_gotValue;
+        public string fpsFixBeep_gotValue;
 
 
         public void SetLanguage(string lan) {
@@ -147,8 +147,8 @@ namespace DSMI_ConfigTool {
             label_sweetFxPreset.ToolTip = Strings.label_sweetFxPreset_toolTipLanguage(lan);
             checkBox_FPSFix.Content = Strings.checkBox_FPSFix_contentLanguage(lan);
             checkBox_FPSFix.ToolTip = Strings.checkBox_FPSFix_toolTipLanguage(lan);
-            label_FPSFixKey.Content = Strings.label_FPSFixKey_contentLanguage(lan);
-            label_FPSFixKey.ToolTip = Strings.label_FPSFixKey_toolTipLanguage(lan);
+            checkBox_FPSFix_beep.Content = Strings.checkbox_FPSFixBeep_contentLanguage(lan);
+            checkBox_FPSFix_beep.ToolTip = Strings.checkbox_FPSFixBeep_toolTipLanguage(lan);
             // Lower buttons
             button_saveAndExit.Content = Strings.button_saveAndExit_contentLanguage(lan);
 
@@ -177,8 +177,6 @@ namespace DSMI_ConfigTool {
                     comboBox_gamepadButtonsStyle.Items.Add("Défaut");
 
                     comboBox_sweetFxKey.Items.Add("Arrêt défil");
-
-                    comboBox_FPSFixKey.Items.Add("Pavé Num 4");
 
                     comboBox_sweetFxPreset.Items.Add("Froid");
                     comboBox_sweetFxPreset.Items.Add("Chaud");
@@ -210,8 +208,6 @@ namespace DSMI_ConfigTool {
 
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
 
-                    comboBox_FPSFixKey.Items.Add("NUMPAD 4");
-
                     comboBox_sweetFxPreset.Items.Add("Frío");
                     comboBox_sweetFxPreset.Items.Add("Caliente");
                     comboBox_sweetFxPreset.Items.Add("Cinemática");
@@ -240,8 +236,6 @@ namespace DSMI_ConfigTool {
 
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
 
-                    comboBox_FPSFixKey.Items.Add("NUMPAD 4");
-
                     comboBox_sweetFxPreset.Items.Add("Cold");
                     comboBox_sweetFxPreset.Items.Add("Warm");
                     comboBox_sweetFxPreset.Items.Add("Cinematic");
@@ -251,15 +245,13 @@ namespace DSMI_ConfigTool {
 
             foreach (string item in Lists.uiRes_Values) {
                 comboBox_uiRes.Items.Add(item);
-            } 
+            }
 
             comboBox_toggleFramerateKey.Items.Add("F2");
 
             foreach (string item in Lists.gamepadButtonsStyle_Values) {
                 comboBox_gamepadButtonsStyle.Items.Add(item);
             }
-
-            comboBox_FPSFixKey.Items.Add("F4");
 
             comboBox_sweetFxKey.Items.Add("F3");
         }
@@ -334,7 +326,7 @@ namespace DSMI_ConfigTool {
                 }
             }
             else {
-                this.Title = "DSMI Configuration Tool (minimal mode)";
+                Title = "DSMI Configuration Tool (minimal mode)";
             }
         }
 
@@ -375,22 +367,26 @@ namespace DSMI_ConfigTool {
             if (comboBox_aoStrength.SelectedIndex == 0) {
                 label_aoType.IsEnabled = false;
                 comboBox_aoType.IsEnabled = false;
+                comboBox_aoType.Foreground = (Brush)bc.ConvertFrom("#888");
             }
             else {
                 label_aoType.IsEnabled = true;
                 comboBox_aoType.IsEnabled = true;
+                comboBox_aoType.Foreground = (Brush)bc.ConvertFrom("#000");
             }
         }
 
         private void checkBox_unlockFPS_Checked(object sender, RoutedEventArgs e) {
 
             label_maxFPSTarget.IsEnabled = true;
-            comboBox_maxFPSTarget.SelectedIndex = maxFPS_gotValue / 30 - 1;
+            comboBox_maxFPSTarget.SelectedIndex = maxFPS_gotValue / 30 - 1; // pure maths here !
             comboBox_maxFPSTarget.IsEnabled = true;
+            comboBox_maxFPSTarget.Foreground = (Brush)bc.ConvertFrom("#000");
             label_writeFPS.IsEnabled = true;
 
             label_toggleFramerateKey.IsEnabled = true;
             comboBox_toggleFramerateKey.IsEnabled = true;
+            comboBox_toggleFramerateKey.Foreground = (Brush)bc.ConvertFrom("#000");
         }
 
         private void checkBox_unlockFPS_Unchecked(object sender, RoutedEventArgs e) {
@@ -398,10 +394,12 @@ namespace DSMI_ConfigTool {
             label_maxFPSTarget.IsEnabled = false;
             comboBox_maxFPSTarget.SelectedIndex = 0;
             comboBox_maxFPSTarget.IsEnabled = false;
+            comboBox_maxFPSTarget.Foreground = (Brush)bc.ConvertFrom("#888");
             label_writeFPS.IsEnabled = false;
 
             label_toggleFramerateKey.IsEnabled = false;
             comboBox_toggleFramerateKey.IsEnabled = false;
+            comboBox_toggleFramerateKey.Foreground = (Brush)bc.ConvertFrom("#888");
         }
 
         private void checkBox_sweetFX_Checked(object sender, RoutedEventArgs e) {
@@ -430,20 +428,15 @@ namespace DSMI_ConfigTool {
             comboBox_sweetFxPreset.Foreground = (Brush)bc.ConvertFrom("#888");
         }
 
-        private void checkBox_fpsFix_Checked(object sender, RoutedEventArgs e) {
-
-            label_FPSFixKey.IsEnabled = true;
-            comboBox_FPSFixKey.IsEnabled = true;
-            label_FPSFixKey.Foreground = (Brush)bc.ConvertFrom("#000");
-            comboBox_FPSFixKey.Foreground = (Brush)bc.ConvertFrom("#000");
+        private void checkBox_FPSFix_Checked(object sender, RoutedEventArgs e) {
+            checkBox_FPSFix_beep.IsEnabled = true;
+            checkBox_FPSFix_beep.Foreground = (Brush)bc.ConvertFrom("#000");
         }
 
-        private void checkBox_fpsFix_Unchecked(object sender, RoutedEventArgs e) {
-
-            label_FPSFixKey.IsEnabled = false;
-            comboBox_FPSFixKey.IsEnabled = false;
-            label_FPSFixKey.Foreground = (Brush)bc.ConvertFrom("#888");
-            comboBox_FPSFixKey.Foreground = (Brush)bc.ConvertFrom("#888");
+        private void checkBox_FPSFix_Unchecked(object sender, RoutedEventArgs e) {
+            checkBox_FPSFix_beep.IsEnabled = false;
+            checkBox_FPSFix_beep.Foreground = (Brush)bc.ConvertFrom("#888");
+            checkBox_FPSFix_beep.IsChecked = false;
         }
 
         private void radioButton_gamepad_Checked(object sender, RoutedEventArgs e) {
@@ -452,11 +445,15 @@ namespace DSMI_ConfigTool {
 
             radioButton_oldMouseFix.IsChecked = false;
             radioButton_oldMouseFix.IsEnabled = false;
+            radioButton_oldMouseFix.Foreground = (Brush)bc.ConvertFrom("#888");
             radioButton_newMouseFix.IsChecked = false;
             radioButton_newMouseFix.IsEnabled = false;
+            radioButton_newMouseFix.Foreground = (Brush)bc.ConvertFrom("#888");
+
 
             label_gamepadButtonsStyle.IsEnabled = true;
             comboBox_gamepadButtonsStyle.IsEnabled = true;
+            comboBox_gamepadButtonsStyle.Foreground = (Brush)bc.ConvertFrom("#000");
         }
 
         private void radioButton_mouse_Checked(object sender, RoutedEventArgs e) {
@@ -468,12 +465,15 @@ namespace DSMI_ConfigTool {
 
             label_gamepadButtonsStyle.IsEnabled = false;
             comboBox_gamepadButtonsStyle.IsEnabled = false;
+            comboBox_gamepadButtonsStyle.Foreground = (Brush)bc.ConvertFrom("#888");
 
             if (oldMouseFix_exist) {
                 radioButton_oldMouseFix.IsEnabled = true;
+                radioButton_oldMouseFix.Foreground = (Brush)bc.ConvertFrom("#000");
             }
             if (newMouseFix_exist) {
                 radioButton_newMouseFix.IsEnabled = true;
+                radioButton_newMouseFix.Foreground = (Brush)bc.ConvertFrom("#000");
             }
         }
 
@@ -1051,50 +1051,17 @@ namespace DSMI_ConfigTool {
             if (modSupport == "normal") {
 
 
-                // GET : FPSFix enabled ? -----
+                // GET : FPSFix+ dll found ? -----
 
-                checkBox_FPSFix.IsChecked = true;
-                checkBox_FPSFix.IsChecked = false; // wonky way to completely disable the Hotkey comboBox
+                if (File.Exists(DATApath + "winmm.dll")) {
+                    checkBox_FPSFix.IsChecked = true;
 
-                fpsFix_gotValue = Functions.GetValueFromFile(DSPW_INI_FILE, "d3d9dllWrapper", 0);
+                    fpsFixBeep_gotValue = Functions.GetValueFromFile(FPS_FIX_INI_FILE, "BeepOnDetection=", 0);
 
-                switch (fpsFix_gotValue) {
-                    case "FPSFix.dll":
-                        checkBox_FPSFix.IsChecked = true;
-                        break;
-
-                    case "none":
-                        checkBox_FPSFix.IsChecked = false;
-                        break;
-
-                    case "noMatch":
-                        error = true;
-                        where = where + "\"d3d9dllWrapper\" (DSPWSteam.ini)\n";
-                        break;
+                    if (fpsFixBeep_gotValue == "1") {
+                        checkBox_FPSFix_beep.IsChecked = true;
+                    }
                 }
-            
-
-
-                // GET : FPSFix hotkey -----
-
-            
-                fpsFixKey_gotValue = Functions.GetValueFromFile(FPS_FIX_INI_FILE, "Key=", 0);
-
-                switch (fpsFixKey_gotValue) {
-                    case "64":
-                        comboBox_FPSFixKey.SelectedIndex = 0;
-                        break;
-
-                    case "73":
-                        comboBox_FPSFixKey.SelectedIndex = 1;
-                        break;
-
-                    case "noMatch":
-                        error = true;
-                        where = where + "\"Key=\" (FPSFix.ini)\n";
-                        break;
-                }
-            
 
 
                 // GET : DSPW overlay -----
@@ -1234,8 +1201,8 @@ namespace DSMI_ConfigTool {
                     if (Functions.GetValueFromFile(startDir + @"\DSMI_settings.txt", "unsupportedTextureWarning", 0) != "no") {
 
                         var customMsgBox = CustomMessageBox.ShowOKCancel(
-                            Strings.Warning_unsupportedButtonTextures(DS_FIX_TEXTURE_FOLDER ,lang),
-                            "", 
+                            Strings.Warning_unsupportedButtonTextures(DS_FIX_TEXTURE_FOLDER, lang),
+                            "",
                             "OK",
                             Strings.CustomButtonText_DontWarn(lang)
                         );
@@ -1255,8 +1222,6 @@ namespace DSMI_ConfigTool {
 
                 groupBox_FPSFix.Visibility = Visibility.Hidden;
                 checkBox_FPSFix.Visibility = Visibility.Hidden;
-                label_FPSFixKey.Visibility = Visibility.Hidden;
-                comboBox_FPSFixKey.Visibility = Visibility.Hidden;
 
                 groupBox_sweetFX.Visibility = Visibility.Hidden;
                 checkBox_sweetFX.Visibility = Visibility.Hidden;
@@ -1744,19 +1709,7 @@ namespace DSMI_ConfigTool {
                 }
 
 
-                // SET : FPSFix enabled ? -----
 
-                string fpsFix_setValue = fpsFix_gotValue;
-                if (checkBox_FPSFix.IsChecked == true) {
-                    fpsFix_setValue = "FPSFix.dll";
-                }
-                else {
-                    fpsFix_setValue = "none";
-                }
-                if (fpsFix_setValue != fpsFix_gotValue) {
-                    line_to_change = Functions.GetLine(DSPW_INI_FILE, "d3d9dllWrapper", 0);
-                    Functions.LineChanger("d3d9dllWrapper " + fpsFix_setValue, DSPW_INI_FILE, line_to_change);
-                }
 
 
                 // SET : DSPW Overlay -----
@@ -1775,100 +1728,114 @@ namespace DSMI_ConfigTool {
 
                 #region Editing FPSFix.ini
 
+                // SET : FPSFix enabled -----
+
                 if (checkBox_FPSFix.IsChecked == true) {
 
-
-                    // SET : FPSFix hotkey -----
-
-                    string fpsFixKey_setValue = fpsFixKey_gotValue;
-                    if (comboBox_FPSFixKey.SelectedIndex == 0) {
-                        fpsFixKey_setValue = "64";
-                    }
-                    else if (comboBox_FPSFixKey.SelectedIndex == 1) {
-                        fpsFixKey_setValue = "73";
-                    }
-                    if (fpsFixKey_setValue != fpsFixKey_gotValue) {
-                        line_to_change = Functions.GetLine(FPS_FIX_INI_FILE, "Key=", 0);
-                        Functions.LineChanger("Key=" + fpsFixKey_setValue, FPS_FIX_INI_FILE, line_to_change);
-                    }
-
-                }
-
-                #endregion
-
-                #region Gamepad icons
-
-
-                // Long and repetitive but clear code here
-
-                if (radioButton_gamepad.IsChecked == true) {
-                    try {
-                        switch (comboBox_gamepadButtonsStyle.SelectedIndex) {
-
-                            case 0:
-                                if (File.Exists(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png")) {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                }
-                                if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
-                                }
-                                break;
-
-                            case 1:
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "x360") {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_x360.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                }
-                                if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
-                                }
-                                break;
-
-                            case 2:
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "xbo") {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_xbo.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                }
-                                if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
-                                }
-                                break;
-
-                            case 3:
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "ps3") {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_ps3.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                }
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") != "ps") {
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\43a2b23a_ps.png", DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
-                                }
-                                break;
-
-                            case 4:
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "ps4") {
-                                    File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_ps4.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
-                                }
-                                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") != "ps") {
-                                    File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\43a2b23a_ps.png", DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
-                                }
-                                break;
-
-                            default:
-                                // Do nothing : keep using the unsupported texture(s)
-                                break;
+                    if (!(File.Exists(DATApath + "winmm.dll"))) {
+                        try {
+                            File.Move(DATApath + "_winmm.dll", DATApath + "winmm.dll");
+                        }
+                        catch (Exception ex) {
+                            MessageBox.Show(ex.ToString());
                         }
                     }
-                    catch {
-                        MessageBox.Show(Strings.ErrorMsg_controllerButtonTexturesCopyFailed(DS_FIX_TEXTURE_FOLDER, lang));
+
+                    string fpsFixBeep_setValue = fpsFixBeep_gotValue;
+                    if (checkBox_FPSFix_beep.IsChecked == true) {
+                        fpsFixBeep_setValue = "1";
+                    }
+                    else {
+                        fpsFixBeep_setValue = "0";
+                    }
+                    if (fpsFixBeep_setValue != fpsFixBeep_gotValue) {
+                        line_to_change = Functions.GetLine(FPS_FIX_INI_FILE, "BeepOnDetection=", 0);
+                        Functions.LineChanger("BeepOnDetection=" + fpsFixBeep_setValue, FPS_FIX_INI_FILE, line_to_change);
+                    }
+
+                }
+                else {
+                    if (File.Exists(DATApath + "winmm.dll")) {
+                        File.Move(DATApath + "winmm.dll", DATApath + "_winmm.dll");
                     }
                 }
-
-                #endregion
-
             }
+
+            #endregion
+
+            #region Gamepad icons
+
+
+            // Long and repetitive but clear code here
+
+            if (radioButton_gamepad.IsChecked == true) {
+                try {
+                    switch (comboBox_gamepadButtonsStyle.SelectedIndex) {
+
+                        case 0:
+                            if (File.Exists(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png")) {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                            }
+                            if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
+                            }
+                            break;
+
+                        case 1:
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "x360") {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_x360.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                            }
+                            if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
+                            }
+                            break;
+
+                        case 2:
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "xbo") {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_xbo.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                            }
+                            if (File.Exists(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png")) {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
+                            }
+                            break;
+
+                        case 3:
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "ps3") {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_ps3.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                            }
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") != "ps") {
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\43a2b23a_ps.png", DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
+                            }
+                            break;
+
+                        case 4:
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture") != "ps4") {
+                                File.Delete(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\40fbc4ad_ps4.png", DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png");
+                            }
+                            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") != "ps") {
+                                File.Copy(DS_FIX_TEXTURE_FOLDER + @"Gamepad icons\43a2b23a_ps.png", DS_FIX_TEXTURE_FOLDER + "43a2b23a.png");
+                            }
+                            break;
+
+                        default:
+                            // Do nothing : keep using the unsupported texture(s)
+                            break;
+                    }
+                }
+                catch {
+                    MessageBox.Show(Strings.ErrorMsg_controllerButtonTexturesCopyFailed(DS_FIX_TEXTURE_FOLDER, lang));
+                }
+            }
+
+            #endregion
 
         }
 
     }
+
+
 }

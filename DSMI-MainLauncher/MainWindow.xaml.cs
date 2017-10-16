@@ -120,7 +120,7 @@ namespace DSMI_MainLauncher {
                 Process.Start(startDir + "DSMI-ConfigTool.exe");
             }
             catch {
-                MessageBox.Show(Strings.ErrorMsg_programNotFound(lang, "DSMI-ConfigTool"));
+                MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI-ConfigTool", lang));
             }
 
         }
@@ -165,8 +165,8 @@ namespace DSMI_MainLauncher {
 
             if (counter > 0) {
                 MessageBoxResult msgBoxResult = MessageBox.Show(
-                    Strings.Warning_installContent(lang), 
-                    Strings.Warning_installHeader(lang), 
+                    Strings.Warning_installContent(lang),
+                    Strings.Warning_installHeader(lang),
                     MessageBoxButton.YesNo);
 
                 if (msgBoxResult == MessageBoxResult.Yes) {
@@ -184,7 +184,7 @@ namespace DSMI_MainLauncher {
                 Process.Start(startDir + "DSMI-ProjectSettings.exe"); Environment.Exit(0);
             }
             catch {
-                MessageBox.Show(Strings.ErrorMsg_programNotFound(lang, "DSMI Project Settings.exe"));
+                MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI Project Settings.exe", lang));
                 Environment.Exit(0);
             }
         }
@@ -194,7 +194,7 @@ namespace DSMI_MainLauncher {
                 Process.Start(startDir + "DSMI-Un.exe");
             }
             catch {
-                MessageBox.Show(Strings.ErrorMsg_programNotFound(lang, "DSMI Un.exe"));
+                MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI Un.exe", lang));
             }
         }
 
@@ -231,22 +231,17 @@ namespace DSMI_MainLauncher {
                 catch (Exception ex) {
                     MessageBox.Show(ex.ToString());
                 }
-
             }
-            else {
-                MessageBox.Show(Strings.Message_launcherCreationFailed(lang));
-
-                try {
-                    Process.Start(startDir + @"Miscellaneous\LAUNCHER_GENERATOR.bat");
-                }
-                catch {
-                    MessageBox.Show(Strings.ErrorMsg_programNotFound("LAUNCHER GENERATOR", lang));
-                }
+            else if (File.Exists(steamPath) && !(File.Exists(DSCMpath))) {
+                MessageBox.Show(Strings.Message_launcherCreationFailed_noDSCM(lang));
+            }
+            else if (File.Exists(DSCMpath) && !(File.Exists(steamPath))) {
+                MessageBox.Show(Strings.Message_launcherCreationFailed_noSteam(lang));
             }
 
         }
 
-
+        // TODO : Tell user "Installation in Progress"
         #region Installation
 
         private async void CallLongRunningMethod_Install() {
@@ -269,10 +264,9 @@ namespace DSMI_MainLauncher {
                 }
 
                 MessageBox.Show(Strings.Message_installationCompleted(lang));
-
             }
-            catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+            catch {
+                MessageBox.Show(Strings.ErrorMsg_unableToReachFilesAtInstall(lang));
             }
         }
 
