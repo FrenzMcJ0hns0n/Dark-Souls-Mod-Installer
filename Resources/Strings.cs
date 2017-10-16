@@ -1380,11 +1380,14 @@ namespace Resources {
 
             switch (language) {
                 case "fr":
-                    return "Appliqué. Le projet est maintenant en Français.";
+                    return "Appliqué. Le projet est maintenant en Français.\n"
+                         + "Veuillez relancer le programme pour appliquer.";
                 case "sp":
-                    return "Aplicado. El proyecto está ahora en Español.";
+                    return "Aplicado. El proyecto está ahora en Español.\n"
+                         + "Por favor, reinicia el programa para aplicar esta configuración.";
                 default:
-                    return "Applied. Project is now in English.";
+                    return "Applied. Project is now in English.\n"
+                         + "Please restart the program to apply.";
             }
         }
 

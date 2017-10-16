@@ -39,7 +39,7 @@ namespace DSMI_ConfigTool {
         BrushConverter bc = new BrushConverter();
 
 
-        //////////   GUI GLOBAL VARS   ////////////////////////////////////////////////
+        /// GUI GLOBAL VARS -----
 
         // Resolution
         public int renderWidth_gotValue;
@@ -521,8 +521,9 @@ namespace DSMI_ConfigTool {
                 resol_ok = false;
             }
 
-            if (radioButton_mouse.IsChecked == true && radioButton_oldMouseFix.IsChecked == false && radioButton_newMouseFix.IsChecked == false) {
-                border_mouse.BorderBrush = (Brush)bc.ConvertFrom("#F00");
+            if (radioButton_mouse.IsChecked == true && 
+                radioButton_oldMouseFix.IsChecked == false && 
+                radioButton_newMouseFix.IsChecked == false) {
                 mouse_ok = false;
             }
             else {
@@ -1836,6 +1837,4 @@ namespace DSMI_ConfigTool {
         }
 
     }
-
-
 }

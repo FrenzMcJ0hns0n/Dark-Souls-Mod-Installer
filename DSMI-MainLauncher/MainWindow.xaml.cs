@@ -19,7 +19,6 @@ namespace DSMI_MainLauncher {
         public string DSCMpath;
         public string steamPath;
 
-
         public void SetLanguage(string lan) {
             // Folder buttons
             button_DATAfolder.ToolTip = Strings.button_DATAfolder_toolTipLanguage(lan);
@@ -54,19 +53,16 @@ namespace DSMI_MainLauncher {
                     MessageBox.Show(Strings.ErrorMsg_wrongDataPath(lang));
                 }
                 else {
-
                     if (DATApath.Substring(DATApath.Length - 1) != @"\") {
                         DATApath = DATApath + @"\";
                     }
-
                     if (File.Exists(DATApath + "fmodex.dll") && File.Exists(DATApath + "fmod_event.dll")) {
                         button_DATAfolder.IsEnabled = true;
                         button_play.IsEnabled = true;
                         button_gameSettings.IsEnabled = true;
                         button_install.IsEnabled = true;
                         button_uninstall.IsEnabled = true;
-                    }
-                    else {
+                    } else {
                         MessageBox.Show(Strings.ErrorMsg_wrongDataPath(lang));
                     }
                 }
@@ -80,14 +76,17 @@ namespace DSMI_MainLauncher {
         #region Button events
 
         private void button_DATAfolder_Click(object sender, RoutedEventArgs e) {
-            Process.Start(DATApath);
+            try {
+                Process.Start(DATApath);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void button_DSMIsRootfolder_Click(object sender, RoutedEventArgs e) {
             try {
                 Process.Start(Path.GetFullPath(Path.Combine(startDir, @"..\")));
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -95,15 +94,16 @@ namespace DSMI_MainLauncher {
         private void button_play_Click(object sender, RoutedEventArgs e) {
 
             int launcherPathOk = 0;
-            if (File.Exists(startDir + "LAUNCHER.bat")) {
+            string batLauncher = startDir + "LAUNCHER.bat";
 
-                if (Functions.ParseLauncherPath(startDir + "LAUNCHER.bat", "start \"\" \"", 0, 1) != "") { launcherPathOk++; }
-                if (Functions.ParseLauncherPath(startDir + "LAUNCHER.bat", "start \"\" \"", 1, 19) != "") { launcherPathOk++; }
+            // Ugly. TODO : Use regex
+            if (File.Exists(startDir + "LAUNCHER.bat")) {
+                if (Functions.ParseLauncherPath(batLauncher, "start \"\" \"", 0, 1) != "") { launcherPathOk++; }
+                if (Functions.ParseLauncherPath(batLauncher, "start \"\" \"", 1, 19) != "") { launcherPathOk++; }
 
                 if (launcherPathOk == 2) {
                     Process.Start(startDir + "LAUNCHER.bat");
-                }
-                else {
+                } else {
                     MessageBox.Show(Strings.ErrorMsg_invalidLauncher(lang));
                     CreateLauncher();
                 }
@@ -115,14 +115,11 @@ namespace DSMI_MainLauncher {
         }
 
         private void button_settings_Click(object sender, RoutedEventArgs e) {
-
             try {
                 Process.Start(startDir + "DSMI-ConfigTool.exe");
-            }
-            catch {
+            } catch {
                 MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI-ConfigTool", lang));
             }
-
         }
 
         private void button_install_Click(object sender, RoutedEventArgs e) {
@@ -132,9 +129,7 @@ namespace DSMI_MainLauncher {
             string folder_name;
             int counter = 0;
 
-
             // GET files within the DATA folder -----
-
             elements = Directory.GetFiles(DATApath);
 
             foreach (string file in elements) {
@@ -146,9 +141,7 @@ namespace DSMI_MainLauncher {
                 }
             }
 
-
             // GET directories within the DATA folder -----
-
             elements = Directory.GetDirectories(DATApath);
 
             foreach (string folder in elements) {
@@ -160,9 +153,7 @@ namespace DSMI_MainLauncher {
                 }
             }
 
-
             // Ckeck files/folders count -----
-
             if (counter > 0) {
                 MessageBoxResult msgBoxResult = MessageBox.Show(
                     Strings.Warning_installContent(lang),
@@ -181,20 +172,19 @@ namespace DSMI_MainLauncher {
 
         private void button_projectSettings_Click(object sender, RoutedEventArgs e) {
             try {
-                Process.Start(startDir + "DSMI-ProjectSettings.exe"); Environment.Exit(0);
-            }
-            catch {
-                MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI Project Settings.exe", lang));
-                Environment.Exit(0);
+                ProjectSettings projectSettings = new ProjectSettings();
+                projectSettings.Show();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void button_uninstall_Click(object sender, RoutedEventArgs e) {
             try {
-                Process.Start(startDir + "DSMI-Un.exe");
-            }
-            catch {
-                MessageBox.Show(Strings.ErrorMsg_programNotFound("DSMI Un.exe", lang));
+                Uninstaller uninstaller = new Uninstaller();
+                uninstaller.Show();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -202,20 +192,20 @@ namespace DSMI_MainLauncher {
 
 
         public void CreateLauncher() {
-            string str;
+            string basePath;
 
             // DSCM.exe location
-            str = Functions.GetDataFolderPathWithRegistry();
+            basePath = Functions.GetDataFolderPathWithRegistry();
 
-            if (File.Exists(str + "DSCM.exe")) {
-                DSCMpath = str + "DSCM.exe";
+            if (File.Exists(basePath + "DSCM.exe")) {
+                DSCMpath = basePath + "DSCM.exe";
             }
 
             // Steam.exe location
-            str = Functions.GetSteamFolderPathWithRegistry();
+            basePath = Functions.GetSteamFolderPathWithRegistry();
 
-            if (File.Exists(str + "Steam.exe")) {
-                steamPath = str + "Steam.exe";
+            if (File.Exists(basePath + "Steam.exe")) {
+                steamPath = basePath + "Steam.exe";
             }
 
             if (File.Exists(DSCMpath) && File.Exists(steamPath)) {
@@ -258,11 +248,9 @@ namespace DSMI_MainLauncher {
                 foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories)) {
                     Directory.CreateDirectory(dirPath.Replace(sourceDir, DATApath));
                 }
-
                 foreach (string newPath in Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories)) {
                     File.Copy(newPath, newPath.Replace(sourceDir, DATApath), true);
                 }
-
                 MessageBox.Show(Strings.Message_installationCompleted(lang));
             }
             catch {
@@ -271,6 +259,11 @@ namespace DSMI_MainLauncher {
         }
 
         #endregion
+
+        protected override void OnClosed(EventArgs e) {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
 
     }
 }

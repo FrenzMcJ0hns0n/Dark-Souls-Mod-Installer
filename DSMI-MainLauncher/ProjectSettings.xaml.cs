@@ -6,9 +6,11 @@ using System.Windows;
 using System.Windows.Forms; // Right-click on References -> Add reference ...
 using System.Windows.Media;
 
-namespace DSMI_ProjectSettings {
-
-    public partial class MainWindow : Window {
+namespace DSMI_MainLauncher {
+    /// <summary>
+    /// Logique d'interaction pour ProjectSettings.xaml
+    /// </summary>
+    public partial class ProjectSettings : Window {
 
         public static string startDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\";
         public const string DATAdefaultLocation = @"C:\Program Files (x86)\Steam\steamapps\common\Dark Souls Prepare to Die Edition\DATA\";
@@ -20,15 +22,12 @@ namespace DSMI_ProjectSettings {
 
         BrushConverter bc = new BrushConverter();
 
-
         public void SetLanguage(string lan) {
-
             label_dataPathLocation.Content = Strings.label_dataPathLocation_contentLanguage(lan);
             button_browseDataPath.Content = Strings.button_browseDataPath_contentLanguage(lan);
             label_languageChoice.Content = Strings.label_languageChoice_contentLanguage(lan);
             label_compatibilityMode.Content = Strings.label_compatibilityMode_contentLanguage(lang);
             radioButton_minMode.Content = Strings.radioButton_minMode_contentLanguage(lan);
-
             button_Apply.Content = Strings.button_Apply_contentLanguage(lan);
 
             switch (lan) {
@@ -44,20 +43,13 @@ namespace DSMI_ProjectSettings {
             }
         }
 
-
-        public MainWindow() {
-            if (!(File.Exists(startDir + "Resources.dll"))) {
-                System.Windows.MessageBox.Show("Error : File \"Resources.dll\" not found !\n\nPlease check your setup then try again.");
-                Environment.Exit(0);
-            }
+        public ProjectSettings() {
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
-
             // Read data from DSMI_settings.txt -----
-
             if (File.Exists(settingsFile)) {
                 lang = Functions.GetValueFromFile(settingsFile, "language", 0);
 
@@ -86,8 +78,7 @@ namespace DSMI_ProjectSettings {
             if (Functions.CheckPath(DATApath) == false) {
                 if (Directory.Exists(DATAdefaultLocation)) {
                     DATApath = DATAdefaultLocation;
-                }
-                else {
+                } else {
                     DATApath = Functions.GetDataFolderPathWithRegistry();
                 }
             }
@@ -97,8 +88,7 @@ namespace DSMI_ProjectSettings {
             if (Functions.CheckPath(DATApath) == true) {
                 textBox_dataPathLocation.Background = (Brush)bc.ConvertFrom("#dcffdc");
                 button_Apply.IsEnabled = true;
-            }
-            else {
+            } else {
                 textBox_dataPathLocation.Background = (Brush)bc.ConvertFrom("#ffcccc");
                 System.Windows.MessageBox.Show(Strings.ErrorMsg_invalidDataPath_projectSettings(lang));
             }
@@ -137,17 +127,11 @@ namespace DSMI_ProjectSettings {
         }
 
         private void radioButton_normalMode_Checked(object sender, RoutedEventArgs e) {
-
-            if (mode != "normal") {
-                mode = "normal";
-            }
+            if (mode != "normal") { mode = "normal"; }
         }
 
         private void radioButton_minMode_Checked(object sender, RoutedEventArgs e) {
-
-            if (mode != "minimal") {
-                mode = "minimal";
-            }
+            if (mode != "minimal") { mode = "minimal"; }
         }
 
         #endregion
@@ -180,9 +164,7 @@ namespace DSMI_ProjectSettings {
             string dataFolderPath = textBox_dataPathLocation.Text;
 
             Outer:
-
-
-            // Edit file DSMI_settings.txt --------------------
+            // Create/Edit file DSMI_settings.txt --------------------
 
             if (File.Exists(startDir + @"\DSMI_settings.txt")) {
                 int line_to_change;
@@ -192,7 +174,8 @@ namespace DSMI_ProjectSettings {
 
                     if (line_to_change > 0) {
                         Functions.LineChanger("dataFolderPath " + dataFolderPath, startDir + @"\DSMI_settings.txt", line_to_change);
-                    } else {
+                    }
+                    else {
                         File.Delete(startDir + @"\DSMI_settings.txt");
                         goto Outer; // Reach "Outer" label then the Else statement (to create the file instead editing it)
                     }
@@ -203,7 +186,8 @@ namespace DSMI_ProjectSettings {
 
                     if (line_to_change > 0) {
                         Functions.LineChanger("language " + lang, startDir + @"\DSMI_settings.txt", line_to_change);
-                    } else {
+                    }
+                    else {
                         File.Delete(startDir + @"\DSMI_settings.txt");
                         goto Outer; // Reach "Outer" label then the Else statement (to create the file instead editing it)
                     }
@@ -221,7 +205,7 @@ namespace DSMI_ProjectSettings {
                 }
 
                 System.Windows.MessageBox.Show(Strings.Message_settingsApplied(lang));
-                Environment.Exit(0);
+                Close();
             }
 
             // Create file DSMI_settings.txt --------------------
@@ -229,7 +213,7 @@ namespace DSMI_ProjectSettings {
                 try {
                     WriteInTxt(lang, dataFolderPath);
                     System.Windows.MessageBox.Show(Strings.Message_settingsApplied(lang));
-                    Environment.Exit(0);
+                    Close();
                 } catch (Exception ex) {
                     System.Windows.MessageBox.Show(ex.ToString());
                 }
