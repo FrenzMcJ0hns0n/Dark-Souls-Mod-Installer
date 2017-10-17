@@ -66,13 +66,9 @@ https://www.reddit.com/user/McJ0hns0n/
 
 ## Programmer guide
 
-This project actually contains 5 distinct sub-projects : 
+This project actually contains 3 distinct sub-projects : 
 - DSMI ConfigTool
 - DSMI MainLauncher
-- DSMI ProjectSettings
-- DSMI DSMI-Un-in-st-al-le-r (cheap trick to avoid the Windows message "this program might not have installed correctly")
 - Resources
 
-The 4 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. This is a bad way to organize files, but that is how I started working, since it is my first substancial project. 
-
-Everything is written in C#/WPF. Check the files *MainPage.xaml* (design) and *MainPage.xaml.cs* (code-behind) in each DSMI sub-project to get the interesting parts.
+The 2 DSMI ones generate .exe files. "Resources" is designed to hold the common resources and therefore it generates a .dll file. Everything is written in C#/WPF. Check the *.xaml* files (design) and *xaml.cs* (code-behind) in each sub-project to get the interesting parts.
