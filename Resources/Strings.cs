@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Resources {
 
     public class Strings {
@@ -7,7 +8,6 @@ namespace Resources {
         #region ConfigTool - GUI items
 
         public static string groupBox_resolutionOptions_headerLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Résolution";
@@ -19,7 +19,6 @@ namespace Resources {
         }
 
         public static string label_renderRes_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Rendu";
@@ -31,57 +30,46 @@ namespace Resources {
         }
 
         public static string label_renderRes_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Résolution de rendu principal du jeu. Idéalement, choisissez la résolution native de votre écran.\n\n"
-                         + "Des valeurs inférieures offrent de meilleures performances (mais dans ce cas voir réglage \"Interface\")"
-                         ;
+                         + "Des valeurs inférieures offrent de meilleures performances (mais dans ce cas voir réglage \"Interface\")";
                 case "sp":
                     return "La resolución principal del juego. Idealmente, elige la resolución nativa de su pantalla.\n\n"
-                         + "Valores inferiores mejoran el rendimiento (pero en este caso veer la configuración de \"Interfaz\")"
-                         ;
+                         + "Valores inferiores mejoran el rendimiento (pero en este caso veer la configuración de \"Interfaz\")";
                 default:
                     return "The resolution for main rendering. It should be your native screen resolution.\n\n"
-                         + "Lower values offer better performance (but in this case see \"User interface\" setting)"
-                         ;
+                         + "Lower values offer better performance (but in this case see \"User interface\" setting)";
             }
         }
 
         public static string label_uiRes_contentLanguage(string language) {
-
             switch (language) {
                 case "sp":
                     return "Interfaz";
-
                 default:
                     return "Interface";
             }
         }
 
         public static string label_uiRes_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Résolution utilisée par l'interface du jeu.\n\n"
                          + "Si la résolution de \"Rendu\" que vous avez choisie est votre résolution native d'écran, laisser sur \"= Rendu\".\n"
-                         + "Sinon saisir la résolution native de votre écran."
-                         ;
+                         + "Sinon saisir la résolution native de votre écran.";
                 case "sp":
                     return "Resolución utilizada para la interfaz del juego.\n\n"
                          + "Si la resolución \"Principal\" que ha escogido es su resolución nativa de pantalla, deje \"= Principal\".\n"
-                         + "Si no, seleccione la resolución nativa de su pantalla."
-                         ;
+                         + "Si no, seleccione la resolución nativa de su pantalla.";
                 default:
                     return "Resolution for in-game interface.\n\n"
                          + "If the resolution you chose for \"Render\" is your native screen resolution, leave this on \"= Rendering\".\n"
-                         + "If not, set the native resolution of your screen."
-                         ;
+                         + "If not, set the native resolution of your screen.";
             }
         }
 
         public static string groupBox_dofOptions_headerLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Profondeur de champ";
@@ -93,7 +81,6 @@ namespace Resources {
         }
 
         public static string label_dofOverrideRes_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Résolution";
@@ -105,7 +92,6 @@ namespace Resources {
         }
 
         public static string label_dofOverrideRes_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Change la résolution de Profondeur de Champ (PdC).\nPlus la valeur est élevée, plus les éléments distants seront nets.\n"
@@ -114,8 +100,7 @@ namespace Resources {
                          + "- 540 : Le cône PdC commence à 960x540\n"
                          + "- 810 : Le cône PdC commence à 1440x810\n"
                          + "- 1080 : Le cône PdC commence à 1920x1080\n"
-                         + "- 2160 : Le cône PdC commence à 3840x2160"
-                         ;
+                         + "- 2160 : Le cône PdC commence à 3840x2160";
                 case "sp":
                     return "Cambia la resolución de la Profundidad del Campo (PdC).\nCuanta más la valor está alta, más los elementos distantes serán netos.\n"
                          + "NO ELIGE EL MISMO VALOR QUE SU RESOLUCIÓN VERTICAL\n\n"
@@ -123,8 +108,7 @@ namespace Resources {
                          + "- 540 : El cono PdC empezas a 960x540\n"
                          + "- 810 : El cono PdC empezas a 1440x810\n"
                          + "- 1080 : El cono PdC empezas a 1920x1080\n"
-                         + "- 2160 : El cono PdC empezas a 3840x2160"
-                         ;
+                         + "- 2160 : El cono PdC empezas a 3840x2160";
                 default:
                     return "Change the Depth of Field (DoF) resolution.\nThe higher the value, the clearer the distant elements.\n"
                          + "DO NOT CHOOSE THE SAME VALUE AS YOUR VERTICAL RENDER RESOLUTION\n\n"
@@ -132,13 +116,11 @@ namespace Resources {
                          + "- 540 : DoF pyramid starts at 960x540\n"
                          + "- 810 : DoF pyramid starts at 1440x810\n"
                          + "- 1080 : DoF pyramid starts at 1920x1080\n"
-                         + "- 2160 : DoF pyramid starts at 3840x2160"
-                         ;
+                         + "- 2160 : DoF pyramid starts at 3840x2160";
             }
         }
 
         public static string label_dofAdditionalBlur_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Flou";
@@ -157,27 +139,40 @@ namespace Resources {
                          + "Permet de conserver l'effet de flou originel, même avec une résolution de PdC élevée.\n\n"
                          + "- Désactivé : Pas de flou\n"
                          + "- Défaut : Valeur par défaut (conseillé pour une résolution PdC de 540 ou 810)\n"
-                         + "- Valeurs supérieures : pour les hautes résolutions de PdC"
-                         ;
+                         + "- Valeurs supérieures : pour les hautes résolutions de PdC";
                 case "sp":
                     return "Aplica mas desenfoque en el efecto de Profundidad de campo (PdC).\n"
                          + "Permite de conservar el efecto de desenfoque original, aunque con una resolución de PdC alta.\n\n"
                          + "- Desactivado : No desenfoque\n"
                          + "- Por defecto : Valor predeterminada (aconsejada para una resolución PdC de 540 o 810)\n"
-                         + "- Valores superiores : para las resoluciones altas de PdC"
-                         ;
+                         + "- Valores superiores : para las resoluciones altas de PdC";
                 default:
                     return "Add additional blur on the Depth of Field (DoF) effect.\n"
                          + "Allows to get the originally intended effect of blur, even with high-resolution DoF settings.\n\n"
                          + "- Disabled : No blur\n"
                          + "- Default : Default value (recommended for a DoF resolution of 540 or 810)\n"
-                         + "- Higher values : for high-resolution DoF settings"
-                         ;
+                         + "- Higher values : for high-resolution DoF settings";
+            }
+        }
+
+        public static List<string> comboBox_dofAdditionalBlur_values(string language) {
+            switch (language) {
+                case "fr":
+                    return new List<string>(new string[] {
+                        "Désactivé","Défaut","Élevé","Maximum"
+                    });
+                case "sp":
+                    return new List<string>(new string[] {
+                        "Desactivado","Por defecto","Alto","Máximo"
+                    });
+                default:
+                    return new List<string>(new string[] {
+                        "Disabled","Default","High","Maximum"
+                    });
             }
         }
 
         public static string groupBox_aoOptions_headerLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Occlusion ambiante";
@@ -189,7 +184,6 @@ namespace Resources {
         }
 
         public static string label_aoStrength_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Intensité";
@@ -201,28 +195,40 @@ namespace Resources {
         }
 
         public static string label_aoStrength_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit la présence de l'effet d'occlusion ambiante.\n\n"
                          + "- Désactivé : Occlusion ambiante désactivée\n"
-                         + "- Élevé : Forte occlusion ambiante"
-                         ;
+                         + "- Élevé : Forte occlusion ambiante";
                 case "sp":
                     return "Define la intensidad del efecto de oclusión ambiental.\n\n"
                          + "- Desactivado : Oclusión ambiental desactivada\n"
-                         + "- Alto : Oclusión ambiental intensa"
-                         ;
+                         + "- Alto : Oclusión ambiental intensa";
                 default:
                     return "Set the strength of the ambient occlusion effect.\n\n"
                          + "- Disabled : Disabled ambient occlusion\n"
-                         + "- High : Strong ambient occlusion"
-                         ;
+                         + "- High : Strong ambient occlusion";
+            }
+        }
+
+        public static List<string> comboBox_aoStrength_values(string language) {
+            switch (language) {
+                case "fr":
+                    return new List<string>(new string[] {
+                        "Désactivé","Bas","Moyen","Élevé"
+                    });
+                case "sp":
+                    return new List<string>(new string[] {
+                        "Desactivado","Bajo","Medio","Alto"
+                    });
+                default:
+                    return new List<string>(new string[] {
+                        "Disabled","Low","Medium","High"
+                    });
             }
         }
 
         public static string label_aoType_contentLanguage(string language) {
-
             switch (language) {
                 case "sp":
                     return "Tipo";
@@ -232,34 +238,21 @@ namespace Resources {
         }
 
         public static string label_aoType_toolTipLanguage(string language) {
-
+            string text = "- VSSAO : Volumetric SSAO\n"
+                        + "- HBAO : Horizon-Based Ambient Occlusion\n"
+                        + "- SCAO : VSSAO + HBAO\n"
+                        + "- VSSAO2 : Volumetric SSAO with more samples (tweaked by Asmodean)";
             switch (language) {
                 case "fr":
-                    return "Définit le type d'Occlusion Ambiante à utiliser.\n\n"
-                         + "- VSSAO : Volumetric SSAO\n"
-                         + "- HBAO : Horizon-Based Ambient Occlusion\n"
-                         + "- SCAO : VSSAO + HBAO\n"
-                         + "- VSSAO2 : Volumetric SSAO with more samples (tweaked by Asmodean)"
-                         ;
+                    return "Définit le type d'Occlusion Ambiante à utiliser.\n\n" + text;
                 case "sp":
-                    return "Define el tipo de Oclusión ambiental utilisada.\n\n"
-                         + "- VSSAO : Volumetric SSAO\n"
-                         + "- HBAO : Horizon-Based Ambient Occlusion\n"
-                         + "- SCAO : VSSAO + HBAO\n"
-                         + "- VSSAO2 : Volumetric SSAO with more samples (tweaked by Asmodean)"
-                         ;
+                    return "Define el tipo de Oclusión ambiental utilisada.\n\n" + text;
                 default:
-                    return "Set the type of Ambient Occlusion to use.\n\n"
-                         + "- VSSAO : Volumetric SSAO\n"
-                         + "- HBAO : Horizon-Based Ambient Occlusion\n"
-                         + "- SCAO : VSSAO + HBAO\n"
-                         + "- VSSAO2 : Volumetric SSAO with more samples (tweaked by Asmodean)"
-                         ;
+                    return "Set the type of Ambient Occlusion to use.\n\n" + text;
             }
         }
 
         public static string checkBox_unlockFPS_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Débloquer le framerate";
@@ -271,46 +264,37 @@ namespace Resources {
         }
 
         public static string checkBox_unlockFPS_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Débloquer le framerate (taux d'images/secondes) pour être en mesure de dépasser 30fps.\n"
-                         + "Peut provoquer quelques effets indésirables sur le gameplay."
-                         ;
+                         + "Peut provoquer quelques effets indésirables sur le gameplay.";
                 case "sp":
                     return "Desbloquear el framerate (tasa imágenes/segundo) para superar los 30fps.\n"
-                         + "Puede provocar efectos indeseables sobre la partida."
-                         ;
+                         + "Puede provocar efectos indeseables sobre la partida.";
                 default:
                     return "Unlock the framerate, in order to be able to exceed 30fps.\n"
-                         + "There may be unintended side-effects in term of gameplay."
-                         ;
+                         + "There may be unintended side-effects in term of gameplay.";
             }
         }
 
         public static string shared_maxFPSTarget_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit le framerate maximum (fps = frame per second).\nLe framerate doit être débloqué pour atteindre 60fps.\n\n"
                          + "- 30fps : idéal pour garantir un framerate stable, ou pour un PC peu puissant\n"
-                         + "- 60fps : choix le plus courant (possibilité de changer à la volée entre 30 et 60 fps en jeu)"
-                         ;
+                         + "- 60fps : choix le plus courant (possibilité de changer à la volée entre 30 et 60 fps en jeu)";
                 case "sp":
                     return "Define el framerate máximo (fps = frame per second).\nEl framerate tiene que estár desbloqueado par alcanzar 60fps.\n\n"
                          + "- 30fps : ideal para garantizar un framerate estable, o para un PC menos poderoso\n"
-                         + "- 60fps : la opción más común (possibilidad de cambiar entre 30 y 60 fps durante la partida)"
-                         ;
+                         + "- 60fps : la opción más común (possibilidad de cambiar entre 30 y 60 fps durante la partida)";
                 default:
                     return "Set the maximum framerate to play at.\nThe framerate must be unlocked in order to achieve 60fps.\n\n"
                          + "- 30fps : to have a consistant framerate, or for a low-end PC\n"
-                         + "- 60fps : most common choice (you can toggle 30/60 during the game)"
-                         ;
+                         + "- 60fps : most common choice (you can toggle 30/60 during the game)";
             }
         }
 
         public static string label_toggleFramerateKey_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Touche :";
@@ -322,7 +306,6 @@ namespace Resources {
         }
 
         public static string label_toggleFramerateKey_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit la touche pour changer entre 30 et 60 fps pendant la partie";
@@ -333,212 +316,7 @@ namespace Resources {
             }
         }
 
-        public static string groupBox_mouseCursor_headerLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Curseur de la souris";
-                case "sp":
-                    return "Cursor del ratón";
-                default:
-                    return "Mouse cursor";
-            }
-        }
-
-        public static string checkBox_showCursor_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Afficher curseur";
-                case "sp":
-                    return "Mostrar cursor";
-                default:
-                    return "Display cursor";
-            }
-        }
-
-        public static string checkBox_showCursor_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Afficher le curseur de la souris pendant la partie.";
-                case "sp":
-                    return "Mostrar el cursor del raton durante el juego.";
-                default:
-                    return "Display the mouse cursor on screen while in-game.";
-            }
-        }
-
-        public static string checkBox_captureCursor_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Capturer curseur";
-                case "sp":
-                    return "Capturar cursor";
-                default:
-                    return "Capture cursor";
-            }
-        }
-
-        public static string checkBox_captureCursor_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Ne pas autoriser le curseur à sortir de la fenêtre de jeu.";
-                case "sp":
-                    return "No permite que el cursor salga de la ventana del juego.";
-                default:
-                    return "Do not allow the cursor to leave the game window.";
-            }
-        }
-
-        public static string groupBox_controlOptions_headerLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Contrôles";
-                case "sp":
-                    return "Controles";
-                default:
-                    return "Controls";
-            }
-        }
-
-        public static string radioButton_gamepad_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Manette";
-                case "sp":
-                    return "Mando";
-                default:
-                    return "Gamepad";
-            }
-        }
-
-        public static string radioButton_gamepad_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Jouer à la manette (choix le plus courant)";
-                case "sp":
-                    return "Jugar con el mando (la opción más común)";
-                default:
-                    return "Play with gamepad (most common choice)";
-            }
-        }
-
-        public static string label_gamepadButtonsStyle_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Icônes";
-                case "sp":
-                    return "Iconos";
-                default:
-                    return "Icons";
-            }
-        }
-
-        public static string label_gamepadButtonsStyle_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Apparence des boutons de la manette";
-                case "sp":
-                    return "Apariencia de los botones de mando";
-                default:
-                    return "Look of the gamepad buttons";
-            }
-        }
-
-        public static string radioButton_mouse_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Souris";
-                case "sp":
-                    return "Ratón";
-                default:
-                    return "Mouse";
-            }
-        }
-
-        public static string radioButton_mouse_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Jouer à la souris (prise en charge améliorée grâce aux mods)";
-                case "sp":
-                    return "Jugar con el ratón (amejorado gracias a los mods)";
-                default:
-                    return "Play with mouse (better support thanks to mods)";
-            }
-        }
-
-        public static string radioButton_oldMouseFix_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Fix classique";
-                case "sp":
-                    return "Fix clásico";
-                default:
-                    return "Classic fix";
-            }
-        }
-
-        public static string radioButton_oldMouseFix_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "L'ancien fix, initialement réalisé par Petska, puis amélioré par Jellybaby34.";
-                case "sp":
-                    return "El antiguo fix, realizado originalmente por Petska y luego mejorado por Jellybaby34.";
-                default:
-                    return "The old fix, initially released by Petska, then improved by Jellybaby34.";
-            }
-        }
-
-        public static string radioButton_newMouseFix_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Nouveau fix";
-                case "sp":
-                    return "Nuevo fix";
-                default:
-                    return "New fix";
-            }
-        }
-
-        public static string radioButton_newMouseFix_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Le nouveau fix, par Methanhydrat";
-                case "sp":
-                    return "El nuevo fix, por Methanhydrat";
-                default:
-                    return "The new fix, by Methanhydrat";
-            }
-        }
-
-        public static string button_configureMouse_contentLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Configurer souris";
-                case "sp":
-                    return "Configurar ratón";
-                default:
-                    return "Configure mouse";
-            }
-        }
-
         public static string groupBox_language_headerLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Langue";
@@ -550,7 +328,6 @@ namespace Resources {
         }
 
         public static string label_forceLanguage_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Forcer langue :";
@@ -562,19 +339,89 @@ namespace Resources {
         }
 
         public static string label_forceLanguage_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
-                    return "Force l'utilisation d'une langue dans le jeu.\n\n- Off : utiliser la langue définie dans Steam.";
+                    return "Force l'utilisation d'une langue dans le jeu.\n\n- Non : utiliser la langue définie dans Steam.";
                 case "sp":
-                    return "Forza la utilisación de un idioma específico durante el juego.\n\n- Off : utilizar el idioma definido en Steam.";
+                    return "Forza la utilisación de un idioma específico durante el juego.\n\n- No : utilizar el idioma definido en Steam.";
                 default:
-                    return "Force the use of a specific language in-game.\n\n- Off : use the language defined by Steam.";
+                    return "Force the use of a specific language in-game.\n\n- No : use the language defined by Steam.";
             }
         }
 
-        public static string checkBox_overlayDspw_contentLanguage(string language) {
+        public static List<string> comboBox_forceLanguage_values(string language) {
+            switch (language) {
+                case "fr":
+                    return new List<string>(new string[] {
+                        "Non","Anglais","Français","Italien","Allemand","Espagnol","Coréen","Chinois","Polonais","Russe"
+                    });
+                case "sp":
+                    return new List<string>(new string[] {
+                        "No","Inglés","Francés","Italiano","Alemán","Español","Coreano","Chino","Polaco","Ruso"
+                    });
+                default:
+                    return new List<string>(new string[] {
+                        "No","English","French","Italian","German","Spanish","Korean","Chinese","Polish","Russian"
+                    });
+            }
+        }
 
+        public static string groupBox_mouseCursor_headerLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Curseur de la souris";
+                case "sp":
+                    return "Cursor del ratón";
+                default:
+                    return "Mouse cursor";
+            }
+        }
+
+        public static string checkBox_showCursor_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Afficher curseur";
+                case "sp":
+                    return "Mostrar cursor";
+                default:
+                    return "Display cursor";
+            }
+        }
+
+        public static string checkBox_showCursor_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Afficher le curseur de la souris pendant la partie.";
+                case "sp":
+                    return "Mostrar el cursor del raton durante el juego.";
+                default:
+                    return "Display the mouse cursor on screen while in-game.";
+            }
+        }
+
+        public static string checkBox_captureCursor_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Capturer curseur";
+                case "sp":
+                    return "Capturar cursor";
+                default:
+                    return "Capture cursor";
+            }
+        }
+
+        public static string checkBox_captureCursor_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Ne pas autoriser le curseur à sortir de la fenêtre de jeu.";
+                case "sp":
+                    return "No permite que el cursor salga de la ventana del juego.";
+                default:
+                    return "Do not allow the cursor to leave the game window.";
+            }
+        }
+        
+        public static string checkBox_overlayDspw_contentLanguage(string language) {
             switch (language) {
                 case "fr":
                     return "Afficher l'overlay au lancement";
@@ -586,28 +433,199 @@ namespace Resources {
         }
 
         public static string checkBox_overlayDspw_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit si la barre d'informations de PvP Watchdog est affichée au démarrage du jeu.\n"
                          + "(indique la version utilisée, le nombre de nodes collectés, des informations sur les joueurs rencontrés, etc ...)\n\n"
-                         + "Touche pour afficher/masquer en jeu : F9 (par défaut)."
-                         ;
+                         + "Touche pour afficher/masquer en jeu : F9 (par défaut).";
                 case "sp":
                     return "Define si la barra de información de PvP Watchdog aparece al lanzamiento del juego.\n"
                          + "(indica la versión que está utilizando, el número de nodes, información sobre los jugadores encontrados, etc ...)\n\n"
-                         + "Tecla para mostrar/esconder en juego : F9 (por defecto)."
-                         ;
+                         + "Tecla para mostrar/esconder en juego : F9 (por defecto).";
                 default:
                     return "Define if the overlay of PvP Watchdog is displayed at game launch\n"
                          + "(shows version, node count, information on players you meet, etc ...)\n\n"
-                         + "Key to toggle the display in-game : F9 (default)."
-                         ;
+                         + "Key to toggle the display in-game : F9 (default).";
+            }
+        }
+
+        public static string checkBox_FPSFix_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Utiliser FPSFix+";
+                case "sp":
+                    return "Utilizar FPSFix+";
+                default:
+                    return "Use FPSFix+";
+            }
+        }
+
+        public static string checkBox_FPSFix_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Définit si FPSFix+ est utilisé durant la partie";
+                case "sp":
+                    return "Define si FPSFix+ está utilizado durante la partida";
+                default:
+                    return "Define if FPSFix+ is used in-game";
+            }
+        }
+
+        public static string checkbox_FPSFixBeep_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Activer bip";
+                case "sp":
+                    return "Activar pitido";
+                default:
+                    return "Enable beep";
+            }
+        }
+
+        public static string checkbox_FPSFixBeep_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Émettre un bip à chaque fois que le fix est automatiquement appliqué ?";
+                case "sp":
+                    return "¿ Emitir un pitido cuando el fix se aplica automáticamente ?";
+                default:
+                    return "Play a sound each time the fix is automatically triggered ?";
+            }
+        }
+
+        public static string groupBox_controlOptions_headerLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Contrôles";
+                case "sp":
+                    return "Controles";
+                default:
+                    return "Controls";
+            }
+        }
+
+        public static string radioButton_gamepad_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Manette";
+                case "sp":
+                    return "Mando";
+                default:
+                    return "Gamepad";
+            }
+        }
+
+        public static string radioButton_gamepad_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Jouer à la manette (choix le plus courant)";
+                case "sp":
+                    return "Jugar con el mando (la opción más común)";
+                default:
+                    return "Play with gamepad (most common choice)";
+            }
+        }
+
+        public static string label_gamepadButtonsStyle_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Icônes";
+                case "sp":
+                    return "Iconos";
+                default:
+                    return "Icons";
+            }
+        }
+
+        public static string label_gamepadButtonsStyle_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Apparence des boutons de la manette";
+                case "sp":
+                    return "Apariencia de los botones de mando";
+                default:
+                    return "Look of the gamepad buttons";
+            }
+        }
+
+        public static string radioButton_mouse_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Souris";
+                case "sp":
+                    return "Ratón";
+                default:
+                    return "Mouse";
+            }
+        }
+
+        public static string radioButton_mouse_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Jouer à la souris (prise en charge améliorée grâce aux mods)";
+                case "sp":
+                    return "Jugar con el ratón (amejorado gracias a los mods)";
+                default:
+                    return "Play with mouse (better support thanks to mods)";
+            }
+        }
+
+        public static string radioButton_oldMouseFix_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Fix classique";
+                case "sp":
+                    return "Fix clásico";
+                default:
+                    return "Classic fix";
+            }
+        }
+
+        public static string radioButton_oldMouseFix_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "L'ancien fix, initialement réalisé par Petska, puis amélioré par Jellybaby34.";
+                case "sp":
+                    return "El antiguo fix, realizado originalmente por Petska y luego mejorado por Jellybaby34.";
+                default:
+                    return "The old fix, initially released by Petska, then improved by Jellybaby34.";
+            }
+        }
+
+        public static string radioButton_newMouseFix_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Nouveau fix";
+                case "sp":
+                    return "Nuevo fix";
+                default:
+                    return "New fix";
+            }
+        }
+
+        public static string radioButton_newMouseFix_toolTipLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Le nouveau fix, par Methanhydrat";
+                case "sp":
+                    return "El nuevo fix, por Methanhydrat";
+                default:
+                    return "The new fix, by Methanhydrat";
+            }
+        }
+
+        public static string button_configureMouse_contentLanguage(string language) {
+            switch (language) {
+                case "fr":
+                    return "Configurer souris";
+                case "sp":
+                    return "Configurar ratón";
+                default:
+                    return "Configure mouse";
             }
         }
 
         public static string checkBox_sweetFX_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Utiliser SweetFX";
@@ -619,7 +637,6 @@ namespace Resources {
         }
 
         public static string checkBox_sweetFX_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit si SweetFX est utilisé durant la partie.\n\n"
@@ -639,7 +656,6 @@ namespace Resources {
         }
 
         public static string label_sweetFxKey_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Touche :";
@@ -651,7 +667,6 @@ namespace Resources {
         }
 
         public static string label_sweetFxKey_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit la touche pour activer/désactiver SweetFX pendant la partie.";
@@ -663,7 +678,6 @@ namespace Resources {
         }
 
         public static string label_sweetFxPreset_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Définit le préréglage à utiliser avec SweetFX.";
@@ -674,56 +688,40 @@ namespace Resources {
             }
         }
 
-        public static string checkBox_FPSFix_contentLanguage(string language) {
-
+        public static string groupBox_dvdbnd3_headerLanguage(string language) {
             switch (language) {
                 case "fr":
-                    return "Utiliser FPSFix+";
+                    return "Fichiers dvdbnd3";
                 case "sp":
-                    return "Utilizar FPSFix+";
+                    return "Archivos dvdbnd3";
                 default:
-                    return "Use FPSFix+";
+                    return "dvdbnd3 files";
             }
         }
 
-        public static string checkBox_FPSFix_toolTipLanguage(string language) {
-
+        public static string checkBox_dvdbnd3Files_contentLanguage(string language) {
             switch (language) {
                 case "fr":
-                    return "Définit si FPSFix+ est utilisé durant la partie";
+                    return "Changer les fichiers utilisés ?";
                 case "sp":
-                    return "Define si FPSFix+ está utilizado durante la partida";
+                    return "¿ Cambiar los archivos usados ?";
                 default:
-                    return "Define if FPSFix+ is used in-game";
+                    return "Change the files to use ?";
             }
         }
 
-        public static string checkbox_FPSFixBeep_contentLanguage(string language) {
-
+        public static string checkBox_dvdbnd3Files_toolTipLanguage(string language) {
             switch (language) {
                 case "fr":
-                    return "Activer bip";
+                    return "Sélectionnez un élément de la liste pour le définir comme contenu dvdbnd3 à charger";
                 case "sp":
-                    return "Activar pitido";
+                    return "Elija un elemento de la lista para definirlo como contenido dvdbnd3 para cargar";
                 default:
-                    return "Enable beep";
-            }
-        }
-
-        public static string checkbox_FPSFixBeep_toolTipLanguage(string language) {
-
-            switch (language) {
-                case "fr":
-                    return "Émettre un bip à chaque fois que le fix est automatiquement appliqué ?";
-                case "sp":
-                    return "¿ Emitir un pitido cuando el fix se aplica automáticamente ?";
-                default:
-                    return "Play a sound each time the fix is automatically triggered ?";
+                    return "Choose an element from the list to define it as dvdbnd3 content to load";
             }
         }
 
         public static string button_saveAndExit_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Sauver et quitter";
@@ -739,7 +737,6 @@ namespace Resources {
         #region MainLauncher - GUI items
 
         public static string button_DATAfolder_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Ouvre le dossier DATA";
@@ -751,7 +748,6 @@ namespace Resources {
         }
 
         public static string button_DSMIsRootfolder_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Ouvre le dossier racine de DSMI";
@@ -763,7 +759,6 @@ namespace Resources {
         }
 
         public static string button_play_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Jouer";
@@ -775,7 +770,6 @@ namespace Resources {
         }
 
         public static string button_gameSettings_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Reglages";
@@ -787,7 +781,6 @@ namespace Resources {
         }
 
         public static string button_install_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Installer mods";
@@ -799,7 +792,6 @@ namespace Resources {
         }
 
         public static string button_projectSettings_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Reglages du projet";
@@ -811,7 +803,6 @@ namespace Resources {
         }
 
         public static string button_uninstall_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Desinstaller mods";
@@ -827,7 +818,6 @@ namespace Resources {
         #region ProjectSettings - GUI items
 
         public static string label_dataPathLocation_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Emplacement du dossier DATA :";
@@ -839,7 +829,6 @@ namespace Resources {
         }
 
         public static string button_browseDataPath_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Parcourir ...";
@@ -851,7 +840,6 @@ namespace Resources {
         }
 
         public static string dialog_browseDatapath_descriptionLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Sélectionner le dossier DATA de Dark Souls: Prepare to Die Edition";
@@ -863,7 +851,6 @@ namespace Resources {
         }
 
         public static string label_languageChoice_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Langue à utiliser dans le projet :";
@@ -875,7 +862,6 @@ namespace Resources {
         }
 
         public static string label_compatibilityMode_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Prise en charge des mods :";
@@ -887,7 +873,6 @@ namespace Resources {
         }
 
         public static string radioButton_minMode_contentLanguage(string language) {
-
             switch (language) {
                 case "sp":
                     return "Mínimo";
@@ -897,7 +882,6 @@ namespace Resources {
         }
 
         public static string button_Apply_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Sauver et quitter";
@@ -913,7 +897,6 @@ namespace Resources {
         #region Uninstaller - GUI items
 
         public static string groupBox_UninstallOptions_headerLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Que supprimer dans le dossier DATA ?";
@@ -925,7 +908,6 @@ namespace Resources {
         }
 
         public static string radioButton_uninstallDsmiFiles_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Uniquement les fichiers/dossiers de DSMI";
@@ -937,7 +919,6 @@ namespace Resources {
         }
 
         public static string radioButton_uninstallMostElements_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "La majorité des fichiers/dossiers non vanilla";
@@ -949,7 +930,6 @@ namespace Resources {
         }
 
         public static string radioButton_uninstallAllContent_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "L'intégralité des fichiers/dossiers non vanilla";
@@ -961,25 +941,20 @@ namespace Resources {
         }
 
         public static string radioButton_uninstallDsmiFiles_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Choisissez cette option pour ne supprimer que les fichiers/dossiers qui sont installés par l'installateur de DSMI\n"
-                         + "(si ils existent)\n\nVoir les fichiers README pour savoir quels mods sont concernés, selon la version de DSMI."
-                         ;
+                         + "(si ils existent)\n\nVoir les fichiers README pour savoir quels mods sont concernés, selon la version de DSMI.";
                 case "sp":
                     return "Elija esta opción para eliminar solamente los archivos/carpetas que están instalados por el instalador de DSMI\n"
-                         + "(si existen)\n\nConsulte los archivos README para ver qué modificaciones se refiere, según la versión de DSMI que utiliza."
-                         ;
+                         + "(si existen)\n\nConsulte los archivos README para ver qué modificaciones se refiere, según la versión de DSMI que utiliza.";
                 default:
                     return "Choose this option to delete only the files/folders that\nwere installed with DSMI Installer (if they exist)\n\n"
-                         + "Refer to the README files to know which mods are going to\nbe uninstalled, depending on the version of DSMI you have."
-                         ;
+                         + "Refer to the README files to know which mods are going to\nbe uninstalled, depending on the version of DSMI you have.";
             }
         }
 
         public static string radioButton_uninstallMostElements_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Choisissez cette option pour supprimer la majorité des éléments non vanilla (installés avec DSMI ou non).\n"
@@ -988,8 +963,7 @@ namespace Resources {
                          + "- dossiers map, sound, etc ... extraits depuis les archives dvdbnd*\n"
                          + "- dossiers dvdbnd[0-3].bhd5.extract\n"
                          + "- fichiers dvdbnd[0-3].[bdt-bhd5].bak\n"
-                         + "- fichier DARKSOULS.exe.bak"
-                         ;
+                         + "- fichier DARKSOULS.exe.bak";
                 case "sp":
                     return "Elija esta opción para eliminar la mayoría de los elementos encontrados que no sean original (instalados con DSMI o no).\n"
                          + "Observación : Esto NO eliminará los archivos/carpetas obtenidos con el Wulf's BND Rebuilder o los archivos .bak.\n\n"
@@ -997,8 +971,7 @@ namespace Resources {
                          + "- carpetas map, sound, etc ... recuperadas de los archivos dvdbnd*\n"
                          + "- carpetas dvdbnd[0-3].bhd5.extract\n"
                          + "- archivos dvdbnd[0-3].[bdt-bhd5].bak\n"
-                         + "- archivo DARKSOULS.exe.bak"
-                         ;
+                         + "- archivo DARKSOULS.exe.bak";
                 default:
                     return "Choose this option to delete most non-vanilla elements found\n(installed with DSMI or not).\nNote that this would NOT "
                          + "delete the files/folders that you may got from using Wulf's BND Rebuilder or any .bak files.\n\n"
@@ -1006,31 +979,25 @@ namespace Resources {
                          + "- folders map, sound, etc ... extracted from dvdbnd* archives\n"
                          + "- folders dvdbnd[0-3].bhd5.extract\n"
                          + "- files dvdbnd[0-3].[bdt-bhd5].bak\n"
-                         + "- file DARKSOULS.exe.bak"
-                         ;
+                         + "- file DARKSOULS.exe.bak";
             }
         }
 
         public static string radioButton_uninstallAllContent_toolTipLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Choisissez cette option pour supprimer tout élément non vanilla trouvé\n(installé avec DSMI ou non)\n\n"
-                         + "Cela restaurera (le dossier DATA de) Dark Souls à l'état vanilla peu importe son état actuel."
-                         ;
+                         + "Cela restaurera (le dossier DATA de) Dark Souls à l'état vanilla peu importe son état actuel.";
                 case "sp":
                     return "Elija esta opción para eliminar todos los elementos encontrados que no sean original\n(instalados con DSMI o no)\n\n"
-                         + "Eso invertirá (la carpeta DATA de) Dark Souls volver al estado original no importa su estado actual."
-                         ;
+                         + "Eso invertirá (la carpeta DATA de) Dark Souls volver al estado original no importa su estado actual.";
                 default:
                     return "Choose this option to delete all non-vanilla elements found\n(installed with DSMI or not)\n\n"
-                         + "That will reverse (the DATA folder of) Dark Souls back to vanilla state no matter what."
-                         ;
+                         + "That will reverse (the DATA folder of) Dark Souls back to vanilla state no matter what.";
             }
         }
 
         public static string button_proceed_contentLanguage(string language) {
-
             switch (language) {
                 case "fr":
                     return "Désinstaller";
@@ -1046,8 +1013,7 @@ namespace Resources {
 
         #region Other texts
 
-        public static string CustomButtonText_DontWarn(string language) {
-
+        public static string CustomButtonText_DontWarnAnymore(string language) {
             switch (language) {
                 case "fr":
                     return "Ne plus m'avertir";
@@ -1062,7 +1028,6 @@ namespace Resources {
         //////////   ERRORS   ////////////////////////////////////////////////
 
         public static string ErrorMsg_controllerButtonTexturesCopyFailed(string folder, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur pendant la copie des textures de boutons de manette.\nVérifier manuellement dans ce dossier :\n\n"
@@ -1077,7 +1042,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_dsmfixGuiNotFound(string program, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Programme de configuration de souris \"" + program + "\" introuvable !";
@@ -1089,7 +1053,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_errorWhileUninstalling(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur lors de l'installation !\nVérifiez que vous n'êtes pas en train d'utiliser un des fichiers à supprimer.";
@@ -1101,7 +1064,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_invalidDataPath(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : L'emplacement spécifié pour le dossier DATA est invalide !\n\n"
@@ -1116,7 +1078,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_invalidLauncher(string language) {
-
             switch (language) {
                 case "fr":
                     return "Emplacement(s) invalide(s) dans le launcher existant.\nCliquez sur OK pour en générer un nouveau.";
@@ -1128,7 +1089,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_invalidDataPath_projectSettings(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Emplacement du dossier DATA invalide !\n"
@@ -1143,7 +1103,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_missingDll(string file, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Fichier \"" + file + "\" introuvable !\n\n"
@@ -1158,7 +1117,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_missingFiles(string mod_name, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Des fichiers du mod \"" + mod_name + "\" sont introuvables dans le dossier DATA !\n\n"
@@ -1173,7 +1131,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_NBGIfileNotFound(string file, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Fichier \"" + file + "\" introuvable !\n\n"
@@ -1188,7 +1145,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_noMouseFixChosen(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Vous devez spécifier quel fix utiliser pour la souris !";
@@ -1200,7 +1156,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_noOptionsSelected(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Vous devez choisir une option pour désinstaller !";
@@ -1212,7 +1167,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_nothingToUninstall(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Aucun fichier à désinstaller n'a été trouvé !";
@@ -1224,7 +1178,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_projectSettingsFileNotFound(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Fichier \"DSMI_settings.txt\" introuvable !\n"
@@ -1239,7 +1192,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_programNotFound(string file, string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Programme \"" + file + "\" introuvable.\nVeuillez vérifier votre installation.";
@@ -1251,7 +1203,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_wrongDataPath(string language) {
-
             switch (language) {
                 case "fr":
                     return "L'emplacement du dossier DATA, spécifié dans les Réglages du projet, semble invalide : "
@@ -1269,7 +1220,6 @@ namespace Resources {
         }
 
         public static string ErrorMsg_wrongResolutionChoice(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur : Choix de résolution incorrect !\n\n"
@@ -1301,7 +1251,6 @@ namespace Resources {
         //////////  MESSAGES  ////////////////////////////////////////////////
 
         public static string Message_appliedSettings(string language) {
-
             switch (language) {
                 case "fr":
                     return "Appliqué.";
@@ -1313,7 +1262,6 @@ namespace Resources {
         }
 
         public static string Message_installationCompleted(string language) {
-
             switch (language) {
                 case "sp":
                     return "Instalación OK.";
@@ -1323,7 +1271,6 @@ namespace Resources {
         }
 
         public static string Message_launcherCreated(string language) {
-
             switch (language) {
                 case "fr":
                     return "Launcher créé avec succès !";
@@ -1335,7 +1282,6 @@ namespace Resources {
         }
 
         public static string Message_launcherCreationFailed_noDSCM(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur lors de la création du launcher à l'aide du registre Windows.\n"
@@ -1350,7 +1296,6 @@ namespace Resources {
         }
 
         public static string Message_launcherCreationFailed_noSteam(string language) {
-
             switch (language) {
                 case "fr":
                     return "Erreur lors de la création du launcher à l'aide du registre Windows.\n"
@@ -1365,7 +1310,6 @@ namespace Resources {
         }
 
         public static string Message_noLauncher(string language) {
-
             switch (language) {
                 case "fr":
                     return "Launcher introuvable. Cliquez sur OK pour le générer.";
@@ -1377,7 +1321,6 @@ namespace Resources {
         }
 
         public static string Message_settingsApplied(string language) {
-
             switch (language) {
                 case "fr":
                     return "Appliqué. Le projet est maintenant en Français.\n"
@@ -1392,7 +1335,6 @@ namespace Resources {
         }
 
         public static string Message_uninstalledElements(int fileCount, int folderCount, string language) {
-
             switch (language) {
                 case "fr":
                     return "Terminé : " + fileCount + " fichier(s) et " + folderCount + " dossier(s) supprimé(s).";
@@ -1403,10 +1345,10 @@ namespace Resources {
             }
         }
 
+
         //////////  WARNINGS  ////////////////////////////////////////////////
 
         public static string Warning_installContent(string language) {
-
             switch (language) {
                 case "fr":
                     return "Êtes-vous sûr ?\n\n"
@@ -1423,8 +1365,7 @@ namespace Resources {
             }
         }
 
-        public static string Warning_installHeader(string language) {
-
+        public static string Warning_confirmation(string language) {
             switch (language) {
                 case "sp":
                     return "Confirmación";
@@ -1434,7 +1375,6 @@ namespace Resources {
         }
 
         public static string Warning_uninstallAllContent(string language) {
-
             switch (language) {
                 case "fr":
                     return "Êtes-vous sûr ?\nCela supprimera aussi les fichiers .bak que vous pourriez avoir !";
@@ -1445,18 +1385,7 @@ namespace Resources {
             }
         }
 
-        public static string Warning_uninstallAllHeader(string language) {
-
-            switch (language) {
-                case "sp":
-                    return "Confirmación";
-                default:
-                    return "Confirmation";
-            }
-        }
-
         public static string Warning_unsupportedButtonTextures(string folder, string language) {
-
             switch (language) {
                 case "fr":
                     return "Les fichiers \"40fbc4ad.png\" et/ou \"43a2b23a.png\" existent mais ne sont pas supportés par DSMI. "
@@ -1474,7 +1403,6 @@ namespace Resources {
         }
 
         public static string Warning_wrongLoadedData(string language) {
-
             switch (language) {
                 case "fr":
                     return "Attention : Valeur(s) introuvable(s) dans les fichiers de configuration !\n"
@@ -1493,8 +1421,7 @@ namespace Resources {
                          + "(GUI) VALUES NOT FOUND :\n";
             }
         }
-
-
+        
         #endregion
 
     }

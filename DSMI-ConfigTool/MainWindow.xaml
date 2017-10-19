@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DSMI_ConfigTool"
         mc:Ignorable="d"
-        Title="DSMI Configuration Tool" Loaded="Window_Loaded" 
-        Height="585" Width="710"
+        Title="DSMI Config Tool" Loaded="Window_Loaded" 
+        Height="704" Width="710"
         ResizeMode="CanMinimize">
     <Grid>
         <!-- TabControl ? -->
@@ -27,19 +27,7 @@
                 x:Name="comboBox_renderRes" SelectionChanged="comboBox_renderRes_SelectionChanged"
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,77,0,0"
                 Width="120"
-                >
-                <ComboBoxItem>3840x2160</ComboBoxItem>
-                <ComboBoxItem>2560x1440</ComboBoxItem>
-                <ComboBoxItem>1920x1080</ComboBoxItem>
-                <ComboBoxItem>1600x900</ComboBoxItem>
-                <ComboBoxItem>1280x720</ComboBoxItem>
-                <ComboBoxItem>1024x576</ComboBoxItem>
-                <ComboBoxItem>896x504</ComboBoxItem>
-                <ComboBoxItem>768x432</ComboBoxItem>
-                <ComboBoxItem>640x360</ComboBoxItem>
-                <ComboBoxItem>512x288</ComboBoxItem>
-                <ComboBoxItem>384x216</ComboBoxItem>
-            </ComboBox>
+                />
             <Label 
                 x:Name="label_uiRes" Content="Interface" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,50,0,0" 
@@ -66,11 +54,6 @@
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="381,77,0,0"
                 Width="120"
                 >
-                <ComboBoxItem>360</ComboBoxItem>
-                <ComboBoxItem>540</ComboBoxItem>
-                <ComboBoxItem>810</ComboBoxItem>
-                <ComboBoxItem>1080</ComboBoxItem>
-                <ComboBoxItem>2160</ComboBoxItem>
             </ComboBox>
             <Label 
                 x:Name="label_dofAdditionalBlur" Content="Blur" 
@@ -134,7 +117,7 @@
             <ComboBox 
                 x:Name="comboBox_maxFPSTarget" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="422,187,0,0"
-                Width="42" ToolTipService.ShowDuration="20000" ToolTip="" IsEnabled="False"
+                Width="42" IsEnabled="False"
                 >
                 <ComboBoxItem>30</ComboBoxItem>
                 <ComboBoxItem>60</ComboBoxItem>
@@ -216,7 +199,7 @@
                 x:Name="button_configureMouse" Content="Configure mouse" 
                 Click="button_configureMouse_Click" Background="#ddd"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,452,18,0"
-                Width="150" Height="25" IsEnabled="False"
+                Width="150" Height="21" IsEnabled="False"
                 />
             <Border 
             x:Name="border_mouse" BorderBrush="Transparent" BorderThickness="1" CornerRadius="2"
@@ -239,18 +222,7 @@
                 x:Name="comboBox_forceLanguage" 
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="171,263,0,0" 
                 Width="90"
-                >
-                <ComboBoxItem>Off</ComboBoxItem>
-                <ComboBoxItem>English</ComboBoxItem>
-                <ComboBoxItem>French</ComboBoxItem>
-                <ComboBoxItem>Italian</ComboBoxItem>
-                <ComboBoxItem>German</ComboBoxItem>
-                <ComboBoxItem>Spanish</ComboBoxItem>
-                <ComboBoxItem>Korean</ComboBoxItem>
-                <ComboBoxItem>Chinese</ComboBoxItem>
-                <ComboBoxItem>Polish</ComboBoxItem>
-                <ComboBoxItem>Russian</ComboBoxItem>
-            </ComboBox>
+                />
             <!-- DSPW -->
             <GroupBox 
                 x:Name="groupBox_pvpWatchdog" Header="PvP Watchdog" FontWeight="DemiBold"
@@ -283,7 +255,7 @@
             <GroupBox 
                 x:Name="groupBox_sweetFX" Header="SweetFX" FontWeight="DemiBold"
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,470,0,0"
-                Height="61" Width="486"
+                Height="91" Width="310"
                 />
             <CheckBox 
                 x:Name="checkBox_sweetFX" Content="Use SweetFX"
@@ -293,30 +265,68 @@
                 />
             <Label 
                 x:Name="label_sweetFxKey" Content="Key :" HorizontalContentAlignment="Right"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,495,0,0" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,493,0,0" 
                 Width="60" ToolTipService.ShowDuration="20000" ToolTip=""
                 />
             <ComboBox 
                 x:Name="comboBox_sweetFxKey"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="221,498,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="221,496,0,0"
                 Width="89"
                 />
             <Label 
                 x:Name="label_sweetFxPreset" Content="Preset :" HorizontalContentAlignment="Right"
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="341,495,0,0"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,521,0,0"
                 ToolTipService.ShowDuration="20000" ToolTip=""
                 />
             <ComboBox 
-                x:Name="comboBox_sweetFxPreset" 
-                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,498,0,0"
-                Width="95"
+                x:Name="comboBox_sweetFxPreset"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,524,0,0"
+                Width="229"
+                />
+            <!-- dvdbnd3 management -->
+            <GroupBox 
+                x:Name="groupBox_dvdbnd3" Header="dvdbnd3 files" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,470,17,0"
+                Height="91" Width="309"
+                />
+            <CheckBox 
+                x:Name="checkBox_dvdbnd3Files" Content="Change the files to use ?"
+                Checked="checkBox_dvdbnd3Files_Checked" Unchecked="checkBox_dvdbnd3Files_Unchecked"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="448,503,0,0"
+                ToolTipService.ShowDuration="20000" ToolTip=""
+                />
+            <ComboBox 
+                x:Name="comboBox_dvdbnd3Files"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,524,32,0" 
+                Width="279"
+                />
+            <!-- Shortcuts -->
+            <GroupBox 
+                x:Name="groupBox_shortcuts" Header="Folder shortcuts" FontWeight="DemiBold"
+                Background="AliceBlue"
+                HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="450" Margin="17,577,0,0"
+                />
+            <Button 
+                x:Name="button_openTexFolder" Content="DSfix texture folder"
+                Background="Transparent"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="48,610,0,0" Click="button_openTexFolder_Click"
+                />
+            <Button 
+                x:Name="button_openSFPresets" Content="SweetFX presets"
+                Background="Transparent"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="200,610,0,0" Click="button_openSFPresets_Click"
+                />
+            <Button 
+                x:Name="button_openDvdbnd3Folder" Content="dvdbnd3 folders"
+                Background="Transparent"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="334,610,0,0" Click="button_openDvdbnd3Folder_Click"
                 />
             <!-- Save and exit -->
             <Button 
                 x:Name="button_saveAndExit" Content="Save and exit" Click="button_SaveAndExit_Click" 
-                Background="#c6ecc6" FontSize="15" FontWeight="DemiBold" VerticalContentAlignment="Center"
-                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,17,17"  
-                Height="33" Width="150"
+                Background="#c6ecc6" FontSize="15" FontWeight="DemiBold"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,32,32"  
+                Height="33" Width="160"
                 />
         </Grid>
     </Grid>

@@ -137,7 +137,9 @@ namespace Resources {
 
         public static string GetDataFolderPathWithRegistry() {
 
-            // Other possible registry keys / values :
+            // TODO : Tests, other keys/values implementation
+
+            // Other possible registry keys/values :
             // @"SOFTWARE\Wow6432Node\namco bandai games\dark souls" / "exe_path"
             // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420" / "InstallLocation"
 

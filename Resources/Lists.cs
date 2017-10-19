@@ -131,7 +131,22 @@ namespace Resources {
         #endregion
 
 
-        #region GUI items
+        #region GUI items - DSMI Config Tool
+
+        public static List<string> renderRes_Values = new List<string>(new string[]
+            {
+                "3840x2160",
+                "2560x1440",
+                "1920x1080",
+                "1600x900",
+                "1280x720",
+                "1024x576",
+                "896x504",
+                "768x432",
+                "640x360",
+                "512x288",
+                "384x216"
+            });
 
         public static List<string> uiRes_Values = new List<string>(new string[]
             {
@@ -140,6 +155,15 @@ namespace Resources {
                 "1920x1080",
                 "1600x900",
                 "1280x720"
+            });
+
+        public static List<string> dofOverrideRes_Values = new List<string>(new string[]
+            {
+                "360",
+                "540",
+                "810",
+                "1080",
+                "2160"
             });
 
         public static List<string> gamepadButtonsStyle_Values = new List<string>(new string[]

@@ -157,7 +157,7 @@ namespace DSMI_MainLauncher {
             if (counter > 0) {
                 MessageBoxResult msgBoxResult = MessageBox.Show(
                     Strings.Warning_installContent(lang),
-                    Strings.Warning_installHeader(lang),
+                    Strings.Warning_confirmation(lang),
                     MessageBoxButton.YesNo);
 
                 if (msgBoxResult == MessageBoxResult.Yes) {

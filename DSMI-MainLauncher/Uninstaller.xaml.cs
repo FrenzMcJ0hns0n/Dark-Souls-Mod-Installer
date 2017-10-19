@@ -89,7 +89,7 @@ namespace DSMI_MainLauncher {
             else if (radioButton_uninstallAllContent.IsChecked == true) {
                 MessageBoxResult msgBoxResult = MessageBox.Show(
                     Strings.Warning_uninstallAllContent(lang),
-                    Strings.Warning_uninstallAllHeader(lang),
+                    Strings.Warning_confirmation(lang),
                     MessageBoxButton.YesNo);
 
                 if (msgBoxResult == MessageBoxResult.Yes) {
@@ -112,26 +112,26 @@ namespace DSMI_MainLauncher {
         public void uninstallDsmiFiles() {
 
             // Deleting files -----
-            string[] filePaths = Directory.GetFiles(DATApath);
-            foreach (string filePath in filePaths) {
-                name = new FileInfo(filePath).Name;
+            string[] files = Directory.GetFiles(DATApath);
+            foreach (string file in files) {
+                name = new FileInfo(file).Name;
                 name = name.ToLower();
 
                 if (Lists.DSMIitems_files.Contains(name)) {
                     fileCounter++;
-                    File.Delete(filePath);
+                    File.Delete(file);
                 }
             }
 
             // Deleting directories -----
-            string[] dirPaths = Directory.GetDirectories(DATApath);
-            foreach (string dirPath in dirPaths) {
-                name = new DirectoryInfo(dirPath).Name;
+            string[] dirs = Directory.GetDirectories(DATApath);
+            foreach (string dir in dirs) {
+                name = new DirectoryInfo(dir).Name;
                 name = name.ToLower();
 
                 if (Lists.DSMIitems_directories.Contains(name)) {
                     dirCounter++;
-                    Directory.Delete(dirPath, true);
+                    Directory.Delete(dir, true);
                 }
             }
 
@@ -148,26 +148,26 @@ namespace DSMI_MainLauncher {
         public void uninstallMostElements() {
 
             // Deleting files -----
-            string[] filePaths = Directory.GetFiles(DATApath);
-            foreach (string filePath in filePaths) {
-                name = new FileInfo(filePath).Name;
+            string[] files = Directory.GetFiles(DATApath);
+            foreach (string file in files) {
+                name = new FileInfo(file).Name;
                 name = name.ToLower();
 
                 if ((!(Lists.vanillaItems_files.Contains(name))) && (!(Lists.otherNonVanilla_files.Contains(name)))) {
                     fileCounter++;
-                    File.Delete(filePath);
+                    File.Delete(file);
                 }
             }
             
             // Deleting directories -----
-            string[] dirPaths = Directory.GetDirectories(DATApath);
-            foreach (string dirPath in dirPaths) {
-                name = new DirectoryInfo(dirPath).Name;
+            string[] dirs = Directory.GetDirectories(DATApath);
+            foreach (string dir in dirs) {
+                name = new DirectoryInfo(dir).Name;
                 name = name.ToLower();
 
                 if ((!(Lists.vanillaItems_directories.Contains(name))) && (!(Lists.otherNonVanilla_directories.Contains(name)))) {
                     dirCounter++;
-                    Directory.Delete(dirPath, true);
+                    Directory.Delete(dir, true);
                 }
             }
             
@@ -184,26 +184,26 @@ namespace DSMI_MainLauncher {
         public void uninstallAllElements() {
 
             // Deleting files -----
-            string[] filePaths = Directory.GetFiles(DATApath);
-            foreach (string filePath in filePaths) {
-                name = new FileInfo(filePath).Name;
+            string[] files = Directory.GetFiles(DATApath);
+            foreach (string file in files) {
+                name = new FileInfo(file).Name;
                 name = name.ToLower();
 
                 if (!(Lists.vanillaItems_files.Contains(name))) {
                     fileCounter++;
-                    File.Delete(filePath);
+                    File.Delete(file);
                 }
             }
 
             // Deleting directories -----
-            string[] dirPaths = Directory.GetDirectories(DATApath);
-            foreach (string dirPath in dirPaths) {
-                name = new DirectoryInfo(dirPath).Name;
+            string[] dirs = Directory.GetDirectories(DATApath);
+            foreach (string dir in dirs) {
+                name = new DirectoryInfo(dir).Name;
                 name = name.ToLower();
 
                 if (!(Lists.vanillaItems_directories.Contains(name))) {
                     dirCounter++;
-                    Directory.Delete(dirPath, true);
+                    Directory.Delete(dir, true);
                 }
             }
 

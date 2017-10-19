@@ -1,5 +1,7 @@
 ﻿using Resources; // Resources.dll
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -17,16 +19,13 @@ namespace DSMI_ConfigTool {
         public string lang;
         public string modSupport;
 
-        // TODO ? Dynamic preset management : add each txt file in ...\DATA\SweetFX\Presets\ as selectable preset ?
-        public const string sf_preset_cold = "\"..\\Presets\\DS_SweetFX_HDR-Cold_and_sharp.txt\"";
-        public const string sf_preset_warm = "\"..\\Presets\\DS_SweetFX_HDR-Warm_and_sharp.txt\"";
-        public const string sf_preset_cine = "\"..\\Presets\\DS_SweetFX_HDR-Cinematic.txt\"";
-
         public string SETTINGS_FILE;
         public string DS_FIX_INI_FILE;
         public string DS_FIX_TEXTURE_FOLDER;
+        public string DVDBND3_FOLDER;
         public string DSPW_INI_FILE;
         public string SWEET_FX_FILE;
+        public string SWEET_FX_PRESET_FOLDER;
         public string FPS_FIX_INI_FILE;
 
         public int line_to_change;
@@ -81,6 +80,7 @@ namespace DSMI_ConfigTool {
         // SweetFX
         public string sweetFxKey_gotValue;
         public string sweetFxPreset_gotValue;
+        public string[] sweetFiles;
 
         // FPSFix
         public string fpsFix_gotValue;
@@ -100,10 +100,12 @@ namespace DSMI_ConfigTool {
             label_dofOverrideRes.ToolTip = Strings.label_dofOverrideRes_toolTipLanguage(lan);
             label_dofAdditionalBlur.Content = Strings.label_dofAdditionalBlur_contentLanguage(lan);
             label_dofAdditionalBlur.ToolTip = Strings.label_dofAdditionalBlur_toolTipLanguage(lan);
+            comboBox_dofAdditionalBlur.ItemsSource = Strings.comboBox_dofAdditionalBlur_values(lan);
             // Ambient occlusion
             groupBox_aoOptions.Header = Strings.groupBox_aoOptions_headerLanguage(lan);
             label_aoStrength.Content = Strings.label_aoStrength_contentLanguage(lan);
             label_aoStrength.ToolTip = Strings.label_aoStrength_toolTipLanguage(lan);
+            comboBox_aoStrength.ItemsSource = Strings.comboBox_aoStrength_values(lan);
             label_aoType.Content = Strings.label_aoType_contentLanguage(lan);
             label_aoType.ToolTip = Strings.label_aoType_toolTipLanguage(lan);
             // Framerate
@@ -115,17 +117,17 @@ namespace DSMI_ConfigTool {
             label_toggleFramerateKey.Content = Strings.label_toggleFramerateKey_contentLanguage(lan);
             label_toggleFramerateKey.ToolTip = Strings.label_toggleFramerateKey_toolTipLanguage(lan);
             // Mouse cursor
-            groupBox_mouseCursor.Header = Strings.groupBox_mouseCursor_headerLanguage(lang);
-            checkBox_showCursor.Content = Strings.checkBox_showCursor_contentLanguage(lang);
-            checkBox_showCursor.ToolTip = Strings.checkBox_showCursor_toolTipLanguage(lang);
-            checkBox_captureCursor.Content = Strings.checkBox_captureCursor_contentLanguage(lang);
-            checkBox_captureCursor.ToolTip = Strings.checkBox_captureCursor_toolTipLanguage(lang);
+            groupBox_mouseCursor.Header = Strings.groupBox_mouseCursor_headerLanguage(lan);
+            checkBox_showCursor.Content = Strings.checkBox_showCursor_contentLanguage(lan);
+            checkBox_showCursor.ToolTip = Strings.checkBox_showCursor_toolTipLanguage(lan);
+            checkBox_captureCursor.Content = Strings.checkBox_captureCursor_contentLanguage(lan);
+            checkBox_captureCursor.ToolTip = Strings.checkBox_captureCursor_toolTipLanguage(lan);
             // Controls
             groupBox_controlOptions.Header = Strings.groupBox_controlOptions_headerLanguage(lan);
             radioButton_gamepad.Content = Strings.radioButton_gamepad_contentLanguage(lan);
             radioButton_gamepad.ToolTip = Strings.radioButton_gamepad_toolTipLanguage(lan);
-            label_gamepadButtonsStyle.Content = Strings.label_gamepadButtonsStyle_contentLanguage(lang);
-            label_gamepadButtonsStyle.ToolTip = Strings.label_gamepadButtonsStyle_toolTipLanguage(lang);
+            label_gamepadButtonsStyle.Content = Strings.label_gamepadButtonsStyle_contentLanguage(lan);
+            label_gamepadButtonsStyle.ToolTip = Strings.label_gamepadButtonsStyle_toolTipLanguage(lan);
             radioButton_mouse.Content = Strings.radioButton_mouse_contentLanguage(lan);
             radioButton_mouse.ToolTip = Strings.radioButton_mouse_toolTipLanguage(lan);
             radioButton_oldMouseFix.Content = Strings.radioButton_oldMouseFix_contentLanguage(lan);
@@ -137,6 +139,7 @@ namespace DSMI_ConfigTool {
             groupBox_language.Header = Strings.groupBox_language_headerLanguage(lan);
             label_forceLanguage.Content = Strings.label_forceLanguage_contentLanguage(lan);
             label_forceLanguage.ToolTip = Strings.label_forceLanguage_toolTipLanguage(lan);
+            comboBox_forceLanguage.ItemsSource = Strings.comboBox_forceLanguage_values(lan);
             // Mod settings
             checkBox_overlayDspw.Content = Strings.checkBox_overlayDspw_contentLanguage(lan);
             checkBox_overlayDspw.ToolTip = Strings.checkBox_overlayDspw_toolTipLanguage(lan);
@@ -149,6 +152,9 @@ namespace DSMI_ConfigTool {
             checkBox_FPSFix.ToolTip = Strings.checkBox_FPSFix_toolTipLanguage(lan);
             checkBox_FPSFix_beep.Content = Strings.checkbox_FPSFixBeep_contentLanguage(lan);
             checkBox_FPSFix_beep.ToolTip = Strings.checkbox_FPSFixBeep_toolTipLanguage(lan);
+            groupBox_dvdbnd3.Header = Strings.groupBox_dvdbnd3_headerLanguage(lan);
+            checkBox_dvdbnd3Files.Content = Strings.checkBox_dvdbnd3Files_contentLanguage(lan);
+            checkBox_dvdbnd3Files.ToolTip = Strings.checkBox_dvdbnd3Files_toolTipLanguage(lan);
             // Lower buttons
             button_saveAndExit.Content = Strings.button_saveAndExit_contentLanguage(lan);
 
@@ -159,104 +165,47 @@ namespace DSMI_ConfigTool {
                     label_gamepadButtonsStyle.Margin = new Thickness(424, 379, 0, 0);
                     radioButton_oldMouseFix.Margin = new Thickness(562, 390, 0, 0);
                     radioButton_newMouseFix.Margin = new Thickness(562, 410, 0, 0);
-
+                    checkBox_dvdbnd3Files.Margin = new Thickness(438, 503, 0, 0);
                     comboBox_uiRes.Items.Add("= Rendu");
-
-                    comboBox_dofAdditionalBlur.Items.Add("Désactivé");
-                    comboBox_dofAdditionalBlur.Items.Add("Défaut");
-                    comboBox_dofAdditionalBlur.Items.Add("Élevé");
-                    comboBox_dofAdditionalBlur.Items.Add("Maximum");
-
-                    comboBox_aoStrength.Items.Add("Désactivé");
-                    comboBox_aoStrength.Items.Add("Bas");
-                    comboBox_aoStrength.Items.Add("Moyen");
-                    comboBox_aoStrength.Items.Add("Élevé");
-
                     comboBox_toggleFramerateKey.Items.Add("Retour Arrière");
-
                     comboBox_gamepadButtonsStyle.Items.Add("Défaut");
-
                     comboBox_sweetFxKey.Items.Add("Arrêt défil");
-
-                    comboBox_sweetFxPreset.Items.Add("Froid");
-                    comboBox_sweetFxPreset.Items.Add("Chaud");
-                    comboBox_sweetFxPreset.Items.Add("Cinématique");
                     break;
-
 
                 case "sp":
                     label_dofAdditionalBlur.Margin = new Thickness(564, 50, 0, 0);
                     checkBox_unlockFPS.Margin = new Thickness(456, 158, 0, 0);
                     label_forceLanguage.Margin = new Thickness(81, 260, 0, 0);
                     label_gamepadButtonsStyle.Margin = new Thickness(424, 379, 0, 0);
-
+                    checkBox_dvdbnd3Files.Margin = new Thickness(433, 503, 0, 0);
                     comboBox_uiRes.Items.Add("= Principal");
-
-                    comboBox_dofAdditionalBlur.Items.Add("Desactivado");
-                    comboBox_dofAdditionalBlur.Items.Add("Por defecto");
-                    comboBox_dofAdditionalBlur.Items.Add("Alto");
-                    comboBox_dofAdditionalBlur.Items.Add("Máximo");
-
-                    comboBox_aoStrength.Items.Add("Desactivado");
-                    comboBox_aoStrength.Items.Add("Bajo");
-                    comboBox_aoStrength.Items.Add("Medio");
-                    comboBox_aoStrength.Items.Add("Alto");
-
                     comboBox_toggleFramerateKey.Items.Add("Backspace");
-
                     comboBox_gamepadButtonsStyle.Items.Add("Por defecto");
-
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
-
-                    comboBox_sweetFxPreset.Items.Add("Frío");
-                    comboBox_sweetFxPreset.Items.Add("Caliente");
-                    comboBox_sweetFxPreset.Items.Add("Cinemática");
                     break;
-
 
                 default:
                     label_renderRes.Margin = new Thickness(60, 50, 0, 0);
                     label_forceLanguage.Margin = new Thickness(74, 260, 0, 0);
-
                     comboBox_uiRes.Items.Add("= Rendering");
-
-                    comboBox_dofAdditionalBlur.Items.Add("Disabled");
-                    comboBox_dofAdditionalBlur.Items.Add("Default");
-                    comboBox_dofAdditionalBlur.Items.Add("High");
-                    comboBox_dofAdditionalBlur.Items.Add("Maximum");
-
-                    comboBox_aoStrength.Items.Add("Disabled");
-                    comboBox_aoStrength.Items.Add("Low");
-                    comboBox_aoStrength.Items.Add("Medium");
-                    comboBox_aoStrength.Items.Add("High");
-
                     comboBox_toggleFramerateKey.Items.Add("Backspace");
-
                     comboBox_gamepadButtonsStyle.Items.Add("Default");
-
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
-
-                    comboBox_sweetFxPreset.Items.Add("Cold");
-                    comboBox_sweetFxPreset.Items.Add("Warm");
-                    comboBox_sweetFxPreset.Items.Add("Cinematic");
                     break;
             }
-
 
             foreach (string item in Lists.uiRes_Values) {
                 comboBox_uiRes.Items.Add(item);
             }
 
             comboBox_toggleFramerateKey.Items.Add("F2");
+            comboBox_sweetFxKey.Items.Add("F3");
 
             foreach (string item in Lists.gamepadButtonsStyle_Values) {
                 comboBox_gamepadButtonsStyle.Items.Add(item);
             }
-
-            comboBox_sweetFxKey.Items.Add("F3");
         }
-
-
+        
         public MainWindow() {
 
             if (!(File.Exists(startDir + "Resources.dll"))) {
@@ -290,19 +239,18 @@ namespace DSMI_ConfigTool {
                 MessageBox.Show(Strings.ErrorMsg_projectSettingsFileNotFound(lang));
                 Environment.Exit(0);
             }
-
-
+            
             // Define files & folders aliases -----
-
             DS_FIX_INI_FILE = DATApath + "DSfix.ini";
             DS_FIX_TEXTURE_FOLDER = DATApath + @"dsfix\tex_override\";
+            DVDBND3_FOLDER = DATApath + @"dvdbnd3\";
             DSPW_INI_FILE = DATApath + "DSPWSteam.ini";
             SWEET_FX_FILE = DATApath + "SweetFX_settings.txt";
+            SWEET_FX_PRESET_FOLDER = DATApath + @"SweetFX\Presets\";
             FPS_FIX_INI_FILE = DATApath + "FPSFix.ini";
 
 
             // File checkup -----
-
             if (!(File.Exists(NBGIfile))) {
                 MessageBox.Show(Strings.ErrorMsg_NBGIfileNotFound(NBGIfile, lang));
                 Environment.Exit(0);
@@ -314,7 +262,6 @@ namespace DSMI_ConfigTool {
             }
 
             if (modSupport == "normal") {
-
                 if (!(File.Exists(DSPW_INI_FILE)) || !(File.Exists(DATApath + "msvcp120.dll")) || !(File.Exists(DATApath + "msvcr120.dll"))) {
                     MessageBox.Show(Strings.ErrorMsg_missingFiles("Dark Souls PvP Watchdog", lang));
                     Environment.Exit(0);
@@ -326,8 +273,27 @@ namespace DSMI_ConfigTool {
                 }
             }
             else {
-                Title = "DSMI Configuration Tool (minimal mode)";
+                Title = "DSMI Config Tool (minimal mode)";
+                groupBox_pvpWatchdog.Visibility = Visibility.Hidden;
+                checkBox_overlayDspw.Visibility = Visibility.Hidden;
+
+                groupBox_FPSFix.Visibility = Visibility.Hidden;
+                checkBox_FPSFix.Visibility = Visibility.Hidden;
+                checkBox_FPSFix_beep.Visibility = Visibility.Hidden;
+
+                groupBox_sweetFX.Visibility = Visibility.Hidden;
+                checkBox_sweetFX.Visibility = Visibility.Hidden;
+                label_sweetFxKey.Visibility = Visibility.Hidden;
+                comboBox_sweetFxKey.Visibility = Visibility.Hidden;
+                label_sweetFxPreset.Visibility = Visibility.Hidden;
+                comboBox_sweetFxPreset.Visibility = Visibility.Hidden;
+
+                // TODO : Alternative layout for minimal mod support !!!
             }
+
+            // Fill non language-relative comboBoxes -----
+            comboBox_renderRes.ItemsSource = Lists.renderRes_Values;
+            comboBox_dofOverrideRes.ItemsSource = Lists.dofOverrideRes_Values;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -379,7 +345,7 @@ namespace DSMI_ConfigTool {
         private void checkBox_unlockFPS_Checked(object sender, RoutedEventArgs e) {
 
             label_maxFPSTarget.IsEnabled = true;
-            comboBox_maxFPSTarget.SelectedIndex = maxFPS_gotValue / 30 - 1; // pure maths here !
+            comboBox_maxFPSTarget.SelectedIndex = 1;
             comboBox_maxFPSTarget.IsEnabled = true;
             comboBox_maxFPSTarget.Foreground = (Brush)bc.ConvertFrom("#000");
             label_writeFPS.IsEnabled = true;
@@ -477,6 +443,44 @@ namespace DSMI_ConfigTool {
             }
         }
 
+        private void checkBox_dvdbnd3Files_Checked(object sender, RoutedEventArgs e) {
+            comboBox_dvdbnd3Files.SelectedIndex = 0;
+            comboBox_dvdbnd3Files.IsEnabled = true;
+            comboBox_dvdbnd3Files.Foreground = (Brush)bc.ConvertFrom("#000");
+        }
+
+        private void checkBox_dvdbnd3Files_Unchecked(object sender, RoutedEventArgs e) {
+            comboBox_dvdbnd3Files.SelectedItem = null;
+            comboBox_dvdbnd3Files.IsEnabled = false;
+            comboBox_dvdbnd3Files.Foreground = (Brush)bc.ConvertFrom("#888");
+        }
+
+        private void button_openTexFolder_Click(object sender, RoutedEventArgs e) {
+            try {
+                Process.Start(DS_FIX_TEXTURE_FOLDER);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button_openSFPresets_Click(object sender, RoutedEventArgs e) {
+            try {
+                Process.Start(SWEET_FX_PRESET_FOLDER);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button_openDvdbnd3Folder_Click(object sender, RoutedEventArgs e) {
+            try {
+                Process.Start(DVDBND3_FOLDER);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         #endregion
 
 
@@ -486,24 +490,22 @@ namespace DSMI_ConfigTool {
                 Directory.SetCurrentDirectory(DATApath);
                 try {
                     System.Diagnostics.Process.Start("dsmfixgui.exe");
-                }
-                catch {
+                } catch {
                     MessageBox.Show(Strings.ErrorMsg_dsmfixGuiNotFound("dsmfixgui.exe", lang));
+                } finally {
+                    Directory.SetCurrentDirectory(startDir);
                 }
-                Directory.SetCurrentDirectory(startDir);
             }
-
             else if (radioButton_newMouseFix.IsChecked == true) {
                 Directory.SetCurrentDirectory(DATApath);
                 try {
                     System.Diagnostics.Process.Start("DarkSoulsMouseFixGUI.exe");
-                }
-                catch {
+                } catch {
                     MessageBox.Show(Strings.ErrorMsg_dsmfixGuiNotFound("DarkSoulsMouseFixGUI.exe", lang));
+                } finally {
+                    Directory.SetCurrentDirectory(startDir);
                 }
-                Directory.SetCurrentDirectory(startDir);
             }
-
             else {
                 MessageBox.Show(Strings.ErrorMsg_noMouseFixChosen(lang));
             }
@@ -511,9 +513,7 @@ namespace DSMI_ConfigTool {
 
         private void button_SaveAndExit_Click(object sender, RoutedEventArgs e) {
 
-
             // Does the job, but could be better
-
             bool resol_ok = true;
             bool mouse_ok = true;
 
@@ -525,8 +525,7 @@ namespace DSMI_ConfigTool {
                 radioButton_oldMouseFix.IsChecked == false && 
                 radioButton_newMouseFix.IsChecked == false) {
                 mouse_ok = false;
-            }
-            else {
+            } else {
                 border_mouse.BorderBrush = (Brush)bc.ConvertFromString("Transparent");
             }
 
@@ -548,9 +547,7 @@ namespace DSMI_ConfigTool {
 
         public void LoadData() {
 
-
             // GET : Rendering resolution -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "renderWidth", 0);
             if (int.TryParse(interm_value, out renderWidth_gotValue) == true) {
                 renderWidth_gotValue = int.Parse(interm_value);
@@ -641,10 +638,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"renderHeight\" (DSfix.ini)\n";
                 }
             }
-
-
+            
             // GET : Interface resolution -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "presentWidth", 0);
             if (int.TryParse(interm_value, out presentWidth_gotValue) == true) {
                 presentWidth_gotValue = int.Parse(interm_value);
@@ -705,10 +700,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"presentHeight\" (DSfix.ini)\n";
                 }
             }
-
-
+            
             // GET : Depth of Field resolution override -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "dofOverrideResolution", 0);
             if (int.TryParse(interm_value, out dofOverrideResolution_gotValue)) {
 
@@ -741,10 +734,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"dofOverrideResolution\" (DSfix.ini)\n";
                 }
             }
-
-
+            
             // GET : Depth of Field additional blur -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "dofBlurAmount", 0);
             if (int.TryParse(interm_value, out dofBlurAmount_gotValue)) {
 
@@ -778,9 +769,7 @@ namespace DSMI_ConfigTool {
                 }
             }
 
-
             // GET : Ambient Occlusion strength -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "ssaoStrength", 0);
             if (int.TryParse(interm_value, out aoStrength_gotValue)) {
 
@@ -810,9 +799,7 @@ namespace DSMI_ConfigTool {
                 }
             }
 
-
             // GET : Ambient Occlusion type -----
-
             aoType_gotValue = Functions.GetValueFromFile(DS_FIX_INI_FILE, "ssaoType", 0);
             switch (aoType_gotValue) {
                 case "VSSAO":
@@ -837,9 +824,7 @@ namespace DSMI_ConfigTool {
                     break;
             }
 
-
             // GET : Unlock framerate -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "unlockFPS", 0);
             if (int.TryParse(interm_value, out unlockFPS_gotValue)) {
 
@@ -861,15 +846,15 @@ namespace DSMI_ConfigTool {
                 }
             }
 
-
             // GET : Max framerate -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "FPSlimit", 0);
             if (int.TryParse(interm_value, out maxFPS_gotValue)) {
 
                 switch (maxFPS_gotValue) {
                     case 30:
                         comboBox_maxFPSTarget.SelectedIndex = 0;
+                        checkBox_unlockFPS.IsChecked = true;
+                        checkBox_unlockFPS.IsChecked = false;
                         break;
 
                     case 60:
@@ -885,9 +870,7 @@ namespace DSMI_ConfigTool {
                 }
             }
 
-
             // GET : Framerate toggle key -----
-
             framerateToggleKey_gotValue = Functions.GetValueFromFile(DATApath + "DSfixKeys.ini", "toggle30FPSLimit", 0);
             switch (framerateToggleKey_gotValue) {
                 case "VK_BACK":
@@ -954,24 +937,19 @@ namespace DSMI_ConfigTool {
                     where = where + "\"overrideLanguage\" (DSfix.ini)\n";
                     break;
             }
-
-
+            
             // CHECK : Do mouse files even exist ?
-
             if (File.Exists(DATApath + "dsmfix.dll") && File.Exists(DATApath + "dsmfix.ini")) {
                 oldMouseFix_exist = true;
             }
             if (File.Exists(DATApath + "DarkSoulsMouseFix.dll") && File.Exists(DATApath + "DarkSoulsMouseFix.ini")) {
                 newMouseFix_exist = true;
             }
-
             if (oldMouseFix_exist || newMouseFix_exist) {
                 radioButton_mouse.IsEnabled = true;
             }
-
-
+            
             // GET : DirectInput wrapper -----
-
             dinput8dllWrapper_gotValue = Functions.GetValueFromFile(DS_FIX_INI_FILE, "dinput8dllWrapper", 0);
             switch (dinput8dllWrapper_gotValue) {
                 case "none":
@@ -997,10 +975,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"dinput8dllWrapper\" (DSfix.ini)\n";
                     break;
             }
-
-
+            
             // GET : Disable mouse cursor -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "disableCursor", 0);
             if (int.TryParse(interm_value, out disableCursor_gotvalue)) {
 
@@ -1021,10 +997,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"disableCursor\" (DSfix.ini)\n";
                 }
             }
-
-
+            
             // GET : Capture mouse cursor -----
-
             interm_value = Functions.GetValueFromFile(DS_FIX_INI_FILE, "captureCursor", 0);
             if (int.TryParse(interm_value, out captureCursor_gotValue)) {
 
@@ -1046,14 +1020,80 @@ namespace DSMI_ConfigTool {
                 }
             }
 
+            // GET : Gamepad buttons -----
+            bool foundTexSupported = true;
+
+            switch (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture")) {
+                case "noFileFound":
+                    comboBox_gamepadButtonsStyle.SelectedIndex = 0;
+                    break;
+
+                case "x360":
+                    comboBox_gamepadButtonsStyle.SelectedIndex = 1;
+                    break;
+
+                case "xbo":
+                    comboBox_gamepadButtonsStyle.SelectedIndex = 2;
+                    break;
+
+                case "ps3":
+                    comboBox_gamepadButtonsStyle.SelectedIndex = 3;
+                    break;
+
+                case "ps4":
+                    comboBox_gamepadButtonsStyle.SelectedIndex = 4;
+                    break;
+
+                case "unsupported":
+                    foundTexSupported = false;
+                    break;
+            }
+
+            if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") == "unsupported") {
+                foundTexSupported = false;
+            }
+
+            // Textures unsupported by DSMI ? -----
+            if (foundTexSupported == false) {
+
+                switch (lang) {
+                    case "fr":
+                        comboBox_gamepadButtonsStyle.Items.Add("Personnalisé");
+                        break;
+                    case "sp":
+                        comboBox_gamepadButtonsStyle.Items.Add("Personalizado");
+                        break;
+                    default:
+                        comboBox_gamepadButtonsStyle.Items.Add("Custom");
+                        break;
+                }
+
+                comboBox_gamepadButtonsStyle.SelectedIndex = 5;
+
+                // Display warning ? -----
+                if (Functions.GetValueFromFile(startDir + @"\DSMI_settings.txt", "unsupportedTextureWarning", 0) != "no") {
+
+                    var customMsgBox = CustomMessageBox.ShowOKCancel(
+                        Strings.Warning_unsupportedButtonTextures(DS_FIX_TEXTURE_FOLDER, lang),
+                        "",
+                        "OK",
+                        Strings.CustomButtonText_DontWarnAnymore(lang)
+                    );
+
+                    if (customMsgBox == MessageBoxResult.Cancel) {
+                        using (StreamWriter sw = new StreamWriter(startDir + @"\DSMI_settings.txt", true)) {
+                            sw.WriteLine("unsupportedTextureWarning no");
+                        }
+                    }
+                }
+
+            }
 
             //////////   MOD SUPPORT   ////////////////////////////////////////////////
 
             if (modSupport == "normal") {
 
-
                 // GET : FPSFix+ dll found ? -----
-
                 if (File.Exists(DATApath + "winmm.dll")) {
                     checkBox_FPSFix.IsChecked = true;
 
@@ -1063,10 +1103,8 @@ namespace DSMI_ConfigTool {
                         checkBox_FPSFix_beep.IsChecked = true;
                     }
                 }
-
-
+                
                 // GET : DSPW overlay -----
-
                 dspwOverlay_gotValue = Functions.GetValueFromFile(DSPW_INI_FILE, "ShowVersionBanner", 0);
 
                 switch (dspwOverlay_gotValue) {
@@ -1083,10 +1121,8 @@ namespace DSMI_ConfigTool {
                         where = where + "\"ShowVersionBanner\" (DSPWSteam.ini)\n";
                         break;
                 }
-
-
+                
                 // GET : d3d9.dll -----
-
                 if (modSupport == "normal") {
                     checkBox_sweetFX.IsChecked = true;
                     checkBox_sweetFX.IsChecked = false; // wonky way to make sure the relative elements are really disabled
@@ -1097,10 +1133,8 @@ namespace DSMI_ConfigTool {
                         checkBox_sweetFX.IsChecked = true;
                     }
                 }
-
-
+                
                 // GET : SweetFX hotkey -----
-
                 sweetFxKey_gotValue = Functions.GetValueFromFile(SWEET_FX_FILE, "// key_toggle_sweetfx =", 0);
 
                 switch (sweetFxKey_gotValue) {
@@ -1118,122 +1152,59 @@ namespace DSMI_ConfigTool {
                         break;
                 }
 
-
                 // GET : SweetFX preset -----
-
-                sweetFxPreset_gotValue = Functions.GetValueFromFile(DATApath + "SweetFX_preset.txt", "#include", 0);
-
-                switch (sweetFxPreset_gotValue) {
-                    case sf_preset_cold:
-                        comboBox_sweetFxPreset.SelectedIndex = 0;
-                        break;
-
-                    case sf_preset_warm:
-                        comboBox_sweetFxPreset.SelectedIndex = 1;
-                        break;
-
-                    case sf_preset_cine:
-                        comboBox_sweetFxPreset.SelectedIndex = 2;
-                        break;
-
-                    case "noMatch":
-                        error = true;
-                        where = where + "\"#include\" (SweetFX_preset.txt)\n";
-                        break;
-                }
-
-
-                // GET : Gamepad buttons -----
-
-                int count = 0;
-
-                switch (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "40fbc4ad.png", "mainButtonsTexture")) {
-                    case "noFileFound":
-                        comboBox_gamepadButtonsStyle.SelectedIndex = 0;
-                        break;
-
-                    case "x360":
-                        comboBox_gamepadButtonsStyle.SelectedIndex = 1;
-                        break;
-
-                    case "xbo":
-                        comboBox_gamepadButtonsStyle.SelectedIndex = 2;
-                        break;
-
-                    case "ps3":
-                        comboBox_gamepadButtonsStyle.SelectedIndex = 3;
-                        break;
-
-                    case "ps4":
-                        comboBox_gamepadButtonsStyle.SelectedIndex = 4;
-                        break;
-
-                    case "unsupported":
-                        count++;
-                        break;
-                }
-
-                if (Functions.CheckFile(DS_FIX_TEXTURE_FOLDER + "43a2b23a.png", "otherButtonsTexture") == "unsupported") {
-                    count++;
-                }
-
-
-                // Textures unsupported by DSMI ? -----
-
-                if (count != 0) {
-
-                    switch (lang) {
-                        case "fr":
-                            comboBox_gamepadButtonsStyle.Items.Add("Personnalisé");
-                            break;
-                        case "sp":
-                            comboBox_gamepadButtonsStyle.Items.Add("Personalizado");
-                            break;
-                        default:
-                            comboBox_gamepadButtonsStyle.Items.Add("Custom");
-                            break;
+                if (Directory.Exists(SWEET_FX_PRESET_FOLDER)) {
+                    sweetFiles = Directory.GetFiles(SWEET_FX_PRESET_FOLDER);
+                    string filename;
+                    foreach (string file in sweetFiles) {
+                        filename = new FileInfo(file).Name;
+                        comboBox_sweetFxPreset.Items.Add(filename);
                     }
 
-                    comboBox_gamepadButtonsStyle.SelectedIndex = 5;
+                    interm_value = Functions.GetValueFromFile(DATApath + "SweetFX_preset.txt", "#include \"..\\Presets\\", 0);
+                    sweetFxPreset_gotValue = interm_value.Substring(0, interm_value.Length - 1);
 
-
-                    // Display warning ? -----
-
-                    if (Functions.GetValueFromFile(startDir + @"\DSMI_settings.txt", "unsupportedTextureWarning", 0) != "no") {
-
-                        var customMsgBox = CustomMessageBox.ShowOKCancel(
-                            Strings.Warning_unsupportedButtonTextures(DS_FIX_TEXTURE_FOLDER, lang),
-                            "",
-                            "OK",
-                            Strings.CustomButtonText_DontWarn(lang)
-                        );
-
-                        if (customMsgBox == MessageBoxResult.Cancel) {
-                            using (StreamWriter sw = new StreamWriter(startDir + @"\DSMI_settings.txt", true)) {
-                                sw.WriteLine("unsupportedTextureWarning no");
+                    if (sweetFxPreset_gotValue == "noMatch") {
+                        error = true;
+                        where = where + "\"#include\" (SweetFX_preset.txt)\n";
+                    }
+                    else {
+                        foreach (string value in sweetFiles) {
+                            if (value.Contains(sweetFxPreset_gotValue)) {
+                                comboBox_sweetFxPreset.Text = sweetFxPreset_gotValue;
                             }
                         }
                     }
-
                 }
-            }
-            else {
-                groupBox_pvpWatchdog.Visibility = Visibility.Hidden;
-                checkBox_overlayDspw.Visibility = Visibility.Hidden;
+                else {
+                    MessageBox.Show("Warning : folder ...\\SweetFX\\Presets\\ folder not found :\n\n" + SWEET_FX_PRESET_FOLDER);
+                }
 
-                groupBox_FPSFix.Visibility = Visibility.Hidden;
-                checkBox_FPSFix.Visibility = Visibility.Hidden;
+                // GET : dvdbnd3 files -----
+                checkBox_dvdbnd3Files.IsChecked = true;
+                checkBox_dvdbnd3Files.IsChecked = false;
+                
+                if (Directory.Exists(DVDBND3_FOLDER)) {
+                    string[] dvdbnd3SubFolders = Directory.GetDirectories(DVDBND3_FOLDER);
+                    string dirname;
 
-                groupBox_sweetFX.Visibility = Visibility.Hidden;
-                checkBox_sweetFX.Visibility = Visibility.Hidden;
-                label_sweetFxKey.Visibility = Visibility.Hidden;
-                comboBox_sweetFxKey.Visibility = Visibility.Hidden;
-                label_sweetFxPreset.Visibility = Visibility.Hidden;
-                comboBox_sweetFxPreset.Visibility = Visibility.Hidden;
+                    foreach (string dir in dvdbnd3SubFolders) {
+                        if (File.Exists(dir + @"\dvdbnd3.bdt") && File.Exists(dir + @"\dvdbnd3.bhd5")) {
+                            dirname = new FileInfo(dir).Name;
+                            comboBox_dvdbnd3Files.Items.Add(dirname);
+                        }
+                    }
+                }
+                else {
+                    //checkBox_dvdbnd3Files.IsEnabled = false;
+                    checkBox_dvdbnd3Files.IsEnabled = false;
+                    checkBox_dvdbnd3Files.Foreground = (Brush)bc.ConvertFrom("#888");
+                }
 
-                label_gamepadButtonsStyle.Visibility = Visibility.Hidden;
-                comboBox_gamepadButtonsStyle.Visibility = Visibility.Hidden;
-            }
+                checkBox_dvdbnd3Files.IsChecked = true;
+                checkBox_dvdbnd3Files.IsChecked = false;
+
+            } // if (modSupport == "normal")
 
         }
 
@@ -1241,9 +1212,7 @@ namespace DSMI_ConfigTool {
 
             #region Editing DSfix.ini
 
-
             // SET : Rendering resolution -----
-
             int renderWidth_setValue = int.Parse(comboBox_renderRes.Text.Split('x', ' ')[0]);
             int renderHeight_setValue = int.Parse(comboBox_renderRes.Text.Split('x', ' ')[1]);
 
@@ -1256,17 +1225,14 @@ namespace DSMI_ConfigTool {
                 Functions.LineChanger("renderHeight " + renderHeight_setValue, DS_FIX_INI_FILE, line_to_change);
             }
 
-
             // SET : Interface resolution -----
-
             int presentHeight_setValue;
             int presentWidth_setValue;
 
             if (comboBox_uiRes.SelectedIndex != 0) {
                 presentWidth_setValue = int.Parse(comboBox_uiRes.Text.Split('x', ' ')[0]);
                 presentHeight_setValue = int.Parse(comboBox_uiRes.Text.Split('x', ' ')[1]);
-            }
-            else {
+            } else {
                 presentWidth_setValue = 0;
                 presentHeight_setValue = 0;
             }
@@ -1279,20 +1245,15 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "presentHeight", 0);
                 Functions.LineChanger("presentHeight " + presentHeight_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Ambient Occlusion strength -----
-
             int aoStrength_setValue = comboBox_aoStrength.SelectedIndex;
             if (aoStrength_setValue != aoStrength_gotValue) {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "ssaoStrength", 0);
                 Functions.LineChanger("ssaoStrength " + aoStrength_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Ambient Occlusion type -----
-
-
             if (comboBox_aoStrength.SelectedIndex != 0) {
 
                 string aoType_setValue = comboBox_aoType.Text;
@@ -1301,30 +1262,25 @@ namespace DSMI_ConfigTool {
                     Functions.LineChanger("ssaoType " + aoType_setValue, DS_FIX_INI_FILE, line_to_change);
                 }
             }
-
-
+            
             // SET : Depth of Field resolution override -----
-
             if (comboBox_dofOverrideRes.Text != "") {
+
                 int dofOverrideResolution_setValue = int.Parse(comboBox_dofOverrideRes.Text);
                 if (dofOverrideResolution_setValue != dofOverrideResolution_gotValue) {
                     line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "dofOverrideResolution", 0);
                     Functions.LineChanger("dofOverrideResolution " + dofOverrideResolution_setValue, DS_FIX_INI_FILE, line_to_change);
                 }
             }
-
-
+            
             // SET : Depth of Field additional blur -----
-
             int dofBlurAmount_setValue = comboBox_dofAdditionalBlur.SelectedIndex;
             if (dofBlurAmount_setValue != dofBlurAmount_gotValue) {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "dofBlurAmount", 0);
                 Functions.LineChanger("dofBlurAmount " + dofBlurAmount_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Unlock framerate -----
-
             int unlockFPS_setValue = 0;
             if (checkBox_unlockFPS.IsChecked == true) {
                 unlockFPS_setValue = 1;
@@ -1333,10 +1289,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "unlockFPS", 0);
                 Functions.LineChanger("unlockFPS " + unlockFPS_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Max framerate -----
-
             if (comboBox_maxFPSTarget.Text != "") {
                 int maxFPS_setValue = int.Parse(comboBox_maxFPSTarget.Text);
                 if (maxFPS_setValue != maxFPS_gotValue) {
@@ -1344,16 +1298,13 @@ namespace DSMI_ConfigTool {
                     Functions.LineChanger("FPSlimit " + maxFPS_setValue, DS_FIX_INI_FILE, line_to_change);
                 }
             }
-
-
+            
             // SET : Framerate toggle key -----
-
             string framerateToggleKey_setValue = framerateToggleKey_gotValue;
 
             if (comboBox_toggleFramerateKey.SelectedIndex == 0) {
                 framerateToggleKey_setValue = "VK_BACK";
-            }
-            else if (comboBox_toggleFramerateKey.SelectedIndex == 1) {
+            } else if (comboBox_toggleFramerateKey.SelectedIndex == 1) {
                 framerateToggleKey_setValue = "VK_F2";
             }
 
@@ -1361,10 +1312,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DATApath + "DSfixKeys.ini", "toggle30FPSLimit", 0);
                 Functions.LineChanger("toggle30FPSLimit " + framerateToggleKey_setValue, DATApath + "DSfixKeys.ini", line_to_change);
             }
-
-
+            
             // SET : Force language -----
-
             string overrideLanguage_setValue = "none";
             switch (comboBox_forceLanguage.Text) {
                 case "English":
@@ -1400,10 +1349,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "overrideLanguage", 0);
                 Functions.LineChanger("overrideLanguage " + overrideLanguage_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : DirectInput wrapper -----
-
             string dinput8dllWrapper_setValue = dinput8dllWrapper_gotValue;
 
             if (radioButton_gamepad.IsChecked == true) {
@@ -1413,8 +1360,7 @@ namespace DSMI_ConfigTool {
 
                 if (radioButton_oldMouseFix.IsChecked == true) {
                     dinput8dllWrapper_setValue = "dsmfix.dll";
-                }
-                else if (radioButton_newMouseFix.IsChecked == true) {
+                } else if (radioButton_newMouseFix.IsChecked == true) {
                     dinput8dllWrapper_setValue = "DarkSoulsMouseFix.dll";
                 }
             }
@@ -1423,10 +1369,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "dinput8dllWrapper", 0);
                 Functions.LineChanger("dinput8dllWrapper " + dinput8dllWrapper_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Disable mouse cursor -----
-
             int disableCursor_setValue = 0;
             if (checkBox_showCursor.IsChecked == false) {
                 disableCursor_setValue = 1;
@@ -1435,10 +1379,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(DS_FIX_INI_FILE, "disableCursor", 0);
                 Functions.LineChanger("disableCursor " + disableCursor_setValue, DS_FIX_INI_FILE, line_to_change);
             }
-
-
+            
             // SET : Capture mouse cursor -----
-
             int captureCursor_setValue = 0;
             if (checkBox_captureCursor.IsChecked == true) {
                 captureCursor_setValue = 1;
@@ -1452,10 +1394,8 @@ namespace DSMI_ConfigTool {
 
 
             #region Editing DarkSouls.ini
-
-
+            
             // SET : In-game resolution settings -----
-
             int windowedWidth_setValue, windowedHeight_setValue;
             int fullscreenWidth_setValue, fullscreenHeight_setValue;
 
@@ -1475,10 +1415,8 @@ namespace DSMI_ConfigTool {
                 windowedWidth_setValue = 1920; windowedHeight_setValue = 1080;
                 fullscreenWidth_setValue = 1920; fullscreenHeight_setValue = 1080;
             }
-
-
+            
             // SET : Windowed resolution -----
-
             int windowedWidth_gotValue = int.Parse(Functions.GetValueFromFile(NBGIfile, "Width =", 0));
             if (windowedWidth_setValue != windowedWidth_gotValue) {
                 line_to_change = Functions.GetLine(NBGIfile, "Width", 0);
@@ -1489,10 +1427,8 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(NBGIfile, "Height", 0);
                 Functions.LineChanger("Height = " + windowedHeight_setValue, NBGIfile, line_to_change);
             }
-
-
+            
             // SET : Fullscreen resolution -----
-
             int fullscreenWidth_gotValue = int.Parse(Functions.GetValueFromFile(NBGIfile, "Width =", 1));
             if (fullscreenWidth_setValue != fullscreenWidth_gotValue) {
                 line_to_change = Functions.GetLine(NBGIfile, "Width", 1);
@@ -1503,26 +1439,20 @@ namespace DSMI_ConfigTool {
                 line_to_change = Functions.GetLine(NBGIfile, "Height", 1);
                 Functions.LineChanger("Height = " + fullscreenHeight_setValue, NBGIfile, line_to_change);
             }
-
-
+            
             // SET : Windowed mode ON -----
-
             if (int.Parse(Functions.GetValueFromFile(NBGIfile, "WindowMode =", 0)) != 1) {
                 line_to_change = Functions.GetLine(NBGIfile, "WindowMode", 0);
                 Functions.LineChanger("WindowMode = 1", NBGIfile, line_to_change);
             }
-
-
-            // SET : Blur OFF ----- 
-
+            
+            // SET : Blur OFF -----
             if (int.Parse(Functions.GetValueFromFile(NBGIfile, "Blur =", 0)) != 0) {
                 line_to_change = Functions.GetLine(NBGIfile, "Blur", 0);
                 Functions.LineChanger("Blur = 0", NBGIfile, line_to_change);
             }
-
-
+            
             // SET : Antialiasing OFF -----
-
             if (int.Parse(Functions.GetValueFromFile(NBGIfile, "Antialiasing =", 0)) != 0) {
                 line_to_change = Functions.GetLine(NBGIfile, "Antialiasing", 0);
                 Functions.LineChanger("Antialiasing = 0", NBGIfile, line_to_change);
@@ -1576,8 +1506,7 @@ namespace DSMI_ConfigTool {
                         else {
                             try {
                                 File.Copy(sourceDir + "d3d9.dll", DATApath + "d3d9.dll");
-                            }
-                            catch (Exception ex) {
+                            } catch (Exception ex) {
                                 MessageBox.Show(ex.ToString());
                             }
                         }
@@ -1586,8 +1515,7 @@ namespace DSMI_ConfigTool {
                         if (!(File.Exists(DATApath + "d3d9_wd.dll"))) {
                             try {
                                 File.Copy(sourceDir + "d3d9_wd.dll", DATApath + "d3d9_wd.dll");
-                            }
-                            catch (Exception ex) {
+                            } catch (Exception ex) {
                                 MessageBox.Show(ex.ToString());
                             }
                         }
@@ -1598,16 +1526,13 @@ namespace DSMI_ConfigTool {
                         }
 
                     }
-
-
+                    
                     // SET : SweetFX hotkey -----
-
                     string sweetFxKey_setValue = sweetFxKey_gotValue;
 
                     if (comboBox_sweetFxKey.SelectedIndex == 0) {
                         sweetFxKey_setValue = "145";
-                    }
-                    else if (comboBox_sweetFxKey.SelectedIndex == 1) {
+                    } else if (comboBox_sweetFxKey.SelectedIndex == 1) {
                         sweetFxKey_setValue = "114";
                     }
 
@@ -1615,25 +1540,14 @@ namespace DSMI_ConfigTool {
                         line_to_change = Functions.GetLine(SWEET_FX_FILE, "// key_toggle_sweetfx", 0);
                         Functions.LineChanger("// key_toggle_sweetfx = " + sweetFxKey_setValue, SWEET_FX_FILE, line_to_change);
                     }
-
-
+                    
                     // SET : SweetFX preset -----
-
                     string sweetFxPreset_setValue = sweetFxPreset_gotValue;
+                    sweetFxPreset_setValue = comboBox_sweetFxPreset.Text;
 
-                    if (comboBox_sweetFxPreset.SelectedIndex == 0) {
-                        sweetFxPreset_setValue = sf_preset_cold;
-                    }
-                    else if (comboBox_sweetFxPreset.SelectedIndex == 1) {
-                        sweetFxPreset_setValue = sf_preset_warm;
-                    }
-                    else if (comboBox_sweetFxPreset.SelectedIndex == 2) {
-                        sweetFxPreset_setValue = sf_preset_cine;
-                    }
-
-                    if (sweetFxPreset_setValue != sweetFxPreset_gotValue) {
+                    if (sweetFxPreset_setValue != sweetFxPreset_gotValue && sweetFxPreset_setValue != "") {
                         line_to_change = Functions.GetLine(DATApath + "SweetFX_preset.txt", "#include", 0);
-                        Functions.LineChanger("#include " + sweetFxPreset_setValue, DATApath + "SweetFX_preset.txt", line_to_change);
+                        Functions.LineChanger("#include \"..\\Presets\\" + sweetFxPreset_setValue + "\"", DATApath + "SweetFX_preset.txt", line_to_change);
                     }
 
                 }
@@ -1679,8 +1593,7 @@ namespace DSMI_ConfigTool {
                         else {
                             try {
                                 File.Copy(sourceDir + "d3d9_wd.dll", DATApath + "d3d9.dll");
-                            }
-                            catch (Exception ex) {
+                            } catch (Exception ex) {
                                 MessageBox.Show(ex.ToString());
                             }
                         }
@@ -1689,8 +1602,7 @@ namespace DSMI_ConfigTool {
                         if (!(File.Exists(DATApath + "d3d9_sf.dll"))) {
                             try {
                                 File.Copy(sourceDir + "d3d9.dll", DATApath + "d3d9_sf.dll");
-                            }
-                            catch (Exception ex) {
+                            } catch (Exception ex) {
                                 MessageBox.Show(ex.ToString());
                             }
                         }
@@ -1701,20 +1613,14 @@ namespace DSMI_ConfigTool {
                 #endregion
 
                 #region Editing DSPWSteam.ini
-
-
+                
                 // Anyway, set this to false :
                 if (Functions.GetValueFromFile(DSPW_INI_FILE, "ShowOverlay", 0) != "false") {
                     line_to_change = Functions.GetLine(DSPW_INI_FILE, "ShowOverlay", 0);
                     Functions.LineChanger("ShowOverlay false", DSPW_INI_FILE, line_to_change);
                 }
 
-
-
-
-
                 // SET : DSPW Overlay -----
-
                 string dspwOverlay_setValue = "false";
 
                 if (checkBox_overlayDspw.IsChecked == true) {
@@ -1736,8 +1642,7 @@ namespace DSMI_ConfigTool {
                     if (!(File.Exists(DATApath + "winmm.dll"))) {
                         try {
                             File.Move(DATApath + "_winmm.dll", DATApath + "winmm.dll");
-                        }
-                        catch (Exception ex) {
+                        } catch (Exception ex) {
                             MessageBox.Show(ex.ToString());
                         }
                     }
@@ -1745,8 +1650,7 @@ namespace DSMI_ConfigTool {
                     string fpsFixBeep_setValue = fpsFixBeep_gotValue;
                     if (checkBox_FPSFix_beep.IsChecked == true) {
                         fpsFixBeep_setValue = "1";
-                    }
-                    else {
+                    } else {
                         fpsFixBeep_setValue = "0";
                     }
                     if (fpsFixBeep_setValue != fpsFixBeep_gotValue) {
@@ -1765,10 +1669,8 @@ namespace DSMI_ConfigTool {
             #endregion
 
             #region Gamepad icons
-
-
+            
             // Long and repetitive but clear code here
-
             if (radioButton_gamepad.IsChecked == true) {
                 try {
                     switch (comboBox_gamepadButtonsStyle.SelectedIndex) {
@@ -1833,6 +1735,32 @@ namespace DSMI_ConfigTool {
             }
 
             #endregion
+
+            //dvdbnd3 files
+            if (comboBox_dvdbnd3Files.Text != "") {
+                string dvdbnd3_setValue = comboBox_dvdbnd3Files.Text; // get folder name
+
+                if (File.Exists(DATApath + "dvdbnd3.bdt.backup")) {
+                    File.Delete(DATApath + "dvdbnd3.bdt.backup");
+                }
+                if (File.Exists(DATApath + "dvdbnd3.bhd5.backup")) {
+                    File.Delete(DATApath + "dvdbnd3.bhd5.backup");
+                }
+
+                if (File.Exists(DATApath + "dvdbnd3.bdt")) {
+                    File.Move(DATApath + "dvdbnd3.bdt", DATApath + "dvdbnd3.bdt.backup");
+                }
+                if (File.Exists(DATApath + "dvdbnd3.bhd5")) {
+                    File.Move(DATApath + "dvdbnd3.bhd5", DATApath + "dvdbnd3.bhd5.backup");
+                }
+
+                try {
+                    File.Copy(DVDBND3_FOLDER + dvdbnd3_setValue + @"\dvdbnd3.bdt", DATApath + "dvdbnd3.bdt");
+                    File.Copy(DVDBND3_FOLDER + dvdbnd3_setValue + @"\dvdbnd3.bhd5", DATApath + "dvdbnd3.bhd5");
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
 
         }
 
