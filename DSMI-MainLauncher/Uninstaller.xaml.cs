@@ -1,5 +1,4 @@
 ﻿using Resources; // Resources.dll
-using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;

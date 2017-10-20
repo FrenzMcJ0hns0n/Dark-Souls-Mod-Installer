@@ -1,6 +1,5 @@
 ﻿using Resources; // Resources.dll
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -112,7 +111,6 @@ namespace DSMI_ConfigTool {
             checkBox_unlockFPS.Content = Strings.checkBox_unlockFPS_contentLanguage(lan);
             checkBox_unlockFPS.ToolTip = Strings.checkBox_unlockFPS_toolTipLanguage(lan);
             label_maxFPSTarget.ToolTip = Strings.shared_maxFPSTarget_toolTipLanguage(lan);
-            comboBox_maxFPSTarget.ToolTip = Strings.shared_maxFPSTarget_toolTipLanguage(lan);
             label_writeFPS.ToolTip = Strings.shared_maxFPSTarget_toolTipLanguage(lan);
             label_toggleFramerateKey.Content = Strings.label_toggleFramerateKey_contentLanguage(lan);
             label_toggleFramerateKey.ToolTip = Strings.label_toggleFramerateKey_toolTipLanguage(lan);
@@ -171,9 +169,10 @@ namespace DSMI_ConfigTool {
                     comboBox_gamepadButtonsStyle.Items.Add("Défaut");
                     comboBox_sweetFxKey.Items.Add("Arrêt défil");
                     break;
-
                 case "sp":
+                    label_renderRes.Margin = new Thickness(65, 50, 0, 0);
                     label_dofAdditionalBlur.Margin = new Thickness(564, 50, 0, 0);
+                    label_aoStrength.Margin = new Thickness(58, 159, 0, 0);
                     checkBox_unlockFPS.Margin = new Thickness(456, 158, 0, 0);
                     label_forceLanguage.Margin = new Thickness(81, 260, 0, 0);
                     label_gamepadButtonsStyle.Margin = new Thickness(424, 379, 0, 0);
@@ -183,7 +182,6 @@ namespace DSMI_ConfigTool {
                     comboBox_gamepadButtonsStyle.Items.Add("Por defecto");
                     comboBox_sweetFxKey.Items.Add("Scroll lock");
                     break;
-
                 default:
                     label_renderRes.Margin = new Thickness(60, 50, 0, 0);
                     label_forceLanguage.Margin = new Thickness(74, 260, 0, 0);
@@ -214,7 +212,6 @@ namespace DSMI_ConfigTool {
             }
 
             InitializeComponent();
-
 
             if (File.Exists(startDir + @"\DSMI_settings.txt")) {
 
@@ -261,19 +258,22 @@ namespace DSMI_ConfigTool {
                 Environment.Exit(0);
             }
 
+            /* TODO (v4) : Disable mods in minimal mode, but display them.
+             * As it is now, the user does not see the mods in the GUI but they are still active ...
+             * Also : Add a button to switch between normal and minimal modes in the GUI ?
+             */
             if (modSupport == "normal") {
                 if (!(File.Exists(DSPW_INI_FILE)) || !(File.Exists(DATApath + "msvcp120.dll")) || !(File.Exists(DATApath + "msvcr120.dll"))) {
                     MessageBox.Show(Strings.ErrorMsg_missingFiles("Dark Souls PvP Watchdog", lang));
                     Environment.Exit(0);
                 }
-
                 if (!(File.Exists(startDir + @"\WPFCustomMessageBox.dll"))) {
                     MessageBox.Show(Strings.ErrorMsg_missingDll("WPFCustomMessageBox.dll", lang));
                     Environment.Exit(0);
                 }
             }
             else {
-                Title = "DSMI Config Tool (minimal mode)";
+                // Hide mods -----
                 groupBox_pvpWatchdog.Visibility = Visibility.Hidden;
                 checkBox_overlayDspw.Visibility = Visibility.Hidden;
 
@@ -288,7 +288,52 @@ namespace DSMI_ConfigTool {
                 label_sweetFxPreset.Visibility = Visibility.Hidden;
                 comboBox_sweetFxPreset.Visibility = Visibility.Hidden;
 
-                // TODO : Alternative layout for minimal mod support !!!
+                groupBox_dvdbnd3.Visibility = Visibility.Hidden;
+                checkBox_dvdbnd3Files.Visibility = Visibility.Hidden;
+                comboBox_dvdbnd3Files.Visibility = Visibility.Hidden;
+
+                groupBox_shortcuts.Visibility = Visibility.Hidden;
+                button_openTexFolder.Visibility = Visibility.Hidden;
+                button_openSFPresets.Visibility = Visibility.Hidden;
+                button_openDvdbnd3Folder.Visibility = Visibility.Hidden;
+
+                // Adapt window for minimal mode -----
+                Title = "DSMI Config Tool (minimal mode)";
+                Height = 568;
+                groupBox_controlOptions.HorizontalAlignment = HorizontalAlignment.Center;
+                groupBox_controlOptions.Margin = new Thickness(0, 316, 0, 0);
+                button_configureMouse.HorizontalAlignment = HorizontalAlignment.Left;
+                button_configureMouse.Width = 140;
+                button_configureMouse.Margin = new Thickness(361, 432, 0, 0);
+                button_saveAndExit.HorizontalAlignment = HorizontalAlignment.Center;
+                button_saveAndExit.Margin = new Thickness(0, 0, 0, 21);
+
+                switch (lang) {
+                    case "fr":
+                        radioButton_gamepad.Margin = new Thickness(236, 345, 0, 0);
+                        label_gamepadButtonsStyle.Margin = new Thickness(252, 377, 0, 0);
+                        comboBox_gamepadButtonsStyle.Margin = new Thickness(223, 403, 0, 0);
+                        radioButton_mouse.Margin = new Thickness(398, 345, 0, 0);
+                        radioButton_oldMouseFix.Margin = new Thickness(388, 384, 0, 0);
+                        radioButton_newMouseFix.Margin = new Thickness(388, 402, 0, 0);
+                        break;
+                    case "sp":
+                        radioButton_gamepad.Margin = new Thickness(240, 345, 0, 0);
+                        label_gamepadButtonsStyle.Margin = new Thickness(250, 377, 0, 0);
+                        comboBox_gamepadButtonsStyle.Margin = new Thickness(223, 403, 0, 0);
+                        radioButton_mouse.Margin = new Thickness(404, 345, 0, 0);
+                        radioButton_oldMouseFix.Margin = new Thickness(394, 384, 0, 0);
+                        radioButton_newMouseFix.Margin = new Thickness(394, 402, 0, 0);
+                        break;
+                    default:
+                        radioButton_gamepad.Margin = new Thickness(236, 345, 0, 0);
+                        label_gamepadButtonsStyle.Margin = new Thickness(252, 377, 0, 0);
+                        comboBox_gamepadButtonsStyle.Margin = new Thickness(223, 403, 0, 0);
+                        radioButton_mouse.Margin = new Thickness(398, 345, 0, 0);
+                        radioButton_oldMouseFix.Margin = new Thickness(396, 384, 0, 0);
+                        radioButton_newMouseFix.Margin = new Thickness(396, 402, 0, 0);
+                        break;
+                }
             }
 
             // Fill non language-relative comboBoxes -----
@@ -308,34 +353,13 @@ namespace DSMI_ConfigTool {
 
         #region GUI events
 
-        private void comboBox_renderRes_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
-
-            if (comboBox_renderRes.SelectedIndex > 4 && comboBox_uiRes.SelectedIndex == 0) {
-                comboBox_uiRes.BorderBrush = (Brush)bc.ConvertFrom("#F00");
-            }
-            else {
-                comboBox_uiRes.BorderBrush = (Brush)bc.ConvertFrom("#777");
-            }
-        }
-
-        private void comboBox_uiRes_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
-
-            if (comboBox_renderRes.SelectedIndex > 4 && comboBox_uiRes.SelectedIndex == 0) {
-                comboBox_uiRes.BorderBrush = (Brush)bc.ConvertFrom("#F00");
-            }
-            else {
-                comboBox_uiRes.BorderBrush = (Brush)bc.ConvertFrom("#777");
-            }
-        }
-
         private void comboBox_aoStrength_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
 
             if (comboBox_aoStrength.SelectedIndex == 0) {
                 label_aoType.IsEnabled = false;
                 comboBox_aoType.IsEnabled = false;
                 comboBox_aoType.Foreground = (Brush)bc.ConvertFrom("#888");
-            }
-            else {
+            } else {
                 label_aoType.IsEnabled = true;
                 comboBox_aoType.IsEnabled = true;
                 comboBox_aoType.Foreground = (Brush)bc.ConvertFrom("#000");
@@ -416,7 +440,6 @@ namespace DSMI_ConfigTool {
             radioButton_newMouseFix.IsEnabled = false;
             radioButton_newMouseFix.Foreground = (Brush)bc.ConvertFrom("#888");
 
-
             label_gamepadButtonsStyle.IsEnabled = true;
             comboBox_gamepadButtonsStyle.IsEnabled = true;
             comboBox_gamepadButtonsStyle.Foreground = (Brush)bc.ConvertFrom("#000");
@@ -466,8 +489,7 @@ namespace DSMI_ConfigTool {
         private void button_openSFPresets_Click(object sender, RoutedEventArgs e) {
             try {
                 Process.Start(SWEET_FX_PRESET_FOLDER);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -475,8 +497,7 @@ namespace DSMI_ConfigTool {
         private void button_openDvdbnd3Folder_Click(object sender, RoutedEventArgs e) {
             try {
                 Process.Start(DVDBND3_FOLDER);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -886,10 +907,8 @@ namespace DSMI_ConfigTool {
                     where = where + "\"toggle30FPSLimit\" (DSfixKeys.ini)\n";
                     break;
             }
-
-
+            
             // GET : Force language -----
-
             overrideLanguage_gotValue = Functions.GetValueFromFile(DS_FIX_INI_FILE, "overrideLanguage", 0);
             switch (overrideLanguage_gotValue) {
                 case "none":
@@ -1315,32 +1334,35 @@ namespace DSMI_ConfigTool {
             
             // SET : Force language -----
             string overrideLanguage_setValue = "none";
-            switch (comboBox_forceLanguage.Text) {
-                case "English":
+            switch (comboBox_forceLanguage.SelectedIndex) {
+                case 0:
+                    overrideLanguage_setValue = "none";
+                    break;
+                case 1:
                     overrideLanguage_setValue = "en-GB";
                     break;
-                case "French":
+                case 2:
                     overrideLanguage_setValue = "fr";
                     break;
-                case "Italian":
+                case 3:
                     overrideLanguage_setValue = "it";
                     break;
-                case "German":
+                case 4:
                     overrideLanguage_setValue = "de";
                     break;
-                case "Spanish":
+                case 5:
                     overrideLanguage_setValue = "es";
                     break;
-                case "Korean":
+                case 6:
                     overrideLanguage_setValue = "ko";
                     break;
-                case "Chinese":
+                case 7:
                     overrideLanguage_setValue = "zh-tw";
                     break;
-                case "Polish":
+                case 8:
                     overrideLanguage_setValue = "pl";
                     break;
-                case "Russian":
+                case 9:
                     overrideLanguage_setValue = "ru";
                     break;
             }
@@ -1636,7 +1658,6 @@ namespace DSMI_ConfigTool {
                 #region Editing FPSFix.ini
 
                 // SET : FPSFix enabled -----
-
                 if (checkBox_FPSFix.IsChecked == true) {
 
                     if (!(File.Exists(DATApath + "winmm.dll"))) {

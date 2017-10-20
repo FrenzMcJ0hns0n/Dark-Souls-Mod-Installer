@@ -7,9 +7,7 @@ using System.Windows.Forms; // Right-click on References -> Add reference ...
 using System.Windows.Media;
 
 namespace DSMI_MainLauncher {
-    /// <summary>
-    /// Logique d'interaction pour ProjectSettings.xaml
-    /// </summary>
+
     public partial class ProjectSettings : Window {
 
         public static string startDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\";
@@ -164,8 +162,8 @@ namespace DSMI_MainLauncher {
             string dataFolderPath = textBox_dataPathLocation.Text;
 
             Outer:
-            // Create/Edit file DSMI_settings.txt --------------------
 
+            // Edit file DSMI_settings.txt -----
             if (File.Exists(startDir + @"\DSMI_settings.txt")) {
                 int line_to_change;
 
@@ -174,8 +172,7 @@ namespace DSMI_MainLauncher {
 
                     if (line_to_change > 0) {
                         Functions.LineChanger("dataFolderPath " + dataFolderPath, startDir + @"\DSMI_settings.txt", line_to_change);
-                    }
-                    else {
+                    } else {
                         File.Delete(startDir + @"\DSMI_settings.txt");
                         goto Outer; // Reach "Outer" label then the Else statement (to create the file instead editing it)
                     }
@@ -186,8 +183,7 @@ namespace DSMI_MainLauncher {
 
                     if (line_to_change > 0) {
                         Functions.LineChanger("language " + lang, startDir + @"\DSMI_settings.txt", line_to_change);
-                    }
-                    else {
+                    } else {
                         File.Delete(startDir + @"\DSMI_settings.txt");
                         goto Outer; // Reach "Outer" label then the Else statement (to create the file instead editing it)
                     }
@@ -208,7 +204,7 @@ namespace DSMI_MainLauncher {
                 Close();
             }
 
-            // Create file DSMI_settings.txt --------------------
+            // Create file DSMI_settings.txt -----
             else {
                 try {
                     WriteInTxt(lang, dataFolderPath);
@@ -234,6 +230,7 @@ namespace DSMI_MainLauncher {
                 sw.WriteLine("modSupport " + mode);
                 sw.WriteLine("");
             }
+
         }
 
     }

@@ -161,11 +161,11 @@ namespace DSMI_MainLauncher {
                     MessageBoxButton.YesNo);
 
                 if (msgBoxResult == MessageBoxResult.Yes) {
-                    CallLongRunningMethod_Install();
+                    Install_async();
                 }
             }
             else {
-                CallLongRunningMethod_Install();
+                Install_async();
             }
 
         }
@@ -234,28 +234,22 @@ namespace DSMI_MainLauncher {
         // TODO : Tell user "Installation in Progress"
         #region Installation
 
-        private async void CallLongRunningMethod_Install() {
-            await LongRunningMethodAsync_Install();
-        }
-
-        private Task LongRunningMethodAsync_Install() {
-            return Task.Run(() => Install());
-        }
-
-        private void Install() {
-
-            try {
-                foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories)) {
-                    Directory.CreateDirectory(dirPath.Replace(sourceDir, DATApath));
+        private async void Install_async() {
+            await Task.Run(() => {
+                try {
+                    foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories)) {
+                        Directory.CreateDirectory(dirPath.Replace(sourceDir, DATApath));
+                    }
+                    foreach (string newPath in Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories)) {
+                        File.Copy(newPath, newPath.Replace(sourceDir, DATApath), true);
+                    }
+                    MessageBox.Show(Strings.Message_installationCompleted(lang));
+                    
                 }
-                foreach (string newPath in Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories)) {
-                    File.Copy(newPath, newPath.Replace(sourceDir, DATApath), true);
+                catch {
+                    MessageBox.Show(Strings.ErrorMsg_unableToReachFilesAtInstall(lang));
                 }
-                MessageBox.Show(Strings.Message_installationCompleted(lang));
-            }
-            catch {
-                MessageBox.Show(Strings.ErrorMsg_unableToReachFilesAtInstall(lang));
-            }
+            });
         }
 
         #endregion

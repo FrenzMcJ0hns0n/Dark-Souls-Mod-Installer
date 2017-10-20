@@ -45,6 +45,9 @@ namespace Resources {
                 "dvdbnd2.bhd5.bak",
                 "dvdbnd3.bdt.bak",
                 "dvdbnd3.bhd5.bak",
+
+                "dvdbnd3.bdt.backup",
+                "dvdbnd3.bhd5.backup"
            });
 
         public static List<string> otherNonVanilla_directories = new List<string>(new string[]
@@ -125,6 +128,7 @@ namespace Resources {
         public static List<string> DSMIitems_directories = new List<string>(new string[]
             {
                 "dsfix",
+                "dvdbnd3",
                 "sweetfx"
             });
 

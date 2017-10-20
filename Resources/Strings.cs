@@ -713,11 +713,17 @@ namespace Resources {
         public static string checkBox_dvdbnd3Files_toolTipLanguage(string language) {
             switch (language) {
                 case "fr":
-                    return "Sélectionnez un élément de la liste pour le définir comme contenu dvdbnd3 à charger";
+                    return "Sélectionnez un élément de la liste pour le définir comme contenu dvdbnd3 à charger.\n\n"
+                         + "Pour ajouter un mod à la liste, créer un nouveau sous-dossier dans le dossier \\dvdbnd3\\\n"
+                         + "et insérez-y les fichiers \"dvdbnd3.bdt\" et \"dvdbnd3.bhd5\".";
                 case "sp":
-                    return "Elija un elemento de la lista para definirlo como contenido dvdbnd3 para cargar";
+                    return "Elija un elemento de la lista para definirlo como contenido dvdbnd3 que el juego debe cargar.\n\n"
+                         + "Para agregar un mod a la lista, cree una nueva subcarpeta dentro de la carpeta \\dvdbnd3\\\n"
+                         + "e inserte los archivos \"dvdbnd3.bdt\" y \"dvdbnd3.bhd5\" dentro de ella.";
                 default:
-                    return "Choose an element from the list to define it as dvdbnd3 content to load";
+                    return "Choose an element from the list to define it as dvdbnd3 content to load.\n\n"
+                         + "To add a mod to the list, create a new sub-folder within the \\dvdbnd3\\ folder\n"
+                         + "and insert the files \"dvdbnd3.bdt\" and \"dvdbnd3.bhd5\" inside it.";
             }
         }
 

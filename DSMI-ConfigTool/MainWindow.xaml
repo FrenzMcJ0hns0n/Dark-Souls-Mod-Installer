@@ -9,7 +9,7 @@
         Height="704" Width="710"
         ResizeMode="CanMinimize">
     <Grid>
-        <!-- TabControl ? -->
+        <!-- TabControl : TODO for v4. One tab for DSfix options, one for other mods, and maybe one for UI/tex mods ? -->
         <Grid>
             <!-- Resolution -->
             <GroupBox 
@@ -24,7 +24,7 @@
                 ToolTipService.ShowDuration="20000" ToolTip=""
                 />
             <ComboBox 
-                x:Name="comboBox_renderRes" SelectionChanged="comboBox_renderRes_SelectionChanged"
+                x:Name="comboBox_renderRes"
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,77,0,0"
                 Width="120"
                 />
@@ -34,7 +34,7 @@
                 Height="28" ToolTipService.ShowDuration="20000" ToolTip=""
                 />
             <ComboBox 
-                x:Name="comboBox_uiRes" SelectionChanged="comboBox_uiRes_SelectionChanged"
+                x:Name="comboBox_uiRes"
                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,77,0,0"
                 Width="132"
                 />

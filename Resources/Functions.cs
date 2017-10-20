@@ -144,8 +144,8 @@ namespace Resources {
             // @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420" / "InstallLocation"
 
             string keyValue = "";
-            var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            var regKey = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420");
+            RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            RegistryKey regKey = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 211420");
 
             if (regKey != null)
                 keyValue = regKey.GetValue("InstallLocation").ToString();
@@ -158,8 +158,8 @@ namespace Resources {
         public static string GetSteamFolderPathWithRegistry() {
 
             string keyValue = "";
-            var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            var regKey = baseKey.OpenSubKey(@"SOFTWARE\Wow6432Node\Valve\Steam");
+            RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            RegistryKey regKey = baseKey.OpenSubKey(@"SOFTWARE\Wow6432Node\Valve\Steam");
 
             if (regKey != null)
                 keyValue = regKey.GetValue("InstallPath").ToString();
@@ -172,28 +172,25 @@ namespace Resources {
 
             string chosenPath = GetValueFromFile(file, expression, 0);
 
-            if (Directory.Exists(chosenPath)) {
+            if (Directory.Exists(chosenPath))
                 return chosenPath;
-            }
             return "";
         }
 
         public static string ParseLauncherPath(string file, string expression, int elementsToSkip, int charToCut) {
 
             string path = GetValueFromFile(file, expression, elementsToSkip);
-            string pathEdit = path.Substring(0, path.Length - charToCut);
+            string editedPath = path.Substring(0, path.Length - charToCut);
 
-            if (File.Exists(pathEdit)) {
-                return pathEdit;
-            }
+            if (File.Exists(editedPath))
+                return editedPath;
             return "";
         }
 
         public static bool CheckPath(string path) {
 
-            if (File.Exists(path + "fmodex.dll") && File.Exists(path + "fmod_event.dll")) {
+            if (File.Exists(path + "fmodex.dll") && File.Exists(path + "fmod_event.dll"))
                 return true;
-            }
             return false;
         }
 
