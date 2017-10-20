@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace DSMI_MainLauncher {
 
@@ -231,12 +232,16 @@ namespace DSMI_MainLauncher {
 
         }
 
-        // TODO : Tell user "Installation in Progress"
+
         #region Installation
 
         private async void Install_async() {
             await Task.Run(() => {
                 try {
+                    // Make the user wait until installation is over : sometimes .dll files can take time to be copied
+                    Application.Current.Dispatcher.Invoke(new Action(() => { Cursor = Cursors.Wait; }));
+
+                    // Installation -----
                     foreach (string dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories)) {
                         Directory.CreateDirectory(dirPath.Replace(sourceDir, DATApath));
                     }
@@ -244,15 +249,18 @@ namespace DSMI_MainLauncher {
                         File.Copy(newPath, newPath.Replace(sourceDir, DATApath), true);
                     }
                     MessageBox.Show(Strings.Message_installationCompleted(lang));
-                    
                 }
                 catch {
                     MessageBox.Show(Strings.ErrorMsg_unableToReachFilesAtInstall(lang));
+                }
+                finally {
+                    Application.Current.Dispatcher.Invoke(new Action(() => { Cursor = Cursors.Arrow; }));
                 }
             });
         }
 
         #endregion
+
 
         protected override void OnClosed(EventArgs e) {
             base.OnClosed(e);

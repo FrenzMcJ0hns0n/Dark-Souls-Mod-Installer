@@ -7,7 +7,8 @@ namespace DSMI_MainLauncher {
 
     public partial class Uninstaller : Window {
 
-        // TODO : Code refactoring !
+        // TODO : Code refactoring !!
+        // + Execute uninstallation async ?
 
         public static string startDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\";
 
